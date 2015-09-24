@@ -357,7 +357,7 @@ class DmaSimpleGrid extends \Controller
                 }
             }
         }
-        if (sizeof($arrOffsetSettings) == 1) {
+        if (sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
             $arrElementSettings = $arrOffsetSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -367,7 +367,7 @@ class DmaSimpleGrid extends \Controller
                 }
             }
         }
-        if (sizeof($arrPushSettings) == 1) {
+        if (sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
             $arrElementSettings = $arrPushSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -377,7 +377,7 @@ class DmaSimpleGrid extends \Controller
                 }
             }
         }
-        if (sizeof($arrPullSettings) == 1) {
+        if (sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
             $arrElementSettings = $arrPullSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -423,7 +423,7 @@ class DmaSimpleGrid extends \Controller
             }
         }
 
-        if (sizeof($arrOffsetSettings) == 1) {
+        if (sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
             $arrElementSettings = $arrOffsetSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -434,7 +434,7 @@ class DmaSimpleGrid extends \Controller
             }
         }
 
-        if (sizeof($arrPushSettings) == 1) {
+        if (sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
             $arrElementSettings = $arrPushSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -445,7 +445,7 @@ class DmaSimpleGrid extends \Controller
             }
         }
 
-        if (sizeof($arrPullSettings) == 1) {
+        if (sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
             $arrElementSettings = $arrPullSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
