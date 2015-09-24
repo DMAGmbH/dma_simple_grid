@@ -1,0 +1,3 @@
+<!-- ROW START -->
+
+<div<?php if ($this->class): ?> class="<?= $this->class; ?>"<?php endif; ?>>
