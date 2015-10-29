@@ -112,11 +112,6 @@ class DmaSimpleGrid extends \Controller
 
             $strWidgetClasses = "";
 
-            if ($this->arrConfigData['config']['column-class'])
-            {
-                $strWidgetClasses .= $this->arrConfigData['config']['column-class'];
-            }
-
             $strWidgetClasses .= ($strWidgetClasses!="" ? " " : "") . $this->getSimpleGridColumnClasses($objWidget->dma_simplegrid_columnsettings, $objWidget->dma_simplegrid_offsetsettings, $objWidget->dma_simplegrid_pushsettings, $objWidget->dma_simplegrid_pullsettings);
 
             if ($objWidget->__get('prefix') != "")
@@ -134,12 +129,8 @@ class DmaSimpleGrid extends \Controller
     {
         if ($objTemplate->dma_simplegrid_columnsettings || $objTemplate->dma_simplegrid_offsetsettings || $objTemplate->dma_simplegrid_pushsettings || $objTemplate->dma_simplegrid_pullsettings) {
 
-            if ($this->arrConfigData['config']['column-class'])
-            {
-                $objTemplate->class .= " " . $this->arrConfigData['config']['column-class'];
-            }
-
             $objTemplate->class .= " " . $this->getSimpleGridColumnClasses($objTemplate->dma_simplegrid_columnsettings, $objTemplate->dma_simplegrid_offsetsettings, $objTemplate->dma_simplegrid_pushsettings, $objTemplate->dma_simplegrid_pullsettings);
+
         }
     }
 
@@ -309,7 +300,6 @@ class DmaSimpleGrid extends \Controller
 
     }
 
-
     public function columnsSelectCallback()
     {
         $arrColumnsSetting = array();
@@ -455,6 +445,14 @@ class DmaSimpleGrid extends \Controller
                 }
             }
         }
+
+        if (sizeof($arrConfiguredClasses) > 0) {
+            if ($this->arrConfigData['config']['column-class'])
+            {
+                $arrConfiguredClasses[] = $this->arrConfigData['config']['column-class'];
+            }
+        }
+
 
         $strClasses = implode(' ', $arrConfiguredClasses);
 
