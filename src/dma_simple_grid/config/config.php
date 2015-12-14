@@ -113,6 +113,120 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG'] = array
             )
         )
     ),
+    'bootstrap4' => array
+    (
+        'name' => 'Bootstrap 4',
+        'config' => array
+        (
+            'row-class' => 'row',
+            'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
+            'columns-config' => array
+            (
+                'xs' => array
+                (
+                    'name' => 'extra small',
+                    'column-class' => 'col-xs-%d',
+                    'offset-class' => 'col-xs-offset-%d',
+                    'push-class' => 'col-xs-push-%d',
+                    'pull-class' => 'col-xs-pull-%d'
+                ),
+                'sm' => array
+                (
+                    'name' => 'small',
+                    'column-class' => 'col-sm-%d',
+                    'offset-class' => 'col-sm-offset-%d',
+                    'push-class' => 'col-sm-push-%d',
+                    'pull-class' => 'col-sm-pull-%d'
+                ),
+                'md' => array
+                (
+                    'name' => 'medium',
+                    'column-class' => 'col-md-%d',
+                    'offset-class' => 'col-md-offset-%d',
+                    'push-class' => 'col-md-push-%d',
+                    'pull-class' => 'col-md-pull-%d'
+                ),
+                'lg' => array
+                (
+                    'name' => 'large',
+                    'column-class' => 'col-lg-%d',
+                    'offset-class' => 'col-lg-offset-%d',
+                    'push-class' => 'col-lg-push-%d',
+                    'pull-class' => 'col-lg-pull-%d'
+                ),
+                'xl' => array
+                (
+                    'name' => 'extra large',
+                    'column-class' => 'col-xl-%d',
+                    'offset-class' => 'col-xl-offset-%d',
+                    'push-class' => 'col-xl-push-%d',
+                    'pull-class' => 'col-xl-pull-%d'
+                )
+            )
+        )
+    ),
+    'gr-grid' => array
+    (
+        'name' => 'Bootstrap 4 (with GRgrid)',
+        'config' => array
+        (
+            'row-class' => 'row',
+            'columns-sizes' => array
+            (
+                'golden ratio' => array
+                (
+                    'gr24','gr29','gr38','gr47','gr53','gr62','gr71','gr76'
+                ),
+                'default columns' => array
+                (
+                    '1','2','3','4','5','6','7','8','9','10','11','12'
+                )
+            ),
+            'columns-config' => array
+            (
+                'xs' => array
+                (
+                    'name' => 'extra small',
+                    'column-class' => 'col-xs-%d',
+                    'offset-class' => 'col-xs-offset-%d',
+                    'push-class' => 'col-xs-push-%d',
+                    'pull-class' => 'col-xs-pull-%d'
+                ),
+                'sm' => array
+                (
+                    'name' => 'small',
+                    'column-class' => 'col-sm-%d',
+                    'offset-class' => 'col-sm-offset-%d',
+                    'push-class' => 'col-sm-push-%d',
+                    'pull-class' => 'col-sm-pull-%d'
+                ),
+                'md' => array
+                (
+                    'name' => 'medium',
+                    'column-class' => 'col-md-%d',
+                    'offset-class' => 'col-md-offset-%d',
+                    'push-class' => 'col-md-push-%d',
+                    'pull-class' => 'col-md-pull-%d'
+                ),
+                'lg' => array
+                (
+                    'name' => 'large',
+                    'column-class' => 'col-lg-%d',
+                    'offset-class' => 'col-lg-offset-%d',
+                    'push-class' => 'col-lg-push-%d',
+                    'pull-class' => 'col-lg-pull-%d'
+                ),
+                'xl' => array
+                (
+                    'name' => 'extra large',
+                    'column-class' => 'col-xl-%d',
+                    'offset-class' => 'col-xl-offset-%d',
+                    'push-class' => 'col-xl-push-%d',
+                    'pull-class' => 'col-xl-pull-%d'
+                )
+            )
+        )
+    ),
     'foundation' => array
     (
         'name' => 'Foundation',
