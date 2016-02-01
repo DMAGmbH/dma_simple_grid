@@ -48,6 +48,8 @@ class ContentSimpleGridRowStart extends \ContentElement
     public function compile()
     {
 
+        $strAdditionalClasses = "";
+
         if ($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] && $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']])
         {
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
@@ -57,7 +59,21 @@ class ContentSimpleGridRowStart extends \ContentElement
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
         }
 
-        $this->type = "row ". $arrConfigData['config']['row-class'];
+        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
+        {
+            $strAdditionalClasses = " sdfsdf";
+            $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalrowclasses, true);
+
+            if (sizeof($arrAdditionalClasses) > 0)
+            {
+                foreach ($arrAdditionalClasses as $strClassKey)
+                {
+                    $strAdditionalClasses .= " " . $strClassKey;
+                }
+            }
+        }
+
+        $this->type = "row ". $arrConfigData['config']['row-class'] . $strAdditionalClasses;
 
     }
 

@@ -261,6 +261,17 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG'] = array
                     'push-class' => 'large-push-%d',
                     'pull-class' => 'large-pull-%d'
                 )
+            ),
+            'additional-classes' => array
+            (
+                'row' => array('expanded'),
+                'columns' => array
+                (
+                    'end' => 'end',
+                    'small-centered' => 'small-centered',
+                    'medium-centered' => 'medium-centered',
+                    'large-centered' => 'large-centered'
+                )
             )
         )
     ),

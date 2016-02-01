@@ -62,12 +62,24 @@ class DmaSimpleGrid extends \Controller
         {
             foreach ($GLOBALS['TL_DCA']['tl_content']['palettes'] as $k => $palette)
             {
-                if (!is_array($palette) && strpos($palette, "cssID")!==false)
+
+                $strDmaSimpleGridPaletteStringOnce = $strDmaSimpleGridPaletteString;
+
+                if (!is_array($palette) && strpos($palette, "cssID")!==false && $k!="module")
                 {
+
+                    if ($k == "dma_simplegrid_row_start")
+                    {
+                        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $this->arrConfigData['config']['additional-classes']['row'])
+                        {
+                            $strDmaSimpleGridPaletteStringOnce .= ",dma_simplegrid_additionalrowclasses";
+                        }
+                    }
+
                     $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
                     (
                         '{invisible_legend',
-                        '{dma_simplegrid_legend}' . $strDmaSimpleGridPaletteString . ';{invisible_legend',
+                        '{dma_simplegrid_legend}' . $strDmaSimpleGridPaletteStringOnce . ';{invisible_legend',
                         $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
                     );
                 }
@@ -90,6 +102,11 @@ class DmaSimpleGrid extends \Controller
                 }
             }
         }
+    }
+
+    public function getAdditionalRowClasses()
+    {
+        return $this->arrConfigData['config']['additional-classes']['row'];
     }
 
     public function getGridTypes()

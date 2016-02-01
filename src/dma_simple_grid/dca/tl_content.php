@@ -113,3 +113,13 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pushsettings'] = arra
     ),
     'sql'                     => "text NULL"
 );
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_additionalrowclasses'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalrowclasses'],
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'options_callback'        => array('DMA\\DmaSimpleGrid', 'getAdditionalRowClasses'),
+    'eval'                    => array('multiple'=>true),
+    'sql'                     => "blob NULL"
+);
