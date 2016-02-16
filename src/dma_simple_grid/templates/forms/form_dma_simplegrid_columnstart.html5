@@ -1,2 +1,1 @@
-<!-- COLUMN START -->
 <div class="<?= $this->prefix ?><?php if ($this->class) echo ' ' . $this->class; ?>">
