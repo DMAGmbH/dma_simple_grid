@@ -1,10 +1,14 @@
 <?php
 
 
+
+$GLOBALS['TL_DCA']['tl_settings']['config']['onload_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'adjustSettingsPalettesString');
+
 /**
  * Add to palette
  */
-$GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ';{dma_simplegrid_legend},dmaSimpleGridType,dmaSimpleGrid_useColumns,dmaSimpleGrid_useOffset,dmaSimpleGrid_usePush,dmaSimpleGrid_usePull,dmaSimpleGrid_useAdditionalRowClasses,dmaSimpleGrid_useAdditionalColumnClasses';
+// Done via DmaSimpleGridDcaCallbacks->adjustSettingsPalettesString
+
 
 /**
  * Add fields
@@ -13,8 +17,8 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGridType'] = array
 (
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGridType'],
     'inputType'	        => 'select',
-    'options_callback'  => array('DMA\\DmaSimpleGrid', 'getGridTypes'),
-    'eval'		        => array('tl_class'=>'w50')
+    'options_callback'  => array('DMA\\DmaSimpleGridHelper', 'getGridTypes'),
+    'eval'		        => array('tl_class'=>'w50', 'submitOnChange'=>true)
 );
 
 $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useColumns'] = array
@@ -27,6 +31,13 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useColumns'] = array
 $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOffset'] = array
 (
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffset'],
+    'inputType'	        => 'checkbox',
+    'eval'		        => array('tl_class'=>'w50')
+);
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOffsetRight'] = array
+(
+    'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffsetRight'],
     'inputType'	        => 'checkbox',
     'eval'		        => array('tl_class'=>'w50')
 );

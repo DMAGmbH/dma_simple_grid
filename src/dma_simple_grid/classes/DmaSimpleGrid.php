@@ -15,319 +15,198 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class DmaSimpleGrid extends \Controller
+class DmaSimpleGrid
 {
 
-    private $arrConfigData;
-
-    protected function __construct()
-    {
-        parent::__construct();
-
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] && $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']])
-        {
-            $this->arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
-        }
-        else
-        {
-            $this->arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
-        }
-
-    }
-
-    public function adjustPalettesString($dc)
-    {
-
-        $strDmaSimpleGridPaletteString = "";
-
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useColumns'])
-        {
-            $strDmaSimpleGridPaletteString .= ",dma_simplegrid_columnsettings";
-        }
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'])
-        {
-            $strDmaSimpleGridPaletteString .= ",dma_simplegrid_offsetsettings";
-        }
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'])
-        {
-            $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pullsettings";
-        }
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'])
-        {
-            $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pushsettings";
-        }
-
-
-        if ($dc->__get('table') == "tl_content")
-        {
-            foreach ($GLOBALS['TL_DCA']['tl_content']['palettes'] as $k => $palette)
-            {
-
-                $strDmaSimpleGridPaletteStringOnce = $strDmaSimpleGridPaletteString;
-
-                if (!is_array($palette) && strpos($palette, "cssID")!==false && $k!="module")
-                {
-
-                    if ($k == "dma_simplegrid_row_start")
-                    {
-                        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $this->arrConfigData['config']['additional-classes']['row'])
-                        {
-                            $strDmaSimpleGridPaletteStringOnce .= ",dma_simplegrid_additionalrowclasses";
-                        }
-                    }
-
-                    $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
-                    (
-                        '{invisible_legend',
-                        '{dma_simplegrid_legend}' . $strDmaSimpleGridPaletteStringOnce . ';{invisible_legend',
-                        $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
-                    );
-                }
-            }
-        };
-
-        if ($dc->__get('table') == "tl_form_field")
-        {
-
-            foreach ($GLOBALS['TL_DCA']['tl_form_field']['palettes'] as $k => $palette)
-            {
-                if (!is_array($palette) && strpos($palette, "class")!==false)
-                {
-                    $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$k] = str_replace
-                    (
-                        '{template_legend',
-                        '{dma_simplegrid_legend}' . $strDmaSimpleGridPaletteString . ';{template_legend',
-                        $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$k]
-                    );
-                }
-            }
-        }
-    }
-
-    public function getAdditionalRowClasses()
-    {
-        return $this->arrConfigData['config']['additional-classes']['row'];
-    }
-
-    public function getGridTypes()
-    {
-        $arrGridTypes = array();
-
-        foreach ($GLOBALS['DMA_SIMPLEGRID_CONFIG'] as $keyValue => $arrGridConfig)
-        {
-            $arrGridTypes[$keyValue] = $arrGridConfig['name'];
-        }
-
-        return $arrGridTypes;
-    }
-
-    public function simplegridLoadFormField($objWidget, $formId, $arrData, $objForm)
-    {
-
-        if ($objForm->tableless && ($objWidget->dma_simplegrid_columnsettings || $objWidget->dma_simplegrid_offsetsettings || $objWidget->dma_simplegrid_pushsettings || $objWidget->dma_simplegrid_pullsettings))
-        {
-
-            $strWidgetClasses = "";
-
-            $strWidgetClasses .= ($strWidgetClasses!="" ? " " : "") . $this->getSimpleGridColumnClasses($objWidget->dma_simplegrid_columnsettings, $objWidget->dma_simplegrid_offsetsettings, $objWidget->dma_simplegrid_pushsettings, $objWidget->dma_simplegrid_pullsettings);
-
-            if ($objWidget->__get('prefix') != "")
-            {
-                $strWidgetClasses = " " . $strWidgetClasses;
-            }
-
-            $objWidget ->__set('prefix', $objWidget->__get('prefix') . $strWidgetClasses);
-        }
-
-        return $objWidget;
-    }
-
-    public function simplegridParseTemplate($objTemplate)
-    {
-        if ($objTemplate->dma_simplegrid_columnsettings || $objTemplate->dma_simplegrid_offsetsettings || $objTemplate->dma_simplegrid_pushsettings || $objTemplate->dma_simplegrid_pullsettings) {
-
-            $objTemplate->class .= " " . $this->getSimpleGridColumnClasses($objTemplate->dma_simplegrid_columnsettings, $objTemplate->dma_simplegrid_offsetsettings, $objTemplate->dma_simplegrid_pushsettings, $objTemplate->dma_simplegrid_pullsettings);
-
-        }
-    }
 
     /**
-     * tl_content DCA onsubmit callback
-     *
-     * Creates a stop element after a start element was created
-     *
-     * @param  \DataContainer $dc Data container
-     * @return void
+     * Object instance (Singleton)
+     * @var \Input
      */
+    protected static $objInstance;
 
-    public function onsubmitCallbackFormField($dc)
+    /**
+     * Cache
+     * @var array
+     */
+    protected static $arrCache = array();
+
+    public static function getData()
     {
-        $activeRecord = $dc->activeRecord;
-        if (!$activeRecord) {
-            return;
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
         }
 
-        if ($activeRecord->type === 'dma_simplegrid_column_start') {
-
-            // Find the next columns or column element
-            $nextElement = \Database::getInstance()
-                ->prepare('
-					SELECT type
-					FROM tl_form_field
-					WHERE pid = ?
-						AND type IN (\'dma_simplegrid_column_stop\')
-						AND sorting > ?
-					ORDER BY sorting ASC
-					LIMIT 1
-				')
-                ->execute(
-                    $activeRecord->pid,
-                    $activeRecord->sorting
-                );
-
-            // Check if a stop element should be created
-            if (!$nextElement->type) {
-                \Database::getInstance()
-                    ->prepare('INSERT INTO tl_form_field %s')
-                    ->set(array(
-                        'pid' => $activeRecord->pid,
-                        'type' => 'dma_simplegrid_column_stop',
-                        'sorting' => $activeRecord->sorting + 1,
-                        'tstamp' => time(),
-                    ))
-                    ->execute();
-            }
-
-        }
-
-        if ($activeRecord->type === 'dma_simplegrid_row_start') {
-
-            // Find the next columns or column element
-            $nextElement = \Database::getInstance()
-                ->prepare('
-					SELECT type
-					FROM tl_form_field
-					WHERE pid = ?
-						AND type IN (\'dma_simplegrid_row_stop\')
-						AND sorting > ?
-					ORDER BY sorting ASC
-					LIMIT 1
-				')
-                ->execute(
-                    $activeRecord->pid,
-                    $activeRecord->sorting
-                );
-
-            // Check if a stop element should be created
-            if (!$nextElement->type) {
-                \Database::getInstance()
-                    ->prepare('INSERT INTO tl_form_field %s')
-                    ->set(array(
-                        'pid' => $activeRecord->pid,
-                        'type' => 'dma_simplegrid_row_stop',
-                        'sorting' => $activeRecord->sorting + 1,
-                        'tstamp' => time(),
-                    ))
-                    ->execute();
-            }
-
-        }
+        return static::$arrCache['grid'];
     }
 
-    public function onsubmitCallback($dc)
+    public static function getConfigData($strKey)
     {
-        $activeRecord = $dc->activeRecord;
-        if (!$activeRecord) {
-            return;
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
         }
 
-        if ($activeRecord->type === 'dma_simplegrid_column_start') {
+        return static::$arrCache['grid']['config'][$strKey];
+    }
 
-            // Find the next columns or column element
-            $nextElement = \Database::getInstance()
-                ->prepare('
-					SELECT type
-					FROM tl_content
-					WHERE pid = ?
-						AND (ptable = ? OR ptable = ?)
-						AND type IN (\'dma_simplegrid_column_stop\')
-						AND sorting > ?
-					ORDER BY sorting ASC
-					LIMIT 1
-				')
-                ->execute(
-                    $activeRecord->pid,
-                    $activeRecord->ptable ?: 'tl_article',
-                    $activeRecord->ptable === 'tl_article' ? '' : $activeRecord->ptable,
-                    $activeRecord->sorting
-                );
+    public static function hasDmaGridInfos($arrTemplateData)
+    {
+        $arrCheckableKeys = array
+        (
+            'dma_simplegrid_columnsettings',
+            'dma_simplegrid_offsetsettings',
+            'dma_simplegrid_offsetrightsettings',
+            'dma_simplegrid_pushsettings',
+            'dma_simplegrid_pullsettings'
+        );
 
-            // Check if a stop element should be created
-            if (!$nextElement->type) {
-                \Database::getInstance()
-                    ->prepare('INSERT INTO tl_content %s')
-                    ->set(array(
-                        'pid' => $activeRecord->pid,
-                        'ptable' => $activeRecord->ptable ?: 'tl_article',
-                        'type' => 'dma_simplegrid_column_stop',
-                        'sorting' => $activeRecord->sorting + 1,
-                        'tstamp' => time(),
-                    ))
-                    ->execute();
+        $blnHasDmaGridInfos = false;
+
+        foreach ($arrCheckableKeys as $checkableKey)
+        {
+            if ($arrTemplateData[$checkableKey])
+            {
+                $blnHasDmaGridInfos = true;
             }
-
         }
 
-        if ($activeRecord->type === 'dma_simplegrid_row_start') {
-
-            // Find the next columns or column element
-            $nextElement = \Database::getInstance()
-                ->prepare('
-					SELECT type
-					FROM tl_content
-					WHERE pid = ?
-						AND (ptable = ? OR ptable = ?)
-						AND type IN (\'dma_simplegrid_row_stop\')
-						AND sorting > ?
-					ORDER BY sorting ASC
-					LIMIT 1
-				')
-                ->execute(
-                    $activeRecord->pid,
-                    $activeRecord->ptable ?: 'tl_article',
-                    $activeRecord->ptable === 'tl_article' ? '' : $activeRecord->ptable,
-                    $activeRecord->sorting
-                );
-
-            // Check if a stop element should be created
-            if (!$nextElement->type) {
-                \Database::getInstance()
-                    ->prepare('INSERT INTO tl_content %s')
-                    ->set(array(
-                        'pid' => $activeRecord->pid,
-                        'ptable' => $activeRecord->ptable ?: 'tl_article',
-                        'type' => 'dma_simplegrid_row_stop',
-                        'sorting' => $activeRecord->sorting + 1,
-                        'tstamp' => time(),
-                    ))
-                    ->execute();
-            }
-
-        }
+        return $blnHasDmaGridInfos;
 
     }
 
-    public function columnsSelectCallback()
+    public static function getColumnClasses($arrTemplateData)
     {
+
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
+        }
+
+        $arrConfiguredClasses = array();
+
+        if (!is_array($arrTemplateData['dma_simplegrid_columnsettings'])) {
+            $arrColumnSettings = deserialize($arrTemplateData['dma_simplegrid_columnsettings'], true);
+        }
+        if (!is_array($arrTemplateData['dma_simplegrid_offsetsettings'])) {
+            $arrOffsetSettings = deserialize($arrTemplateData['dma_simplegrid_offsetsettings'], true);
+        }
+        if (!is_array($arrTemplateData['dma_simplegrid_pushsettings'])) {
+            $arrPushSettings = deserialize($arrTemplateData['dma_simplegrid_pushsettings'], true);
+        }
+        if (!is_array($arrTemplateData['dma_simplegrid_pullsettings'])) {
+            $arrPullSettings = deserialize($arrTemplateData['dma_simplegrid_pullsettings'], true);
+        }
+
+        if (sizeof($arrColumnSettings) == 1) {
+            $arrElementSettings = $arrColumnSettings[0];
+            if (is_array($arrElementSettings)) {
+                foreach ($arrElementSettings as $columnKey => $varValue) {
+                    if ($varValue) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['column-class'], $varValue);
+                    }
+                }
+            }
+        }
+
+        if (sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
+            $arrElementSettings = $arrOffsetSettings[0];
+            if (is_array($arrElementSettings)) {
+                foreach ($arrElementSettings as $columnKey => $varValue) {
+                    if ($varValue) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['offset-class'], $varValue);
+                    }
+                }
+            }
+        }
+
+        if (sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
+            $arrElementSettings = $arrPushSettings[0];
+            if (is_array($arrElementSettings)) {
+                foreach ($arrElementSettings as $columnKey => $varValue) {
+                    if ($varValue) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['push-class'], $varValue);
+                    }
+                }
+            }
+        }
+
+        if (sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
+            $arrElementSettings = $arrPullSettings[0];
+            if (is_array($arrElementSettings)) {
+                foreach ($arrElementSettings as $columnKey => $varValue) {
+                    if ($varValue) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['pull-class'], $varValue);
+                    }
+                }
+            }
+        }
+
+        if (sizeof($arrConfiguredClasses) > 0) {
+            if (static::$arrCache['grid']['config']['column-class'])
+            {
+                $arrConfiguredClasses[] = static::$arrCache['grid']['config']['column-class'];
+            }
+        }
+
+        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
+        {
+            $arrAdditionalClasses = deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true);
+
+            if (sizeof($arrAdditionalClasses) > 0)
+            {
+                foreach ($arrAdditionalClasses as $strClassKey)
+                {
+                    $arrConfiguredClasses[] = $strClassKey;
+                }
+            }
+        }
+
+
+        $strClasses = implode(' ', $arrConfiguredClasses);
+
+        return $strClasses;
+
+    }
+
+
+
+    public static function getSimpleGridInfos($arrRow)
+    {
+
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
+        }
+
+        $strGridInfo = "";
+
+        if ($arrRow['dma_simplegrid_columnsettings'])
+        {
+            $strGridInfo .= '<span class="tl_gray" style="padding-right:10px;">' . self::getColumnsShowString($arrRow) . '</span>';
+        }
+
+        return $strGridInfo;
+
+    }
+
+    public static function columnsSelectCallback()
+    {
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
+        }
+
         $arrColumnsSetting = array();
 
-        if ($this->arrConfigData['config']['columns-config']) {
-            foreach ($this->arrConfigData['config']['columns-config'] as $configName => $arrColumnConfig) {
+        if (static::$arrCache['grid']['config']['columns-config']) {
+            foreach (static::$arrCache['grid']['config']['columns-config'] as $configName => $arrColumnConfig) {
                 $arrColumnsSetting[$configName] = array
                 (
                     'label' => $arrColumnConfig['name'],
                     'inputType' => 'select',
-                    'options' => $this->arrConfigData['config']['columns-sizes'],
+                    'options' => static::$arrCache['grid']['config']['columns-sizes'],
                     'eval' => array('includeBlankOption' => true, 'style' => 'width:115px')
                 );
             }
@@ -336,30 +215,54 @@ class DmaSimpleGrid extends \Controller
         return $arrColumnsSetting;
     }
 
-    public function getColumnsShowString($arrColumnSettings, $arrOffsetSettings=array(), $arrPushSettings=array(), $arrPullSettings=array())
+
+    public static function getAdditionalRowClasses()
+    {
+
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
+        }
+
+        return static::$arrCache['grid']['config']['additional-classes']['row'];
+    }
+
+    public static function getAdditionalColumnClasses()
+    {
+
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
+        }
+
+        return static::$arrCache['grid']['config']['additional-classes']['columns'];
+    }
+
+
+    public static function getColumnsShowString($arrRow)
     {
         $strReturn = "";
         $arrConfiguredClasses = array();
 
-        if (!is_array($arrColumnSettings)) {
-            $arrColumnSettings = deserialize($arrColumnSettings, true);
+        if (!is_array($arrRow['dma_simplegrid_columnsettings'])) {
+            $arrColumnSettings = deserialize($arrRow['dma_simplegrid_columnsettings'], true);
         }
-        if (!is_array($arrOffsetSettings)) {
-            $arrOffsetSettings = deserialize($arrOffsetSettings, true);
+        if (!is_array($arrRow['dma_simplegrid_offsetsettings'])) {
+            $arrOffsetSettings = deserialize($arrRow['dma_simplegrid_offsetsettings'], true);
         }
-        if (!is_array($arrPushSettings)) {
-            $arrPushSettings = deserialize($arrPushSettings, true);
+        if (!is_array($arrRow['dma_simplegrid_pushsettings'])) {
+            $arrPushSettings = deserialize($arrRow['dma_simplegrid_pushsettings'], true);
         }
-        if (!is_array($arrPullSettings)) {
-            $arrPullSettings = deserialize($arrPullSettings, true);
+        if (!is_array($arrRow['dma_simplegrid_pullsettings'])) {
+            $arrPullSettings = deserialize($arrRow['dma_simplegrid_pullsettings'], true);
         }
 
         if (sizeof($arrColumnSettings) == 1) {
             $arrElementSettings = $arrColumnSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = $this->arrConfigData['config']['columns-config'][$columnKey]['name'] . ": " . $varValue;
+                    if ($varValue && static::$arrCache['grid']['config']['columns-config'][$columnKey]['name']) {
+                        $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['name'] . ": " . $varValue;
                     }
                 }
             }
@@ -368,8 +271,8 @@ class DmaSimpleGrid extends \Controller
             $arrElementSettings = $arrOffsetSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = $this->arrConfigData['config']['columns-config'][$columnKey]['name'] . "-offset: " . $varValue;
+                    if ($varValue && static::$arrCache['grid']['config']['columns-config'][$columnKey]['name']) {
+                        $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['name'] . "-offset: " . $varValue;
                     }
                 }
             }
@@ -378,8 +281,8 @@ class DmaSimpleGrid extends \Controller
             $arrElementSettings = $arrPushSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = $this->arrConfigData['config']['columns-config'][$columnKey]['name'] . "-push: " . $varValue;
+                    if ($varValue && static::$arrCache['grid']['config']['columns-config'][$columnKey]['name']) {
+                        $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['name'] . "-push: " . $varValue;
                     }
                 }
             }
@@ -388,8 +291,8 @@ class DmaSimpleGrid extends \Controller
             $arrElementSettings = $arrPullSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = $this->arrConfigData['config']['columns-config'][$columnKey]['name'] . "-pull: " . $varValue;
+                    if ($varValue && static::$arrCache['grid']['config']['columns-config'][$columnKey]['name']) {
+                        $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['name'] . "-pull: " . $varValue;
                     }
                 }
             }
@@ -401,93 +304,17 @@ class DmaSimpleGrid extends \Controller
 
     }
 
-    public function getSimpleGridColumnClasses($arrColumnSettings, $arrOffsetSettings=array(), $arrPushSettings=array(), $arrPullSettings=array())
+    private static function initialize()
     {
 
-        $arrConfiguredClasses = array();
-
-        if (!is_array($arrColumnSettings)) {
-            $arrColumnSettings = deserialize($arrColumnSettings, true);
-        }
-        if (!is_array($arrOffsetSettings)) {
-            $arrOffsetSettings = deserialize($arrOffsetSettings, true);
-        }
-        if (!is_array($arrPushSettings)) {
-            $arrPushSettings = deserialize($arrPushSettings, true);
-        }
-        if (!is_array($arrPullSettings)) {
-            $arrPullSettings = deserialize($arrPullSettings, true);
-        }
-
-        if (sizeof($arrColumnSettings) == 1) {
-            $arrElementSettings = $arrColumnSettings[0];
-            if (is_array($arrElementSettings)) {
-                foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = sprintf($this->arrConfigData['config']['columns-config'][$columnKey]['column-class'], $varValue);
-                    }
-                }
-            }
-        }
-
-        if (sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
-            $arrElementSettings = $arrOffsetSettings[0];
-            if (is_array($arrElementSettings)) {
-                foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = sprintf($this->arrConfigData['config']['columns-config'][$columnKey]['offset-class'], $varValue);
-                    }
-                }
-            }
-        }
-
-        if (sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
-            $arrElementSettings = $arrPushSettings[0];
-            if (is_array($arrElementSettings)) {
-                foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = sprintf($this->arrConfigData['config']['columns-config'][$columnKey]['push-class'], $varValue);
-                    }
-                }
-            }
-        }
-
-        if (sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
-            $arrElementSettings = $arrPullSettings[0];
-            if (is_array($arrElementSettings)) {
-                foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
-                        $arrConfiguredClasses[] = sprintf($this->arrConfigData['config']['columns-config'][$columnKey]['pull-class'], $varValue);
-                    }
-                }
-            }
-        }
-
-        if (sizeof($arrConfiguredClasses) > 0) {
-            if ($this->arrConfigData['config']['column-class'])
-            {
-                $arrConfiguredClasses[] = $this->arrConfigData['config']['column-class'];
-            }
-        }
-
-
-        $strClasses = implode(' ', $arrConfiguredClasses);
-
-        return $strClasses;
-    }
-
-    public function getSimpleGridInfos($arrRow)
-    {
-
-        $strGridInfo = "";
-
-        if ($arrRow['dma_simplegrid_columnsettings'])
+        if ($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] && $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']])
         {
-
-            $strGridInfo .= '<span class="tl_gray" style="padding-right:10px;">' . $this->getColumnsShowString($arrRow['dma_simplegrid_columnsettings'], $arrRow['dma_simplegrid_offsetsettings'], $arrRow['dma_simplegrid_pushsettings'], $arrRow['dma_simplegrid_pullsettings']) . '</span>';
-
+            static::$arrCache['grid'] = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
         }
-
-        return $strGridInfo;
+        else
+        {
+            static::$arrCache['grid'] = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
+        }
     }
+
 }

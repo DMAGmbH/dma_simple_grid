@@ -12,8 +12,8 @@
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
 
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = array('DMA\\DmaSimpleGrid', 'adjustPalettesString');
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array('DMA\\DmaSimpleGrid', 'onsubmitCallbackFormField');
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'adjustPalettesString');
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'onsubmitCallbackFormField');
 
 array_insert($GLOBALS['TL_DCA']['tl_form_field']['list']['operations'], 0, array(
     'show_simplegrid_infos' => array
@@ -112,4 +112,14 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_pushsettings'] = a
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
     'sql'                     => "text NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_additionalrowclasses'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['dma_simplegrid_additionalrowclasses'],
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'options_callback'        => array('DMA\\DmaSimpleGrid', 'getAdditionalRowClasses'),
+    'eval'                    => array('multiple'=>true),
+    'sql'                     => "blob NULL"
 );

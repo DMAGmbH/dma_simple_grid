@@ -3,7 +3,7 @@
 /**
  * Contao Open Source CMS
  *
- * Copyright (c) 2005-2015 Leo Feyer
+ * Copyright (c) 2005-2016 Leo Feyer
  *
  * @license LGPL-3.0+
  */
@@ -25,6 +25,8 @@ ClassLoader::addClasses(array
 (
 	// Classes
 	'DMA\DmaSimpleGrid'                => 'system/modules/dma_simple_grid/classes/DmaSimpleGrid.php',
+	'DMA\DmaSimpleGridDcaCallbacks'    => 'system/modules/dma_simple_grid/classes/DmaSimpleGridDcaCallbacks.php',
+	'DMA\DmaSimpleGridHelper'          => 'system/modules/dma_simple_grid/classes/DmaSimpleGridHelper.php',
 
 	// Elements
 	'DMA\ContentSimpleGridColumnStart' => 'system/modules/dma_simple_grid/elements/ContentSimpleGridColumnStart.php',

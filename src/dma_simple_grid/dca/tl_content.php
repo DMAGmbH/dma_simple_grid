@@ -13,8 +13,8 @@
  */
 
 
-$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('DMA\\DmaSimpleGrid', 'adjustPalettesString');
-$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('DMA\\DmaSimpleGrid', 'onsubmitCallback');
+$GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'adjustPalettesString');
+$GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'onsubmitCallback');
 
 array_insert($GLOBALS['TL_DCA']['tl_content']['list']['operations'], 0, array(
     'show_simplegrid_infos' => array
@@ -74,6 +74,26 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_offsetsettings'] = ar
     'sql'                     => "text NULL"
 );
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_offsetrightsettings'] = array
+(
+    'label'			=> &$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_offsetrightsettings'],
+    'exclude' 		=> true,
+    'inputType' 	=> 'multiColumnWizard',
+    'eval' 			=> array
+    (
+        'maxCount' => 1,
+        'buttons' => array
+        (
+            'copy'=> false,
+            'delete'=>false,
+            'up'=>false,
+            'down'=>false
+        ),
+        'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
+    ),
+    'sql'                     => "text NULL"
+);
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pullsettings'] = array
 (
     'label'			=> &$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_pullsettings'],
@@ -112,6 +132,16 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pushsettings'] = arra
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
     'sql'                     => "text NULL"
+);
+
+$GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_additionalcolumnclasses'] = array
+(
+    'label'                   => &$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalcolumnclasses'],
+    'exclude'                 => true,
+    'inputType'               => 'checkbox',
+    'options_callback'        => array('DMA\\DmaSimpleGrid', 'getAdditionalColumnClasses'),
+    'eval'                    => array('multiple'=>true),
+    'sql'                     => "blob NULL"
 );
 
 $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_additionalrowclasses'] = array

@@ -61,7 +61,6 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
         {
-            $strAdditionalClasses = " sdfsdf";
             $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalrowclasses, true);
 
             if (sizeof($arrAdditionalClasses) > 0)
