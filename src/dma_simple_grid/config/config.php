@@ -316,14 +316,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
         ),
         'additional-classes' => array
         (
-            'row' => array('expanded'),
-            'columns' => array
-            (
-                'end' => 'end',
-                'small-centered' => 'small-centered',
-                'medium-centered' => 'medium-centered',
-                'large-centered' => 'large-centered'
-            )
+            'row' => array('expanded','column','small-uncollapse','medium-uncollapse','large-uncollapse','small-collapse','medium-collapse','large-collapse'),
+            'columns' => array('end','small-centered','medium-centered','large-centered','small-uncentered','medium-uncentered','large-uncentered')
         )
     )
 );

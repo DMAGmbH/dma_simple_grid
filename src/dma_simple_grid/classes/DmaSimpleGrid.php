@@ -256,6 +256,12 @@ class DmaSimpleGrid
         if (!is_array($arrRow['dma_simplegrid_pullsettings'])) {
             $arrPullSettings = deserialize($arrRow['dma_simplegrid_pullsettings'], true);
         }
+        if (!is_array($arrRow['dma_simplegrid_additionalcolumnclasses'])) {
+            $arrAdditionalColumnClassesSettings = deserialize($arrRow['dma_simplegrid_additionalcolumnclasses'], true);
+        }
+        if (!is_array($arrRow['dma_simplegrid_additionalrowclasses'])) {
+            $arrAdditionalRowClassesSettings = deserialize($arrRow['dma_simplegrid_additionalrowclasses'], true);
+        }
 
         if (sizeof($arrColumnSettings) == 1) {
             $arrElementSettings = $arrColumnSettings[0];
@@ -297,6 +303,30 @@ class DmaSimpleGrid
                 }
             }
         }
+
+        if (sizeof($arrAdditionalColumnClassesSettings) > 0 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'])
+        {
+            if (is_array($arrAdditionalColumnClassesSettings))
+            {
+                foreach ($arrAdditionalColumnClassesSettings as $varValue)
+                {
+                    $arrConfiguredClasses[] = $varValue;
+                }
+            }
+        }
+
+        if (sizeof($arrAdditionalRowClassesSettings) > 0 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'])
+        {
+            if (is_array($arrAdditionalRowClassesSettings))
+            {
+                foreach ($arrAdditionalRowClassesSettings as $varValue)
+                {
+                    $arrConfiguredClasses[] = $varValue;
+                }
+            }
+        }
+
+
 
         $strReturn = implode('; ', $arrConfiguredClasses);
 
