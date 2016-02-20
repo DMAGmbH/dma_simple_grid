@@ -378,7 +378,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['unsemantic'] = array
         'hasColumnOffsetRight' => true,
         'hasColumnPush' => true,
         'hasColumnPull' => true,
-        'hasRowClasses' => false,
+        'hasRowClasses' => true,
         'hasColumnClasses' => true,
         'row-class' => 'grid-container',
         'columns-sizes' => array('5','10','15','20','25','30','33','35','40','45','50','55','60','65','66','70','75','80','85','90','95','100'),
@@ -414,7 +414,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['unsemantic'] = array
         ),
         'additional-classes' => array
         (
-            'columns' => array('grid-parent')
+            'row' => array('grid-offset'),
+            'columns' => array('grid-parent','grid-offset')
         )
     )
 );
