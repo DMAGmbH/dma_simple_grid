@@ -415,7 +415,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['unsemantic'] = array
         'additional-classes' => array
         (
             'row' => array('grid-offset'),
-            'columns' => array('grid-parent','grid-offset')
+            'columns' => array('grid-parent','grid-offset','hide-on-mobile','hide-on-tablet','hide-on-desktop')
         )
     )
 );
