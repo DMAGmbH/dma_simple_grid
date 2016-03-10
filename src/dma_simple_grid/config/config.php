@@ -230,41 +230,41 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gr-grid'] = array
             'xs' => array
             (
                 'name' => 'extra small',
-                'column-class' => 'col-xs-%d',
-                'offset-class' => 'col-xs-offset-%d',
-                'push-class' => 'col-xs-push-%d',
-                'pull-class' => 'col-xs-pull-%d'
+                'column-class' => 'col-xs-%s',
+                'offset-class' => 'col-xs-offset-%s',
+                'push-class' => 'col-xs-push-%s',
+                'pull-class' => 'col-xs-pull-%s'
             ),
             'sm' => array
             (
                 'name' => 'small',
-                'column-class' => 'col-sm-%d',
-                'offset-class' => 'col-sm-offset-%d',
-                'push-class' => 'col-sm-push-%d',
-                'pull-class' => 'col-sm-pull-%d'
+                'column-class' => 'col-sm-%s',
+                'offset-class' => 'col-sm-offset-%s',
+                'push-class' => 'col-sm-push-%s',
+                'pull-class' => 'col-sm-pull-%s'
             ),
             'md' => array
             (
                 'name' => 'medium',
-                'column-class' => 'col-md-%d',
-                'offset-class' => 'col-md-offset-%d',
-                'push-class' => 'col-md-push-%d',
-                'pull-class' => 'col-md-pull-%d'
+                'column-class' => 'col-md-%s',
+                'offset-class' => 'col-md-offset-%s',
+                'push-class' => 'col-md-push-%s',
+                'pull-class' => 'col-md-pull-%s'
             ),
             'lg' => array
             (
                 'name' => 'large',
-                'column-class' => 'col-lg-%d',
-                'offset-class' => 'col-lg-offset-%d',
-                'push-class' => 'col-lg-push-%d',
-                'pull-class' => 'col-lg-pull-%d'
+                'column-class' => 'col-lg-%s',
+                'offset-class' => 'col-lg-offset-%s',
+                'push-class' => 'col-lg-push-%s',
+                'pull-class' => 'col-lg-pull-%s'
             ),
             'xl' => array
             (
                 'name' => 'extra large',
-                'column-class' => 'col-xl-%d',
-                'offset-class' => 'col-xl-offset-%d',
-                'push-class' => 'col-xl-push-%d',
+                'column-class' => 'col-xl-%s',
+                'offset-class' => 'col-xl-offset-%s',
+                'push-class' => 'col-xl-push-%s',
                 'pull-class' => 'col-xl-pull-%d'
             )
         )
