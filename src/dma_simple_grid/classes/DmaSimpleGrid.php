@@ -92,6 +92,9 @@ class DmaSimpleGrid
         if (!is_array($arrTemplateData['dma_simplegrid_offsetsettings'])) {
             $arrOffsetSettings = deserialize($arrTemplateData['dma_simplegrid_offsetsettings'], true);
         }
+        if (!is_array($arrTemplateData['dma_simplegrid_offsetrightsettings'])) {
+            $arrOffsetRightSettings = deserialize($arrTemplateData['dma_simplegrid_offsetrightsettings'], true);
+        }
         if (!is_array($arrTemplateData['dma_simplegrid_pushsettings'])) {
             $arrPushSettings = deserialize($arrTemplateData['dma_simplegrid_pushsettings'], true);
         }
@@ -116,6 +119,17 @@ class DmaSimpleGrid
                 foreach ($arrElementSettings as $columnKey => $varValue) {
                     if ($varValue) {
                         $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['offset-class'], $varValue);
+                    }
+                }
+            }
+        }
+
+        if (sizeof($arrOffsetRightSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight']) {
+            $arrElementSettings = $arrOffsetRightSettings[0];
+            if (is_array($arrElementSettings)) {
+                foreach ($arrElementSettings as $columnKey => $varValue) {
+                    if ($varValue) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['offset-right-class'], $varValue);
                     }
                 }
             }
@@ -250,6 +264,9 @@ class DmaSimpleGrid
         if (!is_array($arrRow['dma_simplegrid_offsetsettings'])) {
             $arrOffsetSettings = deserialize($arrRow['dma_simplegrid_offsetsettings'], true);
         }
+        if (!is_array($arrRow['dma_simplegrid_offsetrightsettings'])) {
+            $arrOffsetRightSettings = deserialize($arrRow['dma_simplegrid_offsetrightsettings'], true);
+        }
         if (!is_array($arrRow['dma_simplegrid_pushsettings'])) {
             $arrPushSettings = deserialize($arrRow['dma_simplegrid_pushsettings'], true);
         }
@@ -279,6 +296,16 @@ class DmaSimpleGrid
                 foreach ($arrElementSettings as $columnKey => $varValue) {
                     if ($varValue && static::$arrCache['grid']['config']['columns-config'][$columnKey]['name']) {
                         $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['name'] . "-offset: " . $varValue;
+                    }
+                }
+            }
+        }
+        if (sizeof($arrOffsetRightSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight']) {
+            $arrElementSettings = $arrOffsetRightSettings[0];
+            if (is_array($arrElementSettings)) {
+                foreach ($arrElementSettings as $columnKey => $varValue) {
+                    if ($varValue && static::$arrCache['grid']['config']['columns-config'][$columnKey]['name']) {
+                        $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['name'] . "-offset-right: " . $varValue;
                     }
                 }
             }
