@@ -32,11 +32,5 @@
          "system/"
       ]
    },
-   "extra":{  
-      "contao":{  
-         "sources":{  
-            "src/dma_simple_grid":"system/modules/dma_simple_grid"
-         }
-      }
-   }
+   "minimum-stability": "dev"
 }
