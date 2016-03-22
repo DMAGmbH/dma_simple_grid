@@ -27,10 +27,11 @@
       "contao-community-alliance/composer-plugin":"^2.4.0 || 3.*",
       "menatwork/contao-multicolumnwizard": "~3.2"
    },
-   "autoload":{  
-      "classmap":[  
-         "system/"
-      ]
-   },
-   "minimum-stability": "dev"
+   "extra":{  
+      "contao":{  
+         "sources":{  
+            "src/dma_simple_grid":"system/modules/dma_simple_grid"
+         }
+      }
+   }
 }
