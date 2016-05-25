@@ -24,7 +24,7 @@ https://github.com/menatwork/MultiColumnWizard
 
 ### Erweiterung der Grid-Einstellungen
 Standardmäßig wird diese Erweiterung mit dem Support für das Contao Grid, das Grid von Bootstrap 3, Bootstrap 4, Foundation 6 und unsemantic sowie dem GoldenRatio Grid von uns ausgeliefert. Über eigene `config.php`-Dateien können weitere Grid-Systeme unterstützt werden (hier als Beispiel die Konfiguration für das Foundation-Grid):
-``
+```
 $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
 (
     'name' => 'Foundation',
@@ -81,5 +81,5 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
         )
     )
 );
-``
+```
 
