@@ -196,9 +196,14 @@ class DmaSimpleGrid
 
         $strGridInfo = "";
 
-        if ($arrRow['dma_simplegrid_columnsettings'])
+        if ($arrRow['dma_simplegrid_columnsettings'] || $arrRow['dma_simplegrid_additionalwrapperclasses'])
         {
-            $strGridInfo .= '<span class="tl_gray" style="padding-right:10px;">' . self::getColumnsShowString($arrRow) . '</span>';
+            $strGridInfo .= self::getColumnsShowString($arrRow);
+        }
+
+        if ($strGridInfo != "")
+        {
+            $strGridInfo = '<a href="#" class="tl_gray" style="padding-right:10px; white-space:nowrap; max-width:200px; display:inline-block; overflow:hidden; text-overflow:ellipsis;" title="' . $strGridInfo .'" onclick="return false;">' . $strGridInfo . '</a>';
         }
 
         return $strGridInfo;
@@ -261,7 +266,6 @@ class DmaSimpleGrid
         return static::$arrCache['grid']['config']['additional-classes']['columns'];
     }
 
-
     public static function getColumnsShowString($arrRow)
     {
         $strReturn = "";
@@ -287,6 +291,9 @@ class DmaSimpleGrid
         }
         if (!is_array($arrRow['dma_simplegrid_additionalrowclasses'])) {
             $arrAdditionalRowClassesSettings = deserialize($arrRow['dma_simplegrid_additionalrowclasses'], true);
+        }
+        if (!is_array($arrRow['dma_simplegrid_additionalwrapperclasses'])) {
+            $arrAdditionalWrapperClassesSettings = deserialize($arrRow['dma_simplegrid_additionalwrapperclasses'], true);
         }
 
         if (sizeof($arrColumnSettings) == 1) {
@@ -361,6 +368,19 @@ class DmaSimpleGrid
                 }
             }
         }
+
+        if (sizeof($arrAdditionalWrapperClassesSettings) > 0 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'])
+        {
+            if (is_array($arrAdditionalWrapperClassesSettings))
+            {
+                foreach ($arrAdditionalWrapperClassesSettings as $varValue)
+                {
+                    $arrConfiguredClasses[] = $varValue;
+                }
+            }
+        }
+
+
 
 
 
