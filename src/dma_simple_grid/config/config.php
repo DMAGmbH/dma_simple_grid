@@ -482,6 +482,21 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] = array
             (
                 'name' => 'xs',
                 'block-class' => '^_xs-%d',
+            ),
+            'sm' => array
+            (
+                'name' => 'sm',
+                'block-class' => '^_sm-%d',
+            ),
+            'md' => array
+            (
+                'name' => 'medium',
+                'block-class' => '^_md-%d',
+            ),
+            'lg' => array
+            (
+                'name' => 'large',
+                'block-class' => '^_lg-%d',
             )
         ),
         'columns-config' => array
@@ -495,6 +510,21 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] = array
             (
                 'name' => 'xs',
                 'column-class' => '^_xs-%d',
+            ),
+            'sm' => array
+            (
+                'name' => 'sm',
+                'block-class' => '^_sm-%d',
+            ),
+            'md' => array
+            (
+                'name' => 'medium',
+                'block-class' => '^_md-%d',
+            ),
+            'lg' => array
+            (
+                'name' => 'large',
+                'block-class' => '^_lg-%d',
             )
         ),
         'additional-classes' => array
