@@ -56,6 +56,13 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_usePull'] = array
     'eval'		        => array('tl_class'=>'w50')
 );
 
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useBlockGrid'] = array
+(
+    'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useBlockGrid'],
+    'inputType'	        => 'checkbox',
+    'eval'		        => array('tl_class'=>'w50')
+);
+
 $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useAdditionalWrapperClasses'] = array
 (
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalWrapperClasses'],

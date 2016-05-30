@@ -11,3 +11,4 @@ $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_pushsettings'] = array('Push-E
 $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalcolumnclasses'] = array('Zusätzliche Spalten-Klassen', 'Zusätzliche Spalten-Klassen');
 $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalrowclasses'] = array('Zusätzliche Zeilen-Klassen', 'Zusätzliche Zeilen-Klassen');
 $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalwrapperclasses'] = array('Zusätzliche Wrapper-Klassen', 'Zusätzliche Wrapper-Klassen');
+$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_blocksettings'] = array('Block-Grid-Einstellungen', 'Block-Grid-Einstellungen für die in der Konfiguration vorgegeben Klassen bzw. Media-Queries');

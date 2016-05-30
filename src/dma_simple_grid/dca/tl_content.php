@@ -137,6 +137,26 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pushsettings'] = arra
     'sql'                     => "text NULL"
 );
 
+$GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_blocksettings'] = array
+(
+    'label'			=> &$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_blocksettings'],
+    'exclude' 		=> true,
+    'inputType' 	=> 'multiColumnWizard',
+    'eval' 			=> array
+    (
+        'maxCount' => 1,
+        'buttons' => array
+        (
+            'copy'=> false,
+            'delete'=>false,
+            'up'=>false,
+            'down'=>false
+        ),
+        'columnsCallback' => array('DMA\\DmaSimpleGrid', 'blockSelectCallback')
+    ),
+    'sql'                     => "text NULL"
+);
+
 $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_additionalwrapperclasses'] = array
 (
     'label'                   => &$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalwrapperclasses'],

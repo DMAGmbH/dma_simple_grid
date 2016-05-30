@@ -11,3 +11,4 @@ $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_usePull'] = array('Pull-Select
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalWrapperClasses'] = array('Erweiterte Wrapper-Klassen zur Auswahl anbieten', 'Erweiterte Wrapper-Klassen zur Auswahl anbieten');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalRowClasses'] = array('Erweiterte Zeilen-Klassen zur Auswahl anbieten', 'Erweiterte Zeilen-Klassen zur Auswahl anbieten');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalColumnClasses'] = array('Erweiterte Spalten-Klassen zur Auswahl anbieten', 'Erweiterte Spalten-Klassen zur Auswahl anbieten');
+$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useBlockGrid'] = array('Block-Grid verwenden', 'Block-Grid verwenden');

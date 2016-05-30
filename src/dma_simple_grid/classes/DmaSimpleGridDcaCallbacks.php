@@ -66,6 +66,11 @@ class DmaSimpleGridDcaCallbacks extends \Controller
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_usePull";
         }
 
+        if (DmaSimpleGrid::getConfigData('hasBlockGrid'))
+        {
+            $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useBlockGrid";
+        }
+
         if (DmaSimpleGrid::getConfigData('hasWrapperClasses'))
         {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useAdditionalWrapperClasses";
@@ -151,15 +156,29 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
                 if ($k == "dma_simplegrid_row_start")
                 {
+
+                    $strRowStartFields = "";
+
+                    if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] && DmaSimpleGrid::getConfigData('hasBlockGrid'))
+                    {
+                        $strRowStartFields .= ",dma_simplegrid_blocksettings";
+                    }
+
                     if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $this->arrConfigData['config']['additional-classes']['row'])
+                    {
+                        $strRowStartFields .= ",dma_simplegrid_additionalrowclasses";
+                    }
+
+                    if ($strRowStartFields != "")
                     {
                         $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
                         (
                             '{invisible_legend',
-                            '{dma_simplegrid_legend},dma_simplegrid_additionalrowclasses;{invisible_legend',
+                            '{dma_simplegrid_legend}' . $strRowStartFields . ';{invisible_legend',
                             $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
                         );
                     }
+
                 }
 
                 if ($k == "dma_simplegrid_wrapper_start")

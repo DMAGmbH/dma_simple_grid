@@ -170,8 +170,7 @@ class DmaSimpleGrid
             }
         }
 
-
-        if (sizeof($arrConfiguredClasses) > 0) {
+        if (sizeof($arrConfiguredClasses) > 0 || $arrTemplateData['type']=="dma_simplegrid_column_start") {
             if (static::$arrCache['grid']['config']['column-class'])
             {
                 array_insert($arrConfiguredClasses, 0, static::$arrCache['grid']['config']['column-class']);
@@ -213,6 +212,32 @@ class DmaSimpleGrid
         }
 
         return $strGridInfo;
+
+    }
+
+    public static function blockSelectCallback()
+    {
+
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
+        }
+
+        $arrColumnsSetting = array();
+
+        if (static::$arrCache['grid']['config']['block-config']) {
+            foreach (static::$arrCache['grid']['config']['block-config'] as $configName => $arrColumnConfig) {
+                $arrColumnsSetting[$configName] = array
+                (
+                    'label' => $arrColumnConfig['name'],
+                    'inputType' => 'select',
+                    'options' => static::$arrCache['grid']['config']['block-sizes'],
+                    'eval' => array('includeBlankOption' => true, 'style' => 'width:115px')
+                );
+            }
+        }
+
+        return $arrColumnsSetting;
 
     }
 

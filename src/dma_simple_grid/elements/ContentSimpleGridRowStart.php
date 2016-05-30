@@ -48,7 +48,7 @@ class ContentSimpleGridRowStart extends \ContentElement
     public function compile()
     {
 
-        $strAdditionalClasses = "";
+        $arrConfiguredClasses = array();
 
         if ($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] && $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']])
         {
@@ -59,6 +59,23 @@ class ContentSimpleGridRowStart extends \ContentElement
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
         }
 
+        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] && $this->dma_simplegrid_blocksettings)
+        {
+            $arrBlockSettings = deserialize($this->dma_simplegrid_blocksettings, true);
+            if (sizeof($arrBlockSettings) == 1)
+            {
+                $arrElementSettings = $arrBlockSettings[0];
+                if (is_array($arrElementSettings)) {
+                    foreach ($arrElementSettings as $columnKey => $varValue) {
+                        if ($varValue) {
+                            $arrConfiguredClasses[] = sprintf($arrConfigData['config']['block-config'][$columnKey]['block-class'], $varValue);
+                        }
+                    }
+                }
+            }
+
+        }
+
         if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
         {
             $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalrowclasses, true);
@@ -67,19 +84,25 @@ class ContentSimpleGridRowStart extends \ContentElement
             {
                 foreach ($arrAdditionalClasses as $strClassKey)
                 {
-                    if (strpos($strClassKey, "^") !== false)
-                    {
-                        $strAdditionalClasses .= str_replace("^", "", $strClassKey);
-                    }
-                    else
-                    {
-                        $strAdditionalClasses .= " " . $strClassKey;
-                    }
+                    $arrConfiguredClasses[] = $strClassKey;
                 }
             }
         }
 
-        $this->type = "row ". $arrConfigData['config']['row-class'] . $strAdditionalClasses;
+        if ($arrConfigData['config']['row-class'])
+        {
+            array_insert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
+        }
+
+        $strClasses = implode(' ', $arrConfiguredClasses);
+
+        if (strpos($strClasses, "^") !== false)
+        {
+            $strClasses = str_replace(" ^", "", $strClasses);
+        }
+
+
+        $this->type = "row ". $strClasses;
 
     }
 

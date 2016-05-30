@@ -291,6 +291,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
     (
         'hasRows' => true,
         'hasColumns' => true,
+        'hasBlockGrid' => true,
         'hasColumnOffset' => true,
         'hasColumnOffsetRight' => false,
         'hasColumnPush' => true,
@@ -299,7 +300,26 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
         'hasColumnClasses' => true,
         'row-class' => 'row',
         'column-class' => 'columns',
+        'block-sizes' => array('1','2','3','4','5','6','7','8'),
         'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
+        'block-config' => array
+        (
+            'small' => array
+            (
+                'name' => 'small',
+                'block-class' => 'small-up-%d'
+            ),
+            'medium' => array
+            (
+                'name' => 'medium',
+                'block-class' => 'medium-up-%d'
+            ),
+            'large' => array
+            (
+                'name' => 'large',
+                'block-class' => 'large-up-%d'
+            )
+        ),
         'columns-config' => array
         (
             'small' => array
@@ -440,6 +460,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] = array
     (
         'hasRows' => true,
         'hasColumns' => true,
+        'hasBlockGrid' => true,
         //'hasColumnOffset' => true,
         //'hasColumnOffsetRight' => true,
         //'hasColumnPush' => true,
@@ -448,7 +469,21 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] = array
         'hasColumnClasses' => true,
         'row-class' => 'grid',
         'column-class' => 'col',
+        'block-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
         'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
+        'block-config' => array
+        (
+            'all' => array
+            (
+                'name' => 'all',
+                'block-class' => '^-%d',
+            ),
+            'xs' => array
+            (
+                'name' => 'xs',
+                'block-class' => '^_xs-%d',
+            )
+        ),
         'columns-config' => array
         (
             'all' => array
