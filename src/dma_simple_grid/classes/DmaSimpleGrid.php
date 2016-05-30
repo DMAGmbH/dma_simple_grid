@@ -229,6 +229,15 @@ class DmaSimpleGrid
         return $arrColumnsSetting;
     }
 
+    public static function getAdditionalWrapperClasses()
+    {
+        if (!isset(static::$arrCache['grid']))
+        {
+            self::initialize();
+        }
+
+        return static::$arrCache['grid']['config']['additional-classes']['wrapper'];
+    }
 
     public static function getAdditionalRowClasses()
     {

@@ -66,6 +66,11 @@ class DmaSimpleGridDcaCallbacks extends \Controller
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_usePull";
         }
 
+        if (DmaSimpleGrid::getConfigData('hasWrapperClasses'))
+        {
+            $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useAdditionalWrapperClasses";
+        }
+
         if (DmaSimpleGrid::getConfigData('hasRowClasses'))
         {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useAdditionalRowClasses";
@@ -113,7 +118,19 @@ class DmaSimpleGridDcaCallbacks extends \Controller
         if ($dc->__get('table') == "tl_content")
         {
 
-            $arrNotSupportedOrUsefulElements = array('module', 'dma_simplegrid_row_start');
+            if (!DmaSimpleGrid::getConfigData('hasRows'))
+            {
+                unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row_start']);
+                unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row_stop']);
+            }
+
+            if (!DmaSimpleGrid::getConfigData('hasWrapper'))
+            {
+                unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_start']);
+                unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_stop']);
+            }
+
+            $arrNotSupportedOrUsefulElements = array('module', 'dma_simplegrid_row_start', 'dma_simplegrid_wrapper_start');
 
             foreach ($GLOBALS['TL_DCA']['tl_content']['palettes'] as $k => $palette)
             {
@@ -140,6 +157,19 @@ class DmaSimpleGridDcaCallbacks extends \Controller
                         (
                             '{invisible_legend',
                             '{dma_simplegrid_legend},dma_simplegrid_additionalrowclasses;{invisible_legend',
+                            $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
+                        );
+                    }
+                }
+
+                if ($k == "dma_simplegrid_wrapper_start")
+                {
+                    if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] && $this->arrConfigData['config']['additional-classes']['wrapper'])
+                    {
+                        $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
+                        (
+                            '{invisible_legend',
+                            '{dma_simplegrid_legend},dma_simplegrid_additionalwrapperclasses;{invisible_legend',
                             $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
                         );
                     }
@@ -322,6 +352,43 @@ class DmaSimpleGridDcaCallbacks extends \Controller
                         'pid' => $activeRecord->pid,
                         'ptable' => $activeRecord->ptable ?: 'tl_article',
                         'type' => 'dma_simplegrid_row_stop',
+                        'sorting' => $activeRecord->sorting + 1,
+                        'tstamp' => time(),
+                    ))
+                    ->execute();
+            }
+
+        }
+
+        if ($activeRecord->type === 'dma_simplegrid_wrapper_start') {
+
+            // Find the next columns or column element
+            $nextElement = \Database::getInstance()
+                ->prepare('
+					SELECT type
+					FROM tl_content
+					WHERE pid = ?
+						AND (ptable = ? OR ptable = ?)
+						AND type IN (\'dma_simplegrid_wrapper_stop\')
+						AND sorting > ?
+					ORDER BY sorting ASC
+					LIMIT 1
+				')
+                ->execute(
+                    $activeRecord->pid,
+                    $activeRecord->ptable ?: 'tl_article',
+                    $activeRecord->ptable === 'tl_article' ? '' : $activeRecord->ptable,
+                    $activeRecord->sorting
+                );
+
+            // Check if a stop element should be created
+            if (!$nextElement->type) {
+                \Database::getInstance()
+                    ->prepare('INSERT INTO tl_content %s')
+                    ->set(array(
+                        'pid' => $activeRecord->pid,
+                        'ptable' => $activeRecord->ptable ?: 'tl_article',
+                        'type' => 'dma_simplegrid_wrapper_stop',
                         'sorting' => $activeRecord->sorting + 1,
                         'tstamp' => time(),
                     ))

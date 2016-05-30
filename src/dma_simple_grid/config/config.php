@@ -16,6 +16,8 @@
  * Content elements
  */
 
+$GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_start'] = 'DMA\\ContentSimpleGridWrapperStart';
+$GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_stop'] = 'DMA\\ContentSimpleGridWrapperStop';
 $GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row_start'] = 'DMA\\ContentSimpleGridRowStart';
 $GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row_stop'] = 'DMA\\ContentSimpleGridRowStop';
 $GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_column_start'] = 'DMA\\ContentSimpleGridColumnStart';
@@ -26,6 +28,8 @@ $GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_column_stop'] = 'DMA\\Conte
  * Front end wrappers
  */
 
+$GLOBALS['TL_WRAPPERS']['start'][] = 'dma_simplegrid_wrapper_start';
+$GLOBALS['TL_WRAPPERS']['stop'][] = 'dma_simplegrid_wrapper_stop';
 $GLOBALS['TL_WRAPPERS']['start'][] = 'dma_simplegrid_row_start';
 $GLOBALS['TL_WRAPPERS']['stop'][] = 'dma_simplegrid_row_stop';
 $GLOBALS['TL_WRAPPERS']['start'][] = 'dma_simplegrid_column_start';
@@ -91,6 +95,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
     'name' => 'Bootstrap',
     'config' => array
     (
+        'hasWrapper' => true,
         'hasRows' => true,
         'hasColumns' => true,
         'hasColumnOffset' => true,
@@ -100,6 +105,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
         'hasRowClasses' => false,
         'hasColumnClasses' => false,
         'row-class' => 'row',
+        'wrapper-class' => 'container',
         'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
         'columns-config' => array
         (
@@ -144,15 +150,18 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
     'name' => 'Bootstrap 4',
     'config' => array
     (
+        'hasWrapper' => true,
         'hasRows' => true,
         'hasColumns' => true,
         'hasColumnOffset' => true,
         'hasColumnOffsetRight' => false,
         'hasColumnPush' => true,
         'hasColumnPull' => true,
+        'hasWrapperClasses' => true,
         'hasRowClasses' => false,
         'hasColumnClasses' => false,
         'row-class' => 'row',
+        'wrapper-class' => '',
         'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
         'columns-config' => array
         (
@@ -196,6 +205,10 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
                 'push-class' => 'col-xl-push-%d',
                 'pull-class' => 'col-xl-pull-%d'
             )
+        ),
+        'additional-classes' => array
+        (
+            'wrapper' => array('container', 'container-fluid')
         )
     )
 );

@@ -10,3 +10,4 @@ $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_pullsettings'] = array('Pull-E
 $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_pushsettings'] = array('Push-Einstellungen','Push-Einstellungen');
 $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalcolumnclasses'] = array('Zusätzliche Spalten-Klassen', 'Zusätzliche Spalten-Klassen');
 $GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalrowclasses'] = array('Zusätzliche Zeilen-Klassen', 'Zusätzliche Zeilen-Klassen');
+$GLOBALS['TL_LANG']['tl_content']['dma_simplegrid_additionalwrapperclasses'] = array('Zusätzliche Wrapper-Klassen', 'Zusätzliche Wrapper-Klassen');
