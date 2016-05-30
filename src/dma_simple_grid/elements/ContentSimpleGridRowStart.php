@@ -67,7 +67,14 @@ class ContentSimpleGridRowStart extends \ContentElement
             {
                 foreach ($arrAdditionalClasses as $strClassKey)
                 {
-                    $strAdditionalClasses .= " " . $strClassKey;
+                    if (strpos($strClassKey, "^") !== false)
+                    {
+                        $strAdditionalClasses .= str_replace("^", "", $strClassKey);
+                    }
+                    else
+                    {
+                        $strAdditionalClasses .= " " . $strClassKey;
+                    }
                 }
             }
         }

@@ -433,4 +433,41 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['unsemantic'] = array
     )
 );
 
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] = array
+(
+    'name' => 'gridlex',
+    'config' => array
+    (
+        'hasRows' => true,
+        'hasColumns' => true,
+        //'hasColumnOffset' => true,
+        //'hasColumnOffsetRight' => true,
+        //'hasColumnPush' => true,
+        //'hasColumnPull' => true,
+        'hasRowClasses' => true,
+        'hasColumnClasses' => true,
+        'row-class' => 'grid',
+        'column-class' => 'col',
+        'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
+        'columns-config' => array
+        (
+            'all' => array
+            (
+                'name' => 'all',
+                'column-class' => '^-%d',
+            ),
+            'xs' => array
+            (
+                'name' => 'xs',
+                'column-class' => '^_xs-%d',
+            )
+        ),
+        'additional-classes' => array
+        (
+            'row' => array('^-center', '^-right', '^-middle', '^-bottom', '^-spaceBetween', '^-spaceAround', '^-reverse', '^-column', '^-column-reverse', '^-noGutter', '^-equalHeight'),
+            'columns' => array('col-first', 'col-last')
+        )
+    )
+);
+
 $GLOBALS['DMA_SIMPLEGRID_FALLBACK'] = 'delos';

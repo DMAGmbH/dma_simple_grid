@@ -157,13 +157,6 @@ class DmaSimpleGrid
             }
         }
 
-        if (sizeof($arrConfiguredClasses) > 0) {
-            if (static::$arrCache['grid']['config']['column-class'])
-            {
-                $arrConfiguredClasses[] = static::$arrCache['grid']['config']['column-class'];
-            }
-        }
-
         if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
         {
             $arrAdditionalClasses = deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true);
@@ -178,7 +171,20 @@ class DmaSimpleGrid
         }
 
 
+        if (sizeof($arrConfiguredClasses) > 0) {
+            if (static::$arrCache['grid']['config']['column-class'])
+            {
+                array_insert($arrConfiguredClasses, 0, static::$arrCache['grid']['config']['column-class']);
+            }
+        }
+
+
         $strClasses = implode(' ', $arrConfiguredClasses);
+
+        if (strpos($strClasses, "^") !== false)
+        {
+            $strClasses = str_replace(" ^", "", $strClasses);
+        }
 
         return $strClasses;
 
