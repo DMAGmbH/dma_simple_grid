@@ -514,17 +514,17 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] = array
             'sm' => array
             (
                 'name' => 'sm',
-                'block-class' => '^_sm-%d',
+                'column-class' => '^_sm-%d',
             ),
             'md' => array
             (
                 'name' => 'medium',
-                'block-class' => '^_md-%d',
+                'column-class' => '^_md-%d',
             ),
             'lg' => array
             (
                 'name' => 'large',
-                'block-class' => '^_lg-%d',
+                'column-class' => '^_lg-%d',
             )
         ),
         'additional-classes' => array
