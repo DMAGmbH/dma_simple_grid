@@ -227,7 +227,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
     public function onsubmitCallbackFormField($dc)
     {
         $activeRecord = $dc->activeRecord;
-        if (!$activeRecord) {
+        if (!$activeRecord || \Input::post('SUBMIT_TYPE') === 'auto') {
             return;
         }
 
@@ -301,7 +301,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
     public function onsubmitCallback($dc)
     {
         $activeRecord = $dc->activeRecord;
-        if (!$activeRecord) {
+        if (!$activeRecord || \Input::post('SUBMIT_TYPE') === 'auto') {
             return;
         }
 
