@@ -40,6 +40,13 @@ class FormSimpleGridRowStart extends \Widget
      */
     public function parse($arrAttributes=null)
     {
+        if (version_compare(VERSION, '4.0', '>=') && TL_MODE === 'BE') {
+            /** @var \Contao\BackendTemplate|object $objTemplate */
+            $objTemplate = new \Contao\BackendTemplate('be_wildcard');
+            $objTemplate->wildcard = '### ' . \Patchwork\Utf8::strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]) . ' ###';
+
+            return $objTemplate->parse();
+        }
 
         if ($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] && $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']])
         {
