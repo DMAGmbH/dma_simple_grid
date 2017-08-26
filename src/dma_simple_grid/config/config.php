@@ -535,4 +535,60 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] = array
     )
 );
 
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['flexboxgrid'] = array
+(
+    'name' => 'Flexbox Grid',
+    'config' => array
+    (
+        'hasWrapper' => true,
+        'hasRows' => true,
+        'hasColumns' => true,
+        'hasColumnOffset' => true,
+        'hasColumnOffsetRight' => false,
+        'hasColumnPush' => false,
+        'hasColumnPull' => false,
+        'hasWrapperClasses' => true,
+        'hasRowClasses' => true,
+        'hasColumnClasses' => true,
+        'wrapper-class' => '',
+        'row-class' => 'row',
+        'column-class' => '',
+        'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
+        'columns-config' => array
+        (
+            'xs' => array
+            (
+                'name' => 'extra small',
+                'column-class' => 'col-xs-%d',
+                'offset-class' => 'col-xs-offset-%d',
+
+            ),
+            'sm' => array
+            (
+                'name' => 'small',
+                'column-class' => 'col-sm-%d',
+                'offset-class' => 'col-sm-offset-%d'
+            ),
+            'md' => array
+            (
+                'name' => 'medium',
+                'column-class' => 'col-md-%d',
+                'offset-class' => 'col-md-offset-%d'
+            ),
+            'lg' => array
+            (
+                'name' => 'large',
+                'column-class' => 'col-lg-%d',
+                'offset-class' => 'col-lg-offset-%d'
+            ),
+        ),
+        'additional-classes' => array
+        (
+            'wrapper' => array('container', 'container-fluid'),
+            'row' => array('start-xs', 'center-xs', 'end-xs', 'top-xs', 'middle-xs', 'bottom-xs', 'around-xs', 'between-xs', 'reverse'),
+            'columns' => array('col-xs', 'col-sm', 'col-md', 'col-lg', 'first-xs', 'first-sm', 'first-md', 'first-lg', 'last-xs', 'last-sm', 'last-md', 'last-lg')
+        )
+    )
+);
+
 $GLOBALS['DMA_SIMPLEGRID_FALLBACK'] = 'delos';
