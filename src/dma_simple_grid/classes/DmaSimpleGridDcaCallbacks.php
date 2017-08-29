@@ -86,7 +86,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useAdditionalColumnClasses";
         }
 
-        $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ";";
+        $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useOwnSettingsByIncludeElements;";
     }
 
     public function adjustPalettesString($dc)

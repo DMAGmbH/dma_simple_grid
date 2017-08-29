@@ -78,6 +78,16 @@ class DmaSimpleGrid
 
     public static function getColumnClasses($arrTemplateData)
     {
+		
+		if ($arrTemplateData['origId'] && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOwnSettingsByIncludeElements'])
+		{
+			// includiertes Inhaltselement
+			$origContentElement = \ContentModel::findById($arrTemplateData['id']);
+			if ($origContentElement !== null)
+			{
+				$arrTemplateData = $origContentElement->row();
+			}
+		}
 
         if (!isset(static::$arrCache['grid']))
         {

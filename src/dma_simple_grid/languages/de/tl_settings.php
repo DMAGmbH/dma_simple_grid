@@ -12,3 +12,4 @@ $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalWrapperClasses'] 
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalRowClasses'] = array('Erweiterte Zeilen-Klassen zur Auswahl anbieten', 'Erweiterte Zeilen-Klassen zur Auswahl anbieten');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalColumnClasses'] = array('Erweiterte Spalten-Klassen zur Auswahl anbieten', 'Erweiterte Spalten-Klassen zur Auswahl anbieten');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useBlockGrid'] = array('Block-Grid verwenden', 'Block-Grid verwenden');
+$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOwnSettingsByIncludeElements'] = array('Includierenden Einstellungen nutzen', 'Bei includierten Inhaltselmenten die Einstellungen des includierenden Elemente nutzen');
