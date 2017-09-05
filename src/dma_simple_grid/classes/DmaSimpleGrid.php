@@ -117,7 +117,11 @@ class DmaSimpleGrid
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
                     if ($varValue) {
-                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['column-class'], $varValue);
+                        if ($varValue === 'hide') {
+                            $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['hide-class'];
+                        } else {
+                            $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['column-class'], $varValue);
+                        }
                     }
                 }
             }
@@ -251,7 +255,7 @@ class DmaSimpleGrid
 
     }
 
-    public static function columnsSelectCallback()
+    public static function columnsSelectCallback(\Widget $widget = null)
     {
         if (!isset(static::$arrCache['grid']))
         {
@@ -262,11 +266,23 @@ class DmaSimpleGrid
 
         if (static::$arrCache['grid']['config']['columns-config']) {
             foreach (static::$arrCache['grid']['config']['columns-config'] as $configName => $arrColumnConfig) {
+                $options = [];
+
+                // Add the hide option for column settings
+                if ($widget !== null && $widget->dataContainer->field === 'dma_simplegrid_columnsettings' && isset($arrColumnConfig['hide-class'])) {
+                    $options['hide'] = &$GLOBALS['TL_LANG']['MSC']['dma_simplegrid_hidden'];
+                }
+
+                // Add the column sizes
+                foreach (static::$arrCache['grid']['config']['columns-sizes'] as $column) {
+                    $options[$column] = $column;
+                }
+
                 $arrColumnsSetting[$configName] = array
                 (
                     'label' => $arrColumnConfig['name'],
                     'inputType' => 'select',
-                    'options' => static::$arrCache['grid']['config']['columns-sizes'],
+                    'options' => $options,
                     'eval' => array('includeBlankOption' => true, 'style' => 'width:115px')
                 );
             }
