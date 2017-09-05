@@ -18,3 +18,8 @@ $GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start']    = array('Grid Row Star
 $GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_stop']     = array('Grid Row Stop');
 $GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_start'] = array('Grid Column Start');
 $GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_stop']  = array('Grid Column Stop');
+
+/**
+ * Miscellaneous
+ */
+$GLOBALS['TL_LANG']['MSC']['dma_simplegrid_hidden'] = 'Hidden';
