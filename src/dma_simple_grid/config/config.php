@@ -151,7 +151,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
 
 $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
 (
-    'name' => 'Bootstrap 4',
+    'name' => 'Bootstrap 4 (alpha)',
     'config' => array
     (
         'hasWrapper' => true,
@@ -360,6 +360,54 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
         (
             'row' => array('expanded','column','small-uncollapse','medium-uncollapse','large-uncollapse','small-collapse','medium-collapse','large-collapse'),
             'columns' => array('end','small-centered','medium-centered','large-centered','small-uncentered','medium-uncentered','large-uncentered')
+        )
+    )
+);
+
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation-xy'] = array
+(
+    'name' => 'Foundation (XY Grid)',
+    'config' => array
+    (
+        'hasRows' => true,
+        'hasRowClasses' => true,
+
+        'hasColumns' => true,
+        'hasColumnClasses' => true,
+        'hasColumnOffset' => true,
+        'column-class' => 'cell',
+        'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
+        'columns-config' => array
+        (
+            'small' => array
+            (
+                'name' => 'small',
+                'column-class' => 'small-%d',
+                'offset-class' => 'small-offset-%d',
+            ),
+            'medium' => array
+            (
+                'name' => 'medium',
+                'column-class' => 'medium-%d',
+                'offset-class' => 'medium-offset-%d',
+            ),
+            'large' => array
+            (
+                'name' => 'large',
+                'column-class' => 'large-%d',
+                'offset-class' => 'large-offset-%d',
+            ),
+        ),
+
+        'hasWrapper' => true,
+        'hasWrapperClasses' => true,
+        'wrapper-class' => 'grid-container',
+
+        'additional-classes' => array
+        (
+            'wrapper' => array('fluid', 'full'),
+            'row' => array('grid-x', 'grid-y', 'grid-margin-x', 'small-margin-collapse', 'medium-margin-collapse', 'large-margin-collapse', 'grid-padding-x', 'small-padding-collapse', 'medium-padding-collapse', 'large-padding-collapse', 'small-grid-frame', 'medium-grid-frame', 'large-grid-frame'),
+            'columns' => array('auto', 'shrink', 'small-auto', 'medium-auto', 'large-auto', 'small-shrink', 'medium-shrink', 'large-shrink')
         )
     )
 );
