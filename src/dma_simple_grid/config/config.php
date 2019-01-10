@@ -355,6 +355,75 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
     )
 );
 
+
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation6'] = array
+(
+    'name' => 'Foundation 6 XY Grid',
+    'config' => array
+    (
+        'hasRows' => true,
+        'hasColumns' => true,
+        'hasBlockGrid' => true,
+        'hasColumnOffset' => true,
+        'hasColumnOffsetRight' => false,
+        'hasColumnPush' => true,
+        'hasColumnPull' => false,
+        'hasRowClasses' => true,
+        'hasColumnClasses' => true,
+        'row-class' => 'grid-x',
+        'column-class' => 'cell',
+        'block-sizes' => array('1','2','3','4','5','6','7','8'),
+        'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
+        'block-config' => array
+        (
+            'small' => array
+            (
+                'name' => 'small',
+                'block-class' => 'small-up-%d'
+            ),
+            'medium' => array
+            (
+                'name' => 'medium',
+                'block-class' => 'medium-up-%d'
+            ),
+            'large' => array
+            (
+                'name' => 'large',
+                'block-class' => 'large-up-%d'
+            )
+        ),
+        'columns-config' => array
+        (
+            'small' => array
+            (
+                'name' => 'small',
+                'column-class' => 'small-%d',
+                'offset-class' => 'small-offset-%d',
+                'push-class' => 'small-order-%d',
+            ),
+            'medium' => array
+            (
+                'name' => 'medium',
+                'column-class' => 'medium-%d',
+                'offset-class' => 'medium-offset-%d',
+                'push-class' => 'medium-order-%d',
+            ),
+            'large' => array
+            (
+                'name' => 'large',
+                'column-class' => 'large-%d',
+                'offset-class' => 'large-offset-%d',
+                'push-class' => 'large-order-%d',
+            )
+        ),
+        'additional-classes' => array
+        (
+            'row' => array('grid-margin-x','grid-margin-y','grid-padding-x','grid-padding-y', 'small-margin-collapse','medium-margin-collapse','large-margin-collapse', 'small-padding-collapse','medium-padding-collapse','large-padding-collapse'),
+            'columns' => array('shrink', 'auto', 'small-centered','medium-centered','large-centered','small-uncentered','medium-uncentered','large-uncentered')
+        )
+    )
+);
+
 $GLOBALS['DMA_SIMPLEGRID_CONFIG']['delos'] = array
 (
     'name' => 'DELOS',
