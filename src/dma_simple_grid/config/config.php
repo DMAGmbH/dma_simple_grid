@@ -434,7 +434,6 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation-xy'] = array
         )
     )
 );
-$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation6'] = $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation-xy'];
 
 $GLOBALS['DMA_SIMPLEGRID_CONFIG']['delos'] = array
 (
