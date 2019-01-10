@@ -151,7 +151,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
 
 $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
 (
-    'name' => 'Bootstrap 4',
+    'name' => 'Bootstrap 4 (alpha)',
     'config' => array
     (
         'hasWrapper' => true,
@@ -364,22 +364,18 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
     )
 );
 
-
-$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation6'] = array
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation-xy'] = array
 (
-    'name' => 'Foundation 6 XY Grid',
+    'name' => 'Foundation 6 (XY Grid)',
     'config' => array
     (
         'hasRows' => true,
-        'hasColumns' => true,
-        'hasBlockGrid' => true,
-        'hasColumnOffset' => true,
-        'hasColumnOffsetRight' => false,
-        'hasColumnPush' => true,
-        'hasColumnPull' => false,
         'hasRowClasses' => true,
+        'hasColumns' => true,
         'hasColumnClasses' => true,
-        'row-class' => 'grid-x',
+        'hasColumnOffset' => true,
+        'hasColumnPush' => true,        
+		'hasBlockGrid' => true,        
         'column-class' => 'cell',
         'block-sizes' => array('1','2','3','4','5','6','7','8'),
         'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
@@ -423,15 +419,22 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation6'] = array
                 'column-class' => 'large-%d',
                 'offset-class' => 'large-offset-%d',
                 'push-class' => 'large-order-%d',
-            )
+            ),
         ),
+
+        'hasWrapper' => true,
+        'hasWrapperClasses' => true,
+        'wrapper-class' => 'grid-container',
+
         'additional-classes' => array
         (
-            'row' => array('grid-margin-x','grid-margin-y','grid-padding-x','grid-padding-y', 'small-margin-collapse','medium-margin-collapse','large-margin-collapse', 'small-padding-collapse','medium-padding-collapse','large-padding-collapse'),
-            'columns' => array('shrink', 'auto', 'small-centered','medium-centered','large-centered','small-uncentered','medium-uncentered','large-uncentered')
+            'wrapper' => array('fluid', 'full'),
+            'row' => array('grid-x', 'grid-y', 'grid-margin-x', 'small-margin-collapse', 'medium-margin-collapse', 'large-margin-collapse', 'grid-padding-x', 'small-padding-collapse', 'medium-padding-collapse', 'large-padding-collapse', 'small-grid-frame', 'medium-grid-frame', 'large-grid-frame'),
+            'columns' => array('auto', 'shrink', 'small-auto', 'medium-auto', 'large-auto', 'small-shrink', 'medium-shrink', 'large-shrink', 'small-centered','medium-centered','large-centered','small-uncentered','medium-uncentered','large-uncentered')
         )
     )
 );
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation6'] = $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation-xy'];
 
 $GLOBALS['DMA_SIMPLEGRID_CONFIG']['delos'] = array
 (
