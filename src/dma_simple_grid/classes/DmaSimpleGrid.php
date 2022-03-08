@@ -66,7 +66,7 @@ class DmaSimpleGrid
 
         foreach ($arrCheckableKeys as $checkableKey)
         {
-            if ($arrTemplateData[$checkableKey])
+            if (isset($arrTemplateData[$checkableKey]) && $arrTemplateData[$checkableKey])
             {
                 $blnHasDmaGridInfos = true;
             }
@@ -179,7 +179,7 @@ class DmaSimpleGrid
             }
         }
 
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
+        if (isset($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses']) && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
         {
             $arrAdditionalClasses = deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true);
 
