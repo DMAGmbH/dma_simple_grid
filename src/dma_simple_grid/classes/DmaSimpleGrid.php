@@ -181,7 +181,7 @@ class DmaSimpleGrid
 
         if (isset($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses']) && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
         {
-            $arrAdditionalClasses = deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true);
+            $arrAdditionalClasses = isset($arrTemplateData['dma_simplegrid_additionalcolumnclasses']) ? deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true) : [];
 
             if (sizeof($arrAdditionalClasses) > 0)
             {
