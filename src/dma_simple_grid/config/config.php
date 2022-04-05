@@ -99,9 +99,12 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
         'hasRows' => true,
         'hasColumns' => true,
         'hasColumnOffset' => true,
+        'hasColumnOffsetReset' => true,
         'hasColumnOffsetRight' => false,
         'hasColumnPush' => true,
+        'hasColumnPushReset' => true,
         'hasColumnPull' => true,
+        'hasColumnPullReset' => true,
         'hasRowClasses' => false,
         'hasColumnClasses' => false,
         'row-class' => 'row',
@@ -115,7 +118,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
                 'column-class' => 'col-xs-%d',
                 'offset-class' => 'col-xs-offset-%d',
                 'push-class' => 'col-xs-push-%d',
-                'pull-class' => 'col-xs-pull-%d'
+                'pull-class' => 'col-xs-pull-%d',
+                'hide-class' => 'hidden-xs',
             ),
             'sm' => array
             (
@@ -123,7 +127,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
                 'column-class' => 'col-sm-%d',
                 'offset-class' => 'col-sm-offset-%d',
                 'push-class' => 'col-sm-push-%d',
-                'pull-class' => 'col-sm-pull-%d'
+                'pull-class' => 'col-sm-pull-%d',
+                'hide-class' => 'hidden-sm',
             ),
             'md' => array
             (
@@ -131,7 +136,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
                 'column-class' => 'col-md-%d',
                 'offset-class' => 'col-md-offset-%d',
                 'push-class' => 'col-md-push-%d',
-                'pull-class' => 'col-md-pull-%d'
+                'pull-class' => 'col-md-pull-%d',
+                'hide-class' => 'hidden-md',
             ),
             'lg' => array
             (
@@ -139,7 +145,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
                 'column-class' => 'col-lg-%d',
                 'offset-class' => 'col-lg-offset-%d',
                 'push-class' => 'col-lg-push-%d',
-                'pull-class' => 'col-lg-pull-%d'
+                'pull-class' => 'col-lg-pull-%d',
+                'hide-class' => 'hidden-lg',
             )
         )
     )
@@ -147,16 +154,19 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap'] = array
 
 $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
 (
-    'name' => 'Bootstrap 4',
+    'name' => 'Bootstrap 4 (alpha)',
     'config' => array
     (
         'hasWrapper' => true,
         'hasRows' => true,
         'hasColumns' => true,
         'hasColumnOffset' => true,
+        'hasColumnOffsetReset' => true,
         'hasColumnOffsetRight' => false,
         'hasColumnPush' => true,
+        'hasColumnPushReset' => true,
         'hasColumnPull' => true,
+        'hasColumnPullReset' => true,
         'hasWrapperClasses' => true,
         'hasRowClasses' => false,
         'hasColumnClasses' => false,
@@ -171,7 +181,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
                 'column-class' => 'col-%d',
                 'offset-class' => 'offset-%d',
                 'push-class' => 'push-%d',
-                'pull-class' => 'pull-%d'
+                'pull-class' => 'pull-%d',
+                'hide-class' => 'd-xs-none',
             ),
             'sm' => array
             (
@@ -179,7 +190,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
                 'column-class' => 'col-sm-%d',
                 'offset-class' => 'offset-sm-%d',
                 'push-class' => 'push-sm-%d',
-                'pull-class' => 'pull-sm-%d'
+                'pull-class' => 'pull-sm-%d',
+                'hide-class' => 'd-sm-none',
             ),
             'md' => array
             (
@@ -187,7 +199,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
                 'column-class' => 'col-md-%d',
                 'offset-class' => 'offset-md-%d',
                 'push-class' => 'push-md-%d',
-                'pull-class' => 'pull-md-%d'
+                'pull-class' => 'pull-md-%d',
+                'hide-class' => 'd-md-none',
             ),
             'lg' => array
             (
@@ -195,7 +208,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
                 'column-class' => 'col-lg-%d',
                 'offset-class' => 'offset-lg-%d',
                 'push-class' => 'push-lg-%d',
-                'pull-class' => 'pull-lg-%d'
+                'pull-class' => 'pull-lg-%d',
+                'hide-class' => 'd-lg-none',
             ),
             'xl' => array
             (
@@ -203,7 +217,8 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['bootstrap4'] = array
                 'column-class' => 'col-xl-%d',
                 'offset-class' => 'offset-xl-%d',
                 'push-class' => 'push-xl-%d',
-                'pull-class' => 'pull-xl-%d'
+                'pull-class' => 'pull-xl-%d',
+                'hide-class' => 'd-xl-none',
             )
         ),
         'additional-classes' => array
@@ -221,9 +236,12 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gr-grid'] = array
         'hasRows' => true,
         'hasColumns' => true,
         'hasColumnOffset' => true,
+        'hasColumnOffsetReset' => true,
         'hasColumnOffsetRight' => false,
         'hasColumnPush' => true,
+        'hasColumnPushReset' => true,
         'hasColumnPull' => true,
+        'hasColumnPullReset' => true,
         'hasRowClasses' => false,
         'hasColumnClasses' => false,
         'row-class' => 'row',
@@ -355,22 +373,18 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
     )
 );
 
-
-$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation6'] = array
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation-xy'] = array
 (
-    'name' => 'Foundation 6 XY Grid',
+    'name' => 'Foundation 6 (XY Grid)',
     'config' => array
     (
         'hasRows' => true,
-        'hasColumns' => true,
-        'hasBlockGrid' => true,
-        'hasColumnOffset' => true,
-        'hasColumnOffsetRight' => false,
-        'hasColumnPush' => true,
-        'hasColumnPull' => false,
         'hasRowClasses' => true,
+        'hasColumns' => true,
         'hasColumnClasses' => true,
-        'row-class' => 'grid-x',
+        'hasColumnOffset' => true,
+        'hasColumnPush' => true,
+		'hasBlockGrid' => true,
         'column-class' => 'cell',
         'block-sizes' => array('1','2','3','4','5','6','7','8'),
         'columns-sizes' => array('1','2','3','4','5','6','7','8','9','10','11','12'),
@@ -414,12 +428,18 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation6'] = array
                 'column-class' => 'large-%d',
                 'offset-class' => 'large-offset-%d',
                 'push-class' => 'large-order-%d',
-            )
+            ),
         ),
+
+        'hasWrapper' => true,
+        'hasWrapperClasses' => true,
+        'wrapper-class' => 'grid-container',
+
         'additional-classes' => array
         (
-            'row' => array('grid-margin-x','grid-margin-y','grid-padding-x','grid-padding-y', 'small-margin-collapse','medium-margin-collapse','large-margin-collapse', 'small-padding-collapse','medium-padding-collapse','large-padding-collapse'),
-            'columns' => array('shrink', 'auto', 'small-centered','medium-centered','large-centered','small-uncentered','medium-uncentered','large-uncentered')
+            'wrapper' => array('fluid', 'full'),
+            'row' => array('grid-x', 'grid-y', 'grid-margin-x', 'small-margin-collapse', 'medium-margin-collapse', 'large-margin-collapse', 'grid-padding-x', 'small-padding-collapse', 'medium-padding-collapse', 'large-padding-collapse', 'small-grid-frame', 'medium-grid-frame', 'large-grid-frame'),
+            'columns' => array('auto', 'shrink', 'small-auto', 'medium-auto', 'large-auto', 'small-shrink', 'medium-shrink', 'large-shrink', 'small-centered','medium-centered','large-centered','small-uncentered','medium-uncentered','large-uncentered')
         )
     )
 );

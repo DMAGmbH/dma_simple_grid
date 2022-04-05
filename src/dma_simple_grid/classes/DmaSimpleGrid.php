@@ -66,7 +66,7 @@ class DmaSimpleGrid
 
         foreach ($arrCheckableKeys as $checkableKey)
         {
-            if ($arrTemplateData[$checkableKey])
+            if (isset($arrTemplateData[$checkableKey]) && $arrTemplateData[$checkableKey])
             {
                 $blnHasDmaGridInfos = true;
             }
@@ -79,6 +79,16 @@ class DmaSimpleGrid
     public static function getColumnClasses($arrTemplateData)
     {
 
+		if (isset($arrTemplateData['origId']) && $arrTemplateData['origId'] && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOwnSettingsByIncludeElements'])
+		{
+			// includiertes Inhaltselement
+			$origContentElement = \ContentModel::findById($arrTemplateData['id']);
+			if ($origContentElement !== null)
+			{
+				$arrTemplateData = $origContentElement->row();
+			}
+		}
+
         if (!isset(static::$arrCache['grid']))
         {
             self::initialize();
@@ -86,80 +96,92 @@ class DmaSimpleGrid
 
         $arrConfiguredClasses = array();
 
-        if (!is_array($arrTemplateData['dma_simplegrid_columnsettings'])) {
+        if (isset($arrTemplateData['dma_simplegrid_columnsettings']) && !is_array($arrTemplateData['dma_simplegrid_columnsettings'])) {
             $arrColumnSettings = deserialize($arrTemplateData['dma_simplegrid_columnsettings'], true);
         }
-        if (!is_array($arrTemplateData['dma_simplegrid_offsetsettings'])) {
+        if (isset($arrTemplateData['dma_simplegrid_offsetsettings']) && !is_array($arrTemplateData['dma_simplegrid_offsetsettings'])) {
             $arrOffsetSettings = deserialize($arrTemplateData['dma_simplegrid_offsetsettings'], true);
         }
-        if (!is_array($arrTemplateData['dma_simplegrid_offsetrightsettings'])) {
+        if (isset($arrTemplateData['dma_simplegrid_offsetrightsettings']) && !is_array($arrTemplateData['dma_simplegrid_offsetrightsettings'])) {
             $arrOffsetRightSettings = deserialize($arrTemplateData['dma_simplegrid_offsetrightsettings'], true);
         }
-        if (!is_array($arrTemplateData['dma_simplegrid_pushsettings'])) {
+        if (isset($arrTemplateData['dma_simplegrid_pushsettings']) && !is_array($arrTemplateData['dma_simplegrid_pushsettings'])) {
             $arrPushSettings = deserialize($arrTemplateData['dma_simplegrid_pushsettings'], true);
         }
-        if (!is_array($arrTemplateData['dma_simplegrid_pullsettings'])) {
+        if (isset($arrTemplateData['dma_simplegrid_pullsettings']) && !is_array($arrTemplateData['dma_simplegrid_pullsettings'])) {
             $arrPullSettings = deserialize($arrTemplateData['dma_simplegrid_pullsettings'], true);
         }
 
-        if (sizeof($arrColumnSettings) == 1) {
+        if (isset($arrColumnSettings) && sizeof($arrColumnSettings) == 1) {
             $arrElementSettings = $arrColumnSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
                     if ($varValue) {
-                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['column-class'], $varValue);
+                        if ($varValue === 'hide') {
+                            $arrConfiguredClasses[] = static::$arrCache['grid']['config']['columns-config'][$columnKey]['hide-class'];
+                        } else {
+                            $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['column-class'], $varValue);
+                        }
                     }
                 }
             }
         }
 
-        if (sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
+        if (isset($arrOffsetSettings) && sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
             $arrElementSettings = $arrOffsetSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
+                    if ($varValue === 'reset' && isset(static::$arrCache['grid']['config']['hasColumnOffsetReset']) && static::$arrCache['grid']['config']['hasColumnOffsetReset']) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['offset-class'], 0);
+                    } elseif ($varValue) {
                         $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['offset-class'], $varValue);
                     }
                 }
             }
         }
 
-        if (sizeof($arrOffsetRightSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight']) {
+        if (isset($arrOffsetRightSettings) && sizeof($arrOffsetRightSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight']) {
             $arrElementSettings = $arrOffsetRightSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
+                    if ($varValue === 'reset' && isset(static::$arrCache['grid']['config']['hasColumnOffsetRightReset']) && static::$arrCache['grid']['config']['hasColumnOffsetRightReset']) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['offset-right-class'], 0);
+                    } elseif ($varValue) {
                         $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['offset-right-class'], $varValue);
                     }
                 }
             }
         }
 
-        if (sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
+        if (isset($arrPushSettings) && sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
             $arrElementSettings = $arrPushSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
+                    if ($varValue === 'reset' && isset(static::$arrCache['grid']['config']['hasColumnPushReset']) && static::$arrCache['grid']['config']['hasColumnPushReset']) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['push-class'], 0);
+                    } elseif ($varValue) {
                         $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['push-class'], $varValue);
                     }
                 }
             }
         }
 
-        if (sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
+        if (isset($arrPullSettings) && sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
             $arrElementSettings = $arrPullSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
-                    if ($varValue) {
+                    if ($varValue === 'reset' && isset(static::$arrCache['grid']['config']['hasColumnPullReset']) && static::$arrCache['grid']['config']['hasColumnPullReset']) {
+                        $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['pull-class'], 0);
+                    } elseif ($varValue) {
                         $arrConfiguredClasses[] = sprintf(static::$arrCache['grid']['config']['columns-config'][$columnKey]['pull-class'], $varValue);
                     }
                 }
             }
         }
 
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
+        if (isset($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses']) && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
         {
-            $arrAdditionalClasses = deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true);
+            $arrAdditionalClasses = isset($arrTemplateData['dma_simplegrid_additionalcolumnclasses']) ? deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true) : [];
 
             if (sizeof($arrAdditionalClasses) > 0)
             {
@@ -170,8 +192,8 @@ class DmaSimpleGrid
             }
         }
 
-        if (sizeof($arrConfiguredClasses) > 0 || $arrTemplateData['type']=="dma_simplegrid_column_start") {
-            if (static::$arrCache['grid']['config']['column-class'])
+        if (sizeof($arrConfiguredClasses) > 0 || (isset($arrTemplateData['type']) && $arrTemplateData['type']=="dma_simplegrid_column_start")) {
+            if (isset(static::$arrCache['grid']['config']['column-class']) && static::$arrCache['grid']['config']['column-class'])
             {
                 array_insert($arrConfiguredClasses, 0, static::$arrCache['grid']['config']['column-class']);
             }
@@ -241,7 +263,7 @@ class DmaSimpleGrid
 
     }
 
-    public static function columnsSelectCallback()
+    public static function columnsSelectCallback(\Widget $widget = null)
     {
         if (!isset(static::$arrCache['grid']))
         {
@@ -252,11 +274,33 @@ class DmaSimpleGrid
 
         if (static::$arrCache['grid']['config']['columns-config']) {
             foreach (static::$arrCache['grid']['config']['columns-config'] as $configName => $arrColumnConfig) {
+                $options = [];
+
+                // Add the hide option for column settings
+                if ($widget !== null && $widget->dataContainer->field === 'dma_simplegrid_columnsettings' && isset($arrColumnConfig['hide-class'])) {
+                    $options['hide'] = &$GLOBALS['TL_LANG']['MSC']['dma_simplegrid_hidden'];
+                }
+
+                // Add the reset/zero option for offset/offset-right/push/pull settings
+                if ($widget !== null && (
+                    ($widget->dataContainer->field === 'dma_simplegrid_offsetsettings' && isset(static::$arrCache['grid']['config']['hasColumnOffsetReset']) && static::$arrCache['grid']['config']['hasColumnOffsetReset'])
+                    || ($widget->dataContainer->field === 'dma_simplegrid_offsetrightsettings' && isset(static::$arrCache['grid']['config']['hasColumnOffsetRightReset']) && static::$arrCache['grid']['config']['hasColumnOffsetRightReset'])
+                    || ($widget->dataContainer->field === 'dma_simplegrid_pushsettings' && isset(static::$arrCache['grid']['config']['hasColumnPushReset']) && static::$arrCache['grid']['config']['hasColumnPushReset'])
+                    || ($widget->dataContainer->field === 'dma_simplegrid_pullsettings' && isset(static::$arrCache['grid']['config']['hasColumnPullReset']) && static::$arrCache['grid']['config']['hasColumnPullReset'])
+                )) {
+                    $options['reset'] = '0 (reset)';
+                }
+
+                // Add the column sizes
+                foreach (static::$arrCache['grid']['config']['columns-sizes'] as $column) {
+                    $options[$column] = $column;
+                }
+
                 $arrColumnsSetting[$configName] = array
                 (
                     'label' => $arrColumnConfig['name'],
                     'inputType' => 'select',
-                    'options' => static::$arrCache['grid']['config']['columns-sizes'],
+                    'options' => $options,
                     'eval' => array('includeBlankOption' => true, 'style' => 'width:115px')
                 );
             }

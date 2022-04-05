@@ -59,7 +59,7 @@ class ContentSimpleGridRowStart extends \ContentElement
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
         }
 
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] && $this->dma_simplegrid_blocksettings)
+        if (isset($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid']) && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] && $this->dma_simplegrid_blocksettings)
         {
             $arrBlockSettings = deserialize($this->dma_simplegrid_blocksettings, true);
             if (sizeof($arrBlockSettings) == 1)
@@ -76,7 +76,7 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         }
 
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
+        if (isset($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses']) && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
         {
             $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalrowclasses, true);
 

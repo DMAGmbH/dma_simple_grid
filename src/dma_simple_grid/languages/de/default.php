@@ -11,3 +11,8 @@ $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_row_start'] = array('SimpleGrid: Row 
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_row_stop'] = array('SimpleGrid: Row Stop','SimpleGrid: Row Stop');
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_column_start'] = array('SimpleGrid: Column Start','SimpleGrid: Column Start');
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_column_stop'] = array('SimpleGrid: Column Stop','SimpleGrid: Column Stop');
+
+/**
+ * Miscellaneous
+ */
+$GLOBALS['TL_LANG']['MSC']['dma_simplegrid_hidden'] = 'Versteckt';
