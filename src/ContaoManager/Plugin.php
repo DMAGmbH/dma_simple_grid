@@ -24,11 +24,6 @@ class Plugin implements BundlePluginInterface
                         ContaoManagerBundle::class,
                     ]
                 )
-                ->setReplace(
-                [
-                    'dma_simple_grid',
-                ]
-            ),
         ];
     }
 }
