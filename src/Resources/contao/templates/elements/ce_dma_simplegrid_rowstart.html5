@@ -1,1 +1,1 @@
-<div<?php if ($this->class): ?> class="<?= $this->class; ?>"<?php endif; ?>>
+<div class="<?= $this->class ?>"<?= $this->cssID ?><?php if ($this->style): ?> style="<?= $this->style ?>"<?php endif; ?>>
