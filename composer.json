@@ -10,11 +10,17 @@
    "type":"contao-module",
    "homepage":"http://www.dma.do",
    "license":"LGPL-3.0+",
-   "authors":[  
+   "authors":[
+      {
+         "name":"DMA GmbH",
+         "homepage":"http://www.dma.do",
+         "role": "origin maintainer"
+      },
       {  
          "name":"Janosch Oltmanns",
-         "email":"oltmanns@dma.do",
-         "homepage":"http://www.dma.do"
+         "email":"kontakt@janosch-oltamnns.de",
+         "homepage":"https://www.janosch-oltmanns.de",
+         "role": "maintainer"
       }
    ],
    "support":{  
@@ -24,14 +30,23 @@
    "require":{
       "php": "^7.2 || ^8.0",
 	  "contao/core-bundle":"^4.9",
-      "contao-community-alliance/composer-plugin":"^2.4.0 || 3.*",
       "menatwork/contao-multicolumnwizard-bundle": "^3.5"
    },
-   "extra":{  
-      "contao":{  
-         "sources":{  
-            "src/dma_simple_grid":"system/modules/dma_simple_grid"
-         }
-      }
+   "autoload": {
+      "psr-4": {
+         "Dma\\SimpleGrid\\": "src"
+      },
+      "classmap": [
+         "src/Resources/contao/"
+      ],
+      "exclude-from-classmap": [
+         "src/Resources/contao/config/",
+         "src/Resources/contao/dca/",
+         "src/Resources/contao/languages/",
+         "src/Resources/contao/templates/"
+      ]
+   },
+   "extra":{
+      "contao-manager-plugin": "Dma\\SimpleGrid\\ContaoManager\\Plugin"
    }
 }
