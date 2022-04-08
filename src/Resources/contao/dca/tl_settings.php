@@ -18,7 +18,7 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGridType'] = array
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGridType'],
     'inputType'	        => 'select',
     'options_callback'  => array('DMA\\DmaSimpleGridHelper', 'getGridTypes'),
-    'eval'		        => array('tl_class'=>'w50', 'submitOnChange'=>true)
+    'eval'		        => array('tl_class'=>'w50', 'submitOnChange'=>true, 'includeBlankOption'=>true)
 );
 
 $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useColumns'] = array
@@ -87,5 +87,5 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOwnSettingsByInclu
 (
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOwnSettingsByIncludeElements'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
+    'eval'		        => array('tl_class'=>'w50 clr')
 );

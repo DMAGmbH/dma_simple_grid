@@ -45,13 +45,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_columnsettings'] = ar
     'eval' 			=> array
     (
         'maxCount' => 1,
-        'buttons' => array
-        (
-            'copy'=> false,
-            'delete'=>false,
-            'up'=>false,
-            'down'=>false
-        ),
+        'buttons' => [
+            'up' => false,
+            'down' => false,
+            'move' => false,
+            'new' => false,
+            'copy' => false,
+            'delete' => false,
+        ],
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
     'sql'                     => "text NULL"
@@ -65,13 +66,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_offsetsettings'] = ar
     'eval' 			=> array
     (
         'maxCount' => 1,
-        'buttons' => array
-        (
-            'copy'=> false,
-            'delete'=>false,
-            'up'=>false,
-            'down'=>false
-        ),
+        'buttons' => [
+            'up' => false,
+            'down' => false,
+            'move' => false,
+            'new' => false,
+            'copy' => false,
+            'delete' => false,
+        ],
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
     'sql'                     => "text NULL"
@@ -85,13 +87,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_offsetrightsettings']
     'eval' 			=> array
     (
         'maxCount' => 1,
-        'buttons' => array
-        (
-            'copy'=> false,
-            'delete'=>false,
-            'up'=>false,
-            'down'=>false
-        ),
+        'buttons' => [
+            'up' => false,
+            'down' => false,
+            'move' => false,
+            'new' => false,
+            'copy' => false,
+            'delete' => false,
+        ],
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
     'sql'                     => "text NULL"
@@ -105,13 +108,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pullsettings'] = arra
     'eval' 			=> array
     (
         'maxCount' => 1,
-        'buttons' => array
-        (
-            'copy'=> false,
-            'delete'=>false,
-            'up'=>false,
-            'down'=>false
-        ),
+        'buttons' => [
+            'up' => false,
+            'down' => false,
+            'move' => false,
+            'new' => false,
+            'copy' => false,
+            'delete' => false,
+        ],
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
     'sql'                     => "text NULL"
@@ -125,13 +129,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pushsettings'] = arra
     'eval' 			=> array
     (
         'maxCount' => 1,
-        'buttons' => array
-        (
-            'copy'=> false,
-            'delete'=>false,
-            'up'=>false,
-            'down'=>false
-        ),
+        'buttons' => [
+            'up' => false,
+            'down' => false,
+            'move' => false,
+            'new' => false,
+            'copy' => false,
+            'delete' => false,
+        ],
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
     'sql'                     => "text NULL"
@@ -145,13 +150,14 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_blocksettings'] = arr
     'eval' 			=> array
     (
         'maxCount' => 1,
-        'buttons' => array
-        (
-            'copy'=> false,
-            'delete'=>false,
-            'up'=>false,
-            'down'=>false
-        ),
+        'buttons' => [
+            'up' => false,
+            'down' => false,
+            'move' => false,
+            'new' => false,
+            'copy' => false,
+            'delete' => false,
+        ],
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'blockSelectCallback')
     ),
     'sql'                     => "text NULL"
