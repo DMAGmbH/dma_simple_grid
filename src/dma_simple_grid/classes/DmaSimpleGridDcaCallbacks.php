@@ -159,12 +159,12 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
                     $strRowStartFields = "";
 
-                    if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] && DmaSimpleGrid::getConfigData('hasBlockGrid'))
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && DmaSimpleGrid::getConfigData('hasBlockGrid'))
                     {
                         $strRowStartFields .= ",dma_simplegrid_blocksettings";
                     }
 
-                    if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $this->arrConfigData['config']['additional-classes']['row'])
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['row'])
                     {
                         $strRowStartFields .= ",dma_simplegrid_additionalrowclasses";
                     }
@@ -208,7 +208,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
                 {
                     if ($k == "dma_simplegrid_row_start")
                     {
-                        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $this->arrConfigData['config']['additional-classes']['row'])
+                        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['row'])
                         {
                             $strDmaSimpleGridPaletteStringOnce .= ",dma_simplegrid_additionalrowclasses";
                         }
