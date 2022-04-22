@@ -50,7 +50,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_columnsettings'] = ar
             'copy'=> false,
             'delete'=>false,
             'up'=>false,
-            'down'=>false
+            'down'=>false,
+            'move'=>false,
         ),
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
@@ -70,7 +71,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_offsetsettings'] = ar
             'copy'=> false,
             'delete'=>false,
             'up'=>false,
-            'down'=>false
+            'down'=>false,
+            'move'=>false,
         ),
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
@@ -90,7 +92,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_offsetrightsettings']
             'copy'=> false,
             'delete'=>false,
             'up'=>false,
-            'down'=>false
+            'down'=>false,
+            'move'=>false,
         ),
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
@@ -110,7 +113,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pullsettings'] = arra
             'copy'=> false,
             'delete'=>false,
             'up'=>false,
-            'down'=>false
+            'down'=>false,
+            'move'=>false,
         ),
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
@@ -130,7 +134,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_pushsettings'] = arra
             'copy'=> false,
             'delete'=>false,
             'up'=>false,
-            'down'=>false
+            'down'=>false,
+            'move'=>false,
         ),
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
     ),
@@ -150,7 +155,8 @@ $GLOBALS['TL_DCA']['tl_content']['fields']['dma_simplegrid_blocksettings'] = arr
             'copy'=> false,
             'delete'=>false,
             'up'=>false,
-            'down'=>false
+            'down'=>false,
+            'move'=>false,
         ),
         'columnsCallback' => array('DMA\\DmaSimpleGrid', 'blockSelectCallback')
     ),
