@@ -79,7 +79,7 @@ class DmaSimpleGrid
     public static function getColumnClasses($arrTemplateData)
     {
 
-		if (isset($arrTemplateData['origId']) && $arrTemplateData['origId'] && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOwnSettingsByIncludeElements'])
+		if (isset($arrTemplateData['origId']) && $arrTemplateData['origId'] && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOwnSettingsByIncludeElements'] ?? false))
 		{
 			// includiertes Inhaltselement
 			$origContentElement = \ContentModel::findById($arrTemplateData['id']);
@@ -127,7 +127,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (isset($arrOffsetSettings) && sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
+        if (isset($arrOffsetSettings) && sizeof($arrOffsetSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'] ?? false)) {
             $arrElementSettings = $arrOffsetSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -140,7 +140,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (isset($arrOffsetRightSettings) && sizeof($arrOffsetRightSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight']) {
+        if (isset($arrOffsetRightSettings) && sizeof($arrOffsetRightSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight'] ?? false)) {
             $arrElementSettings = $arrOffsetRightSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -153,7 +153,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (isset($arrPushSettings) && sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
+        if (isset($arrPushSettings) && sizeof($arrPushSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false)) {
             $arrElementSettings = $arrPushSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -166,7 +166,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (isset($arrPullSettings) && sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
+        if (isset($arrPullSettings) && sizeof($arrPullSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false)) {
             $arrElementSettings = $arrPullSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -179,7 +179,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (isset($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses']) && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] && static::$arrCache['grid']['config']['additional-classes']['columns'])
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false) && static::$arrCache['grid']['config']['additional-classes']['columns'])
         {
             $arrAdditionalClasses = isset($arrTemplateData['dma_simplegrid_additionalcolumnclasses']) ? deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true) : [];
 
@@ -381,7 +381,7 @@ class DmaSimpleGrid
                 }
             }
         }
-        if (sizeof($arrOffsetSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset']) {
+        if (sizeof($arrOffsetSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'] ?? false)) {
             $arrElementSettings = $arrOffsetSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -391,7 +391,7 @@ class DmaSimpleGrid
                 }
             }
         }
-        if (sizeof($arrOffsetRightSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight']) {
+        if (sizeof($arrOffsetRightSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight'] ?? false)) {
             $arrElementSettings = $arrOffsetRightSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -401,7 +401,7 @@ class DmaSimpleGrid
                 }
             }
         }
-        if (sizeof($arrPushSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush']) {
+        if (sizeof($arrPushSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false)) {
             $arrElementSettings = $arrPushSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -411,7 +411,7 @@ class DmaSimpleGrid
                 }
             }
         }
-        if (sizeof($arrPullSettings) == 1 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull']) {
+        if (sizeof($arrPullSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false)) {
             $arrElementSettings = $arrPullSettings[0];
             if (is_array($arrElementSettings)) {
                 foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -422,7 +422,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (sizeof($arrAdditionalColumnClassesSettings) > 0 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'])
+        if (sizeof($arrAdditionalColumnClassesSettings) > 0 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false))
         {
             if (is_array($arrAdditionalColumnClassesSettings))
             {
@@ -433,7 +433,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (sizeof($arrAdditionalRowClassesSettings) > 0 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'])
+        if (sizeof($arrAdditionalRowClassesSettings) > 0 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false))
         {
             if (is_array($arrAdditionalRowClassesSettings))
             {
@@ -444,7 +444,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (sizeof($arrAdditionalWrapperClassesSettings) > 0 && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'])
+        if (sizeof($arrAdditionalWrapperClassesSettings) > 0 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false))
         {
             if (is_array($arrAdditionalWrapperClassesSettings))
             {
@@ -468,7 +468,7 @@ class DmaSimpleGrid
     private static function initialize()
     {
 
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] && $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']])
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false))
         {
             static::$arrCache['grid'] = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
         }
