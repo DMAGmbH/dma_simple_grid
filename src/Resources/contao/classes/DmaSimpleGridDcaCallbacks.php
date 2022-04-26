@@ -24,7 +24,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
     {
         parent::__construct();
 
-        if ($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] && $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']])
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null] ?? false))
         {
             $this->arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
         }
@@ -94,27 +94,27 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
         $strDmaSimpleGridPaletteString = "";
 
-        if (DmaSimpleGrid::getConfigData('hasColumns') && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useColumns'])
+        if (DmaSimpleGrid::getConfigData('hasColumns') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useColumns'] ?? false))
         {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_columnsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnOffset') && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'])
+        if (DmaSimpleGrid::getConfigData('hasColumnOffset') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'] ?? false))
         {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_offsetsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnOffsetRight') && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight'])
+        if (DmaSimpleGrid::getConfigData('hasColumnOffsetRight') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight'] ?? false))
         {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_offsetrightsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnPull') && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'])
+        if (DmaSimpleGrid::getConfigData('hasColumnPull') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false))
         {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pullsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnPush') && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'])
+        if (DmaSimpleGrid::getConfigData('hasColumnPush') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false))
         {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pushsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnClasses') && $GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'])
+        if (DmaSimpleGrid::getConfigData('hasColumnClasses') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false))
         {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_additionalcolumnclasses";
         }
@@ -159,12 +159,12 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
                     $strRowStartFields = "";
 
-                    if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] && DmaSimpleGrid::getConfigData('hasBlockGrid'))
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && DmaSimpleGrid::getConfigData('hasBlockGrid'))
                     {
                         $strRowStartFields .= ",dma_simplegrid_blocksettings";
                     }
 
-                    if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $this->arrConfigData['config']['additional-classes']['row'])
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['row'])
                     {
                         $strRowStartFields .= ",dma_simplegrid_additionalrowclasses";
                     }
@@ -183,7 +183,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
                 if ($k == "dma_simplegrid_wrapper_start")
                 {
-                    if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] && $this->arrConfigData['config']['additional-classes']['wrapper'])
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['wrapper'])
                     {
                         $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
                         (
@@ -208,7 +208,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
                 {
                     if ($k == "dma_simplegrid_row_start")
                     {
-                        if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] && $this->arrConfigData['config']['additional-classes']['row'])
+                        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['row'])
                         {
                             $strDmaSimpleGridPaletteStringOnce .= ",dma_simplegrid_additionalrowclasses";
                         }
