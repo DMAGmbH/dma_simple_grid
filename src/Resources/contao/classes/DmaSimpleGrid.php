@@ -346,28 +346,28 @@ class DmaSimpleGrid
         $strReturn = "";
         $arrConfiguredClasses = array();
 
-        if (!is_array($arrRow['dma_simplegrid_columnsettings'])) {
+        if (!is_array($arrRow['dma_simplegrid_columnsettings'] ?? null)) {
             $arrColumnSettings = deserialize($arrRow['dma_simplegrid_columnsettings'], true);
         }
-        if (!is_array($arrRow['dma_simplegrid_offsetsettings'])) {
+        if (!is_array($arrRow['dma_simplegrid_offsetsettings'] ?? null)) {
             $arrOffsetSettings = deserialize($arrRow['dma_simplegrid_offsetsettings'], true);
         }
-        if (!is_array($arrRow['dma_simplegrid_offsetrightsettings'])) {
+        if (!is_array($arrRow['dma_simplegrid_offsetrightsettings'] ?? null)) {
             $arrOffsetRightSettings = deserialize($arrRow['dma_simplegrid_offsetrightsettings'], true);
         }
-        if (!is_array($arrRow['dma_simplegrid_pushsettings'])) {
+        if (!is_array($arrRow['dma_simplegrid_pushsettings'] ?? null)) {
             $arrPushSettings = deserialize($arrRow['dma_simplegrid_pushsettings'], true);
         }
-        if (!is_array($arrRow['dma_simplegrid_pullsettings'])) {
+        if (!is_array($arrRow['dma_simplegrid_pullsettings'] ?? null)) {
             $arrPullSettings = deserialize($arrRow['dma_simplegrid_pullsettings'], true);
         }
-        if (!is_array($arrRow['dma_simplegrid_additionalcolumnclasses'])) {
+        if (!is_array($arrRow['dma_simplegrid_additionalcolumnclasses'] ?? null)) {
             $arrAdditionalColumnClassesSettings = deserialize($arrRow['dma_simplegrid_additionalcolumnclasses'], true);
         }
-        if (!is_array($arrRow['dma_simplegrid_additionalrowclasses'])) {
+        if (!is_array($arrRow['dma_simplegrid_additionalrowclasses'] ?? null)) {
             $arrAdditionalRowClassesSettings = deserialize($arrRow['dma_simplegrid_additionalrowclasses'], true);
         }
-        if (!is_array($arrRow['dma_simplegrid_additionalwrapperclasses'])) {
+        if (!is_array($arrRow['dma_simplegrid_additionalwrapperclasses'] ?? null)) {
             $arrAdditionalWrapperClassesSettings = deserialize($arrRow['dma_simplegrid_additionalwrapperclasses'], true);
         }
 
