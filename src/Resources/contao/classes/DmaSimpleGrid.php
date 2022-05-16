@@ -381,6 +381,7 @@ class DmaSimpleGrid
                 }
             }
         }
+
         if (sizeof($arrOffsetSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'] ?? false)) {
             $arrElementSettings = $arrOffsetSettings[0];
             if (is_array($arrElementSettings)) {
@@ -391,6 +392,7 @@ class DmaSimpleGrid
                 }
             }
         }
+
         if (sizeof($arrOffsetRightSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight'] ?? false)) {
             $arrElementSettings = $arrOffsetRightSettings[0];
             if (is_array($arrElementSettings)) {
@@ -401,6 +403,7 @@ class DmaSimpleGrid
                 }
             }
         }
+
         if (sizeof($arrPushSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false)) {
             $arrElementSettings = $arrPushSettings[0];
             if (is_array($arrElementSettings)) {
@@ -411,6 +414,7 @@ class DmaSimpleGrid
                 }
             }
         }
+
         if (sizeof($arrPullSettings) == 1 && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false)) {
             $arrElementSettings = $arrPullSettings[0];
             if (is_array($arrElementSettings)) {
