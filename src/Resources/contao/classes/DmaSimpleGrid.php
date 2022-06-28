@@ -223,7 +223,7 @@ class DmaSimpleGrid
 
         $strGridInfo = "";
 
-        if ($arrRow['dma_simplegrid_columnsettings'] || $arrRow['dma_simplegrid_additionalwrapperclasses'])
+        if (($arrRow['dma_simplegrid_columnsettings'] ?? false) || ($arrRow['dma_simplegrid_additionalwrapperclasses'] ?? false))
         {
             $strGridInfo .= self::getColumnsShowString($arrRow);
         }
