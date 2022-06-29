@@ -43,7 +43,7 @@ class FormSimpleGridRowStart extends \Widget
         if (version_compare(VERSION, '4.0', '>=') && TL_MODE === 'BE') {
             /** @var \Contao\BackendTemplate|object $objTemplate */
             $objTemplate = new \Contao\BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### ' . \Patchwork\Utf8::strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]) . ' ###';
+            $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]) . ' ###';
 
             return $objTemplate->parse();
         }

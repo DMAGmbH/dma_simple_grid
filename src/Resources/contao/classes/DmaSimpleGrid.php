@@ -223,7 +223,7 @@ class DmaSimpleGrid
 
         $strGridInfo = "";
 
-        if ($arrRow['dma_simplegrid_columnsettings'] || $arrRow['dma_simplegrid_additionalwrapperclasses'])
+        if (($arrRow['dma_simplegrid_columnsettings'] ?? false) || ($arrRow['dma_simplegrid_additionalwrapperclasses'] ?? false))
         {
             $strGridInfo .= self::getColumnsShowString($arrRow);
         }
@@ -347,28 +347,28 @@ class DmaSimpleGrid
         $arrConfiguredClasses = array();
 
         if (!is_array($arrRow['dma_simplegrid_columnsettings'] ?? null)) {
-            $arrColumnSettings = deserialize($arrRow['dma_simplegrid_columnsettings'], true);
+            $arrColumnSettings = isset($arrRow['dma_simplegrid_columnsettings']) ? deserialize($arrRow['dma_simplegrid_columnsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_offsetsettings'] ?? null)) {
-            $arrOffsetSettings = deserialize($arrRow['dma_simplegrid_offsetsettings'], true);
+            $arrOffsetSettings = isset($arrRow['dma_simplegrid_offsetsettings']) ? deserialize($arrRow['dma_simplegrid_offsetsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_offsetrightsettings'] ?? null)) {
-            $arrOffsetRightSettings = deserialize($arrRow['dma_simplegrid_offsetrightsettings'], true);
+            $arrOffsetRightSettings = isset($arrRow['dma_simplegrid_offsetrightsettings']) ? deserialize($arrRow['dma_simplegrid_offsetrightsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_pushsettings'] ?? null)) {
-            $arrPushSettings = deserialize($arrRow['dma_simplegrid_pushsettings'], true);
+            $arrPushSettings = isset($arrRow['dma_simplegrid_pushsettings']) ? deserialize($arrRow['dma_simplegrid_pushsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_pullsettings'] ?? null)) {
-            $arrPullSettings = deserialize($arrRow['dma_simplegrid_pullsettings'], true);
+            $arrPullSettings = isset($arrRow['dma_simplegrid_pullsettings']) ? deserialize($arrRow['dma_simplegrid_pullsettings'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_additionalcolumnclasses'] ?? null)) {
-            $arrAdditionalColumnClassesSettings = deserialize($arrRow['dma_simplegrid_additionalcolumnclasses'], true);
+            $arrAdditionalColumnClassesSettings = isset($arrRow['dma_simplegrid_additionalcolumnclasses']) ? deserialize($arrRow['dma_simplegrid_additionalcolumnclasses'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_additionalrowclasses'] ?? null)) {
-            $arrAdditionalRowClassesSettings = deserialize($arrRow['dma_simplegrid_additionalrowclasses'], true);
+            $arrAdditionalRowClassesSettings = isset($arrRow['dma_simplegrid_additionalrowclasses']) ? deserialize($arrRow['dma_simplegrid_additionalrowclasses'], true) : [];
         }
         if (!is_array($arrRow['dma_simplegrid_additionalwrapperclasses'] ?? null)) {
-            $arrAdditionalWrapperClassesSettings = deserialize($arrRow['dma_simplegrid_additionalwrapperclasses'], true);
+            $arrAdditionalWrapperClassesSettings = isset($arrRow['dma_simplegrid_additionalwrapperclasses']) ? deserialize($arrRow['dma_simplegrid_additionalwrapperclasses'], true) : [];
         }
 
         if (sizeof($arrColumnSettings) == 1) {
