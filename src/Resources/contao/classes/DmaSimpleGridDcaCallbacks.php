@@ -30,7 +30,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
         }
         else
         {
-            $this->arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
+            $this->arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_FALLBACK']];
         }
 
     }
@@ -164,8 +164,10 @@ class DmaSimpleGridDcaCallbacks extends \Controller
                         $strRowStartFields .= ",dma_simplegrid_blocksettings";
                     }
 
-                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['row'])
-                    {
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false)
+                        && isset($this->arrConfigData['config']['additional-classes'])
+                        && isset($this->arrConfigData['config']['additional-classes']['row'])
+                    ) {
                         $strRowStartFields .= ",dma_simplegrid_additionalrowclasses";
                     }
 
@@ -183,8 +185,10 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
                 if ($k == "dma_simplegrid_wrapper_start")
                 {
-                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['wrapper'])
-                    {
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false)
+                        && isset($this->arrConfigData['config']['additional-classes'])
+                        && isset($this->arrConfigData['config']['additional-classes']['wrapper'])
+                    ) {
                         $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
                         (
                             '{invisible_legend',
