@@ -48,7 +48,7 @@ class DmaSimpleGrid
             self::initialize();
         }
 
-        return static::$arrCache['grid']['config'][$strKey];
+        return static::$arrCache['grid']['config'][$strKey] ?? false;
     }
 
     public static function hasDmaGridInfos($arrTemplateData)
@@ -179,8 +179,8 @@ class DmaSimpleGrid
             }
         }
 
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false) && static::$arrCache['grid']['config']['additional-classes']['columns'])
-        {
+        if (isset(static::$arrCache['grid']['config']['additional-classes']['columns']) && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false)
+        ) {
             $arrAdditionalClasses = isset($arrTemplateData['dma_simplegrid_additionalcolumnclasses']) ? deserialize($arrTemplateData['dma_simplegrid_additionalcolumnclasses'], true) : [];
 
             if (sizeof($arrAdditionalClasses) > 0)
@@ -478,7 +478,7 @@ class DmaSimpleGrid
         }
         else
         {
-            static::$arrCache['grid'] = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
+            static::$arrCache['grid'] = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_FALLBACK']];
         }
     }
 
