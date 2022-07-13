@@ -48,7 +48,7 @@ class DmaSimpleGrid
             self::initialize();
         }
 
-        return static::$arrCache['grid']['config'][$strKey];
+        return static::$arrCache['grid']['config'][$strKey] ?? false;
     }
 
     public static function hasDmaGridInfos($arrTemplateData)
