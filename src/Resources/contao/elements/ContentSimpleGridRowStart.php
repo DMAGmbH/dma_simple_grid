@@ -89,7 +89,7 @@ class ContentSimpleGridRowStart extends \ContentElement
             }
         }
 
-        if ($arrConfigData['config']['row-class'])
+        if ($arrConfigData['config']['row-class'] ?? false)
         {
             array_insert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
         }
