@@ -57,7 +57,8 @@ class FormSimpleGridRowStart extends \Widget
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
         }
 
-        $strAdditionalClasses = $arrConfigData['config']['row-class'];
+        $strAdditionalClasses = $arrConfigData['config']['row-class'] ?? '';
+
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
         {
