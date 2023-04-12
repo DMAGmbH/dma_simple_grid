@@ -8,12 +8,14 @@
 
 namespace DMA;
 
+use Contao\Controller;
+
 /**
  * DMA SimpleGrid Helper
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class DmaSimpleGridHelper extends \Controller
+class DmaSimpleGridHelper extends Controller
 {
 
     public function getGridTypes()

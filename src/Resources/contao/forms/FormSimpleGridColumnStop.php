@@ -6,6 +6,11 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+use Contao\BackendTemplate;
+use Contao\CoreBundle\Routing\ScopeMatcher;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * SimpleGrid row start content element
  *
@@ -40,9 +45,15 @@ class FormSimpleGridColumnStop extends \Widget
      */
     public function parse($arrAttributes=null)
     {
-        if (version_compare(VERSION, '4.0', '>=') && TL_MODE === 'BE') {
-            /** @var \Contao\BackendTemplate|object $objTemplate */
-            $objTemplate = new \Contao\BackendTemplate('be_wildcard');
+        /** @var Request $request */
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        /** @var ScopeMatcher $matcher */
+        $matcher = System::getContainer()->get('contao.routing.scope_matcher');
+
+        if (version_compare(VERSION, '4.0', '>=') && $matcher->isBackendRequest($request)) {
+            
+            $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_stop'][0]) . ' ###';
 
             return $objTemplate->parse();

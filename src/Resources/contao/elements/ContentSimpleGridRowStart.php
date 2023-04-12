@@ -6,12 +6,20 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+use Contao\ArrayUtil;
+use Contao\BackendTemplate;
+use Contao\ContentElement;
+use Contao\CoreBundle\Routing\ScopeMatcher;
+use Contao\StringUtil;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * SimpleGrid row start content element
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridRowStart extends \ContentElement
+class ContentSimpleGridRowStart extends ContentElement
 {
     /**
      * @var string Template
@@ -27,10 +35,16 @@ class ContentSimpleGridRowStart extends \ContentElement
      */
     public function generate()
     {
-        if (TL_MODE == 'BE')
+        /** @var Request $request */
+        $request = System::getContainer()->get('request_stack')->getCurrentRequest();
+
+        /** @var ScopeMatcher $matcher */
+        $matcher = System::getContainer()->get('contao.routing.scope_matcher');
+
+        if ($matcher->isBackendRequest($request))
         {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new \BackendTemplate($this->strTemplate);
+            $objTemplate = new BackendTemplate($this->strTemplate);
             //$objTemplate->wildcard = "SimpleGrid: Row Start";
 
             return $objTemplate->parse();
@@ -61,7 +75,7 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && $this->dma_simplegrid_blocksettings)
         {
-            $arrBlockSettings = deserialize($this->dma_simplegrid_blocksettings, true);
+            $arrBlockSettings = StringUtil::deserialize($this->dma_simplegrid_blocksettings, true);
             if (sizeof($arrBlockSettings) == 1)
             {
                 $arrElementSettings = $arrBlockSettings[0];
@@ -78,7 +92,7 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
         {
-            $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalrowclasses, true);
+            $arrAdditionalClasses = StringUtil::deserialize($this->dma_simplegrid_additionalrowclasses, true);
 
             if (sizeof($arrAdditionalClasses) > 0)
             {
@@ -91,7 +105,7 @@ class ContentSimpleGridRowStart extends \ContentElement
 
         if ($arrConfigData['config']['row-class'] ?? false)
         {
-            array_insert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
+            ArrayUtil::arrayInsert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
         }
 
         $strClasses = implode(' ', $arrConfiguredClasses);

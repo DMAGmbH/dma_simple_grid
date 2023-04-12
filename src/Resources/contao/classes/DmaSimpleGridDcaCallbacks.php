@@ -8,6 +8,11 @@
 
 namespace DMA;
 
+use Contao\Controller;
+use Contao\Database;
+use Contao\Image;
+use Contao\Input;
+
 /**
  * DMA SimpleGrid DCA (tl_content and tl_module)
  *
@@ -15,7 +20,7 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class DmaSimpleGridDcaCallbacks extends \Controller
+class DmaSimpleGridDcaCallbacks extends Controller
 {
 
     private $arrConfigData;
@@ -231,14 +236,14 @@ class DmaSimpleGridDcaCallbacks extends \Controller
     public function onsubmitCallbackFormField($dc)
     {
         $activeRecord = $dc->activeRecord;
-        if (!$activeRecord || \Input::post('SUBMIT_TYPE') === 'auto') {
+        if (!$activeRecord || Image::post('SUBMIT_TYPE') === 'auto') {
             return;
         }
 
         if ($activeRecord->type === 'dma_simplegrid_column_start') {
 
             // Find the next columns or column element
-            $nextElement = \Database::getInstance()
+            $nextElement = Database::getInstance()
                 ->prepare('
 					SELECT type
 					FROM tl_form_field
@@ -255,7 +260,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
             // Check if a stop element should be created
             if (!$nextElement->type) {
-                \Database::getInstance()
+                Database::getInstance()
                     ->prepare('INSERT INTO tl_form_field %s')
                     ->set(array(
                         'pid' => $activeRecord->pid,
@@ -271,7 +276,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
         if ($activeRecord->type === 'dma_simplegrid_row_start') {
 
             // Find the next columns or column element
-            $nextElement = \Database::getInstance()
+            $nextElement = Database::getInstance()
                 ->prepare('
 					SELECT type
 					FROM tl_form_field
@@ -288,7 +293,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
             // Check if a stop element should be created
             if (!$nextElement->type) {
-                \Database::getInstance()
+                Database::getInstance()
                     ->prepare('INSERT INTO tl_form_field %s')
                     ->set(array(
                         'pid' => $activeRecord->pid,
@@ -305,14 +310,14 @@ class DmaSimpleGridDcaCallbacks extends \Controller
     public function onsubmitCallback($dc)
     {
         $activeRecord = $dc->activeRecord;
-        if (!$activeRecord || \Input::post('SUBMIT_TYPE') === 'auto') {
+        if (!$activeRecord || Input::post('SUBMIT_TYPE') === 'auto') {
             return;
         }
 
         if ($activeRecord->type === 'dma_simplegrid_column_start') {
 
             // Find the next columns or column element
-            $nextElement = \Database::getInstance()
+            $nextElement = Database::getInstance()
                 ->prepare('
 					SELECT type
 					FROM tl_content
@@ -332,7 +337,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
             // Check if a stop element should be created
             if (!$nextElement->type) {
-                \Database::getInstance()
+                Database::getInstance()
                     ->prepare('INSERT INTO tl_content %s')
                     ->set(array(
                         'pid' => $activeRecord->pid,
@@ -349,7 +354,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
         if ($activeRecord->type === 'dma_simplegrid_row_start') {
 
             // Find the next columns or column element
-            $nextElement = \Database::getInstance()
+            $nextElement = Database::getInstance()
                 ->prepare('
 					SELECT type
 					FROM tl_content
@@ -369,7 +374,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
             // Check if a stop element should be created
             if (!$nextElement->type) {
-                \Database::getInstance()
+                Database::getInstance()
                     ->prepare('INSERT INTO tl_content %s')
                     ->set(array(
                         'pid' => $activeRecord->pid,
@@ -386,7 +391,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
         if ($activeRecord->type === 'dma_simplegrid_wrapper_start') {
 
             // Find the next columns or column element
-            $nextElement = \Database::getInstance()
+            $nextElement = Database::getInstance()
                 ->prepare('
 					SELECT type
 					FROM tl_content
@@ -406,7 +411,7 @@ class DmaSimpleGridDcaCallbacks extends \Controller
 
             // Check if a stop element should be created
             if (!$nextElement->type) {
-                \Database::getInstance()
+                Database::getInstance()
                     ->prepare('INSERT INTO tl_content %s')
                     ->set(array(
                         'pid' => $activeRecord->pid,

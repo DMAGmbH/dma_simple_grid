@@ -29,8 +29,8 @@
    },
    "require":{
       "php": "^7.2 || ^8.0",
-      "contao/core-bundle":"^4.9",
-      "menatwork/contao-multicolumnwizard-bundle": "^3.5"
+      "contao/core-bundle":"^4.9 || ^5.0",
+      "menatwork/contao-multicolumnwizard-bundle": "^3.6"
    },
    "autoload": {
       "psr-4": {
@@ -49,4 +49,4 @@
    "extra":{
       "contao-manager-plugin": "Dma\\SimpleGrid\\ContaoManager\\Plugin"
    }
-}
+ }
