@@ -10,7 +10,6 @@ namespace DMA;
 
 use Contao\Controller;
 use Contao\Database;
-use Contao\Image;
 use Contao\Input;
 
 /**
@@ -236,7 +235,7 @@ class DmaSimpleGridDcaCallbacks extends Controller
     public function onsubmitCallbackFormField($dc)
     {
         $activeRecord = $dc->activeRecord;
-        if (!$activeRecord || Image::post('SUBMIT_TYPE') === 'auto') {
+        if (!$activeRecord || Input::post('SUBMIT_TYPE') === 'auto') {
             return;
         }
 
