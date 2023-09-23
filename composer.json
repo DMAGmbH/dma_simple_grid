@@ -37,7 +37,7 @@
         "contao/easy-coding-standard": "^6.0",
         "contao/manager-plugin": "^2.11",
         "contao/test-case": "^4.13 || ^5.0",
-        "phpstan/phpstan": "^1.10",
+        "phpstan/phpstan": "^1.10"
     },
     "autoload": {
         "psr-4": {
