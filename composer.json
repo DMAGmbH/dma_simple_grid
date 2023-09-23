@@ -51,5 +51,11 @@
         "cs-fixer": "@php tools/ecs/vendor/bin/ecs check config/ contao/ src/ tests/ --config tools/ecs/config.php --fix --ansi",
         "phpstan": "@php tools/phpstan/vendor/bin/phpstan analyse src tests",
         "unit-tests": "@php tools/phpunit/vendor/bin/phpunit -c tools/phpunit/phpunit.xml.dist"
+    },
+    "config": {
+        "allow-plugins": {
+            "contao-components/installer": false,
+            "contao/manager-plugin": false
+        }
     }
 }
