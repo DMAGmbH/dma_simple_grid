@@ -1,0 +1,13 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Dma\DmaSimpleGrid\:
+        resource: ../src/
+        exclude: ../src/{DependencyInjection,Config}
+
+    Dma\DmaSimpleGrid\DataContainer\AcrossTablesDcaCallback:
+        public: true
+

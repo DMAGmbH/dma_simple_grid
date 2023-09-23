@@ -1,0 +1,6 @@
+# PhpStorm stuff
+.idea/**/*.*
+.idea
+.idea/
+
+tools/phpunit/.phpunit.result.cache

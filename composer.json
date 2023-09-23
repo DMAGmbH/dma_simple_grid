@@ -1,4 +1,5 @@
 {
+    "version": "1.0",
     "name": "dma/dma_simple_grid",
     "description": "Contao Extension for simple multiple grid-support",
     "keywords": [
@@ -8,7 +9,7 @@
         "grid"
     ],
     "type": "contao-module",
-    "homepage": "http://www.dma.do",
+    "homepage": "https://www.dma.do",
     "license": "LGPL-3.0+",
     "authors": [
         {
@@ -18,7 +19,7 @@
         },
         {
             "name": "Janosch Oltmanns",
-            "email": "kontakt@janosch-oltamnns.de",
+            "email": "kontakt@janosch-oltmanns.de",
             "homepage": "https://www.janosch-oltmanns.de",
             "role": "maintainer"
         }
@@ -32,21 +33,18 @@
         "contao/core-bundle": "^4.13 || ^5.0",
         "menatwork/contao-multicolumnwizard-bundle": "^3.6"
     },
+    "require-dev": {
+        "contao/easy-coding-standard": "^6.0",
+        "contao/manager-plugin": "^2.11",
+        "contao/test-case": "^4.13 || ^5.0",
+        "phpstan/phpstan": "^1.10",
+    },
     "autoload": {
         "psr-4": {
-            "Dma\\SimpleGrid\\": "src"
-        },
-        "classmap": [
-            "src/Resources/contao/"
-        ],
-        "exclude-from-classmap": [
-            "src/Resources/contao/config/",
-            "src/Resources/contao/dca/",
-            "src/Resources/contao/languages/",
-            "src/Resources/contao/templates/"
-        ]
+            "Dma\\DmaSimpleGrid\\": "src"
+        }
     },
     "extra": {
-        "contao-manager-plugin": "Dma\\SimpleGrid\\ContaoManager\\Plugin"
+        "contao-manager-plugin": "Dma\\DmaSimpleGrid\\ContaoManager\\Plugin"
     }
 }
