@@ -13,7 +13,7 @@ namespace DMA;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class DmaSimpleGridHelper extends \Controller
+class DmaSimpleGridHelper extends \Contao\Controller
 {
 
     public function getGridTypes()
@@ -31,7 +31,7 @@ class DmaSimpleGridHelper extends \Controller
 
     public function simplegridLoadFormField($objWidget, $formId, $arrData, $objForm)
     {
-        $tableless = version_compare(VERSION, '4.0', '>=') ? true : $objForm->tableless;
+        $tableless = true;
 
         if ($tableless && ($objWidget->dma_simplegrid_columnsettings || $objWidget->dma_simplegrid_offsetsettings || $objWidget->dma_simplegrid_pushsettings || $objWidget->dma_simplegrid_pullsettings))
         {

@@ -6,12 +6,16 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+use Contao\StringUtil;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * SimpleGrid row start content element
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class FormSimpleGridRowStart extends \Widget
+class FormSimpleGridRowStart extends \Contao\Widget
 {
 
     /**
@@ -40,7 +44,8 @@ class FormSimpleGridRowStart extends \Widget
      */
     public function parse($arrAttributes=null)
     {
-        if (version_compare(VERSION, '4.0', '>=') && TL_MODE === 'BE') {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
+        {
             /** @var \Contao\BackendTemplate|object $objTemplate */
             $objTemplate = new \Contao\BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]) . ' ###';
@@ -62,7 +67,7 @@ class FormSimpleGridRowStart extends \Widget
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
         {
-            $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalrowclasses, true);
+            $arrAdditionalClasses = StringUtil::deserialize($this->dma_simplegrid_additionalrowclasses, true);
 
             if (sizeof($arrAdditionalClasses) > 0)
             {

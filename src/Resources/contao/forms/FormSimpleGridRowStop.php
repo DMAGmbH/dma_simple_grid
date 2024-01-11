@@ -6,12 +6,15 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * SimpleGrid row start content element
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class FormSimpleGridRowStop extends \Widget
+class FormSimpleGridRowStop extends \Contao\Widget
 {
 
     /**
@@ -40,7 +43,8 @@ class FormSimpleGridRowStop extends \Widget
      */
     public function parse($arrAttributes=null)
     {
-        if (version_compare(VERSION, '4.0', '>=') && TL_MODE === 'BE') {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
+        {
             /** @var \Contao\BackendTemplate|object $objTemplate */
             $objTemplate = new \Contao\BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_stop'][0]) . ' ###';

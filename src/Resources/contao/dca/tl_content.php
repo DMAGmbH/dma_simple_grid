@@ -16,7 +16,7 @@
 $GLOBALS['TL_DCA']['tl_content']['config']['onload_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'adjustPalettesString');
 $GLOBALS['TL_DCA']['tl_content']['config']['onsubmit_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'onsubmitCallback');
 
-array_insert($GLOBALS['TL_DCA']['tl_content']['list']['operations'], 0, array(
+Contao\ArrayUtil::arrayInsert($GLOBALS['TL_DCA']['tl_content']['list']['operations'], 0, array(
     'show_simplegrid_infos' => array
     (
         'button_callback' => array('DMA\\DmaSimpleGrid', 'getSimpleGridInfos')
