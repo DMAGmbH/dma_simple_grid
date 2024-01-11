@@ -1,0 +1,6 @@
+services:
+  _defaults:
+    autoconfigure: true
+
+  Dma\SimpleGrid\Twig\SimpleGridClassesExtension:
+    tags: [twig.extension]

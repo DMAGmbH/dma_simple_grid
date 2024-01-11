@@ -66,7 +66,14 @@ class DmaSimpleGridHelper extends \Contao\Controller
         {
             $objTemplate->class .= " " . DmaSimpleGrid::getColumnClasses($objTemplate->getData());
         }
+    }
 
+    public static function getGridClassesForTwig(array $rowData): string
+    {
+        if (DmaSimpleGrid::hasDmaGridInfos($rowData)) {
+            return DmaSimpleGrid::getColumnClasses($rowData);
+        }
+        return '';
     }
 
 }
