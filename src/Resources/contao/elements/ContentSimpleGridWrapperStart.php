@@ -6,12 +6,19 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+
+use Contao\BackendTemplate;
+use Contao\ContentElement;
+use Contao\StringUtil;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * SimpleGrid row start content element
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridWrapperStart extends \ContentElement
+class ContentSimpleGridWrapperStart extends ContentElement
 {
     /**
      * @var string Template
@@ -27,10 +34,11 @@ class ContentSimpleGridWrapperStart extends \ContentElement
      */
     public function generate()
     {
-        if (TL_MODE == 'BE')
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
         {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new \BackendTemplate($this->strTemplate);
+            $objTemplate = new BackendTemplate($this->strTemplate);
+
             //$objTemplate->wildcard = "SimpleGrid: Row Start";
 
             return $objTemplate->parse();
@@ -61,7 +69,7 @@ class ContentSimpleGridWrapperStart extends \ContentElement
 
         if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false) && $arrConfigData['config']['additional-classes']['wrapper'] && $this->dma_simplegrid_additionalwrapperclasses)
         {
-            $arrAdditionalClasses = deserialize($this->dma_simplegrid_additionalwrapperclasses, true);
+            $arrAdditionalClasses = StringUtil::deserialize($this->dma_simplegrid_additionalwrapperclasses, true);
 
             if (sizeof($arrAdditionalClasses) > 0)
             {

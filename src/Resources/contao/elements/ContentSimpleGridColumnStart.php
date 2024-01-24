@@ -6,12 +6,19 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+
+
+use Contao\BackendTemplate;
+use Contao\ContentElement;
+use Contao\System;
+use Symfony\Component\HttpFoundation\Request;
+
 /**
  * SimpleGrid row start content element
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridColumnStart extends \ContentElement
+class ContentSimpleGridColumnStart extends ContentElement
 {
     /**
      * @var string Template
@@ -21,13 +28,13 @@ class ContentSimpleGridColumnStart extends \ContentElement
 
     public function generate()
     {
-        if (TL_MODE == 'BE')
+
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
         {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new \BackendTemplate($this->strTemplate);
             //$objTemplate->wildcard = "SimpleGrid: Column Start";
 
-            return $objTemplate->parse();
+            return (new BackendTemplate($this->strTemplate))->parse();
         }
 
         return parent::generate();

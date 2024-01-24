@@ -6,19 +6,23 @@
  * file that was distributed with this source code.
  */
 
+use Contao\ArrayUtil;
+use DMA\DmaSimpleGridDcaCallbacks;
+use DMA\DmaSimpleGrid;
+
 /**
  * DMA SimpleGrid DCA
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
 
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'adjustPalettesString');
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'onsubmitCallbackFormField');
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = array(DmaSimpleGridDcaCallbacks::class, 'adjustPalettesString');
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array(DmaSimpleGridDcaCallbacks::class, 'onsubmitCallbackFormField');
 
-array_insert($GLOBALS['TL_DCA']['tl_form_field']['list']['operations'], 0, array(
+ArrayUtil::arrayInsert($GLOBALS['TL_DCA']['tl_form_field']['list']['operations'], 0, array(
     'show_simplegrid_infos' => array
     (
-        'button_callback' => array('DMA\\DmaSimpleGrid', 'getSimpleGridInfos')
+        'button_callback' => array(DmaSimpleGrid::class, 'getSimpleGridInfos')
     )
 ));
 
