@@ -6,6 +6,10 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+
+use Contao\ArrayUtil;
+use Contao\BackendTemplate;
+use Contao\ContentElement;
 use Contao\StringUtil;
 use Contao\System;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +19,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridRowStart extends \Contao\ContentElement
+class ContentSimpleGridRowStart extends ContentElement
 {
     /**
      * @var string Template
@@ -34,7 +38,8 @@ class ContentSimpleGridRowStart extends \Contao\ContentElement
         if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
         {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new \Contao\BackendTemplate($this->strTemplate);
+            $objTemplate = new BackendTemplate($this->strTemplate);
+
             //$objTemplate->wildcard = "SimpleGrid: Row Start";
 
             return $objTemplate->parse();
@@ -95,7 +100,7 @@ class ContentSimpleGridRowStart extends \Contao\ContentElement
 
         if ($arrConfigData['config']['row-class'] ?? false)
         {
-            \Contao\ArrayUtil::arrayInsert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
+            ArrayUtil::arrayInsert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
         }
 
         $strClasses = implode(' ', $arrConfiguredClasses);

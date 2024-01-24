@@ -6,6 +6,9 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+
+use Contao\BackendTemplate;
+use Contao\ContentElement;
 use Contao\System;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -14,7 +17,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class ContentSimpleGridWrapperStop extends \Contao\ContentElement
+class ContentSimpleGridWrapperStop extends ContentElement
 {
     /**
      * @var string Template
@@ -33,7 +36,7 @@ class ContentSimpleGridWrapperStop extends \Contao\ContentElement
         {
             $this->strTemplate = 'be_wildcard';
 
-            $objTemplate = new \Contao\BackendTemplate($this->strTemplate);
+            $objTemplate = new BackendTemplate($this->strTemplate);
 
             $this->Template = $objTemplate;
         }

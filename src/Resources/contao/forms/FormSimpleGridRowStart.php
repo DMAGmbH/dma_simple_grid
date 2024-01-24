@@ -6,8 +6,11 @@
  * file that was distributed with this source code.
  */
 namespace DMA;
+
+use Contao\BackendTemplate;
 use Contao\StringUtil;
 use Contao\System;
+use Contao\Widget;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -15,7 +18,7 @@ use Symfony\Component\HttpFoundation\Request;
  *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
-class FormSimpleGridRowStart extends \Contao\Widget
+class FormSimpleGridRowStart extends Widget
 {
 
     /**
@@ -46,8 +49,8 @@ class FormSimpleGridRowStart extends \Contao\Widget
     {
         if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
         {
-            /** @var \Contao\BackendTemplate|object $objTemplate */
-            $objTemplate = new \Contao\BackendTemplate('be_wildcard');
+            /** @var BackendTemplate|object $objTemplate */
+            $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]) . ' ###';
 
             return $objTemplate->parse();

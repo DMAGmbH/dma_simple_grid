@@ -9,7 +9,9 @@
 namespace DMA;
 
 use Contao\ArrayUtil;
+use Contao\ContentModel;
 use Contao\StringUtil;
+use Contao\Widget;
 
 /**
  * DMA SimpleGrid DCA (tl_content and tl_module)
@@ -85,7 +87,7 @@ class DmaSimpleGrid
 		if (isset($arrTemplateData['origId']) && $arrTemplateData['origId'] && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOwnSettingsByIncludeElements'] ?? false))
 		{
 			// includiertes Inhaltselement
-			$origContentElement = \Contao\ContentModel::findById($arrTemplateData['id']);
+			$origContentElement = ContentModel::findById($arrTemplateData['id']);
 			if ($origContentElement !== null)
 			{
 				$arrTemplateData = $origContentElement->row();
@@ -266,7 +268,7 @@ class DmaSimpleGrid
 
     }
 
-    public static function columnsSelectCallback(\Contao\Widget $widget = null)
+    public static function columnsSelectCallback(Widget $widget = null)
     {
         if (!isset(static::$arrCache['grid']))
         {
