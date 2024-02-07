@@ -25,23 +25,11 @@ class ContentSimpleGridWrapperStart extends ContentElement
      */
     protected $strTemplate = 'ce_dma_simplegrid_wrapperstart';
 
-
-
-    /**
-     * Return if the highlighter plugin is not loaded
-     *
-     * @return string
-     */
-    public function generate()
+    public function generate(): string
     {
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new BackendTemplate($this->strTemplate);
-
-            //$objTemplate->wildcard = "SimpleGrid: Row Start";
-
-            return $objTemplate->parse();
+            return (new BackendTemplate($this->strTemplate))->parse();
         }
 
         return parent::generate();
@@ -50,38 +38,27 @@ class ContentSimpleGridWrapperStart extends ContentElement
 
     /**
      * Compile the content element
-     *
-     * @return void
      */
-    public function compile()
+    public function compile(): void
     {
+        $strAdditionalClasses = '';
 
-        $strAdditionalClasses = "";
-
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false))
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false)) {
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
-        }
-        else
-        {
+        } else {
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
         }
 
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false) && $arrConfigData['config']['additional-classes']['wrapper'] && $this->dma_simplegrid_additionalwrapperclasses)
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false) && $arrConfigData['config']['additional-classes']['wrapper'] && $this->dma_simplegrid_additionalwrapperclasses) {
             $arrAdditionalClasses = StringUtil::deserialize($this->dma_simplegrid_additionalwrapperclasses, true);
-
-            if (sizeof($arrAdditionalClasses) > 0)
-            {
-                foreach ($arrAdditionalClasses as $strClassKey)
-                {
-                    $strAdditionalClasses .= " " . $strClassKey;
+            if (count($arrAdditionalClasses) > 0) {
+                foreach ($arrAdditionalClasses as $strClassKey) {
+                    $strAdditionalClasses .= ' ' . $strClassKey;
                 }
             }
         }
 
-        $this->type = "wrapper ". $arrConfigData['config']['wrapper-class'] . $strAdditionalClasses;
-
+        $this->type = 'wrapper ' . $arrConfigData['config']['wrapper-class'] . $strAdditionalClasses;
     }
 
 }

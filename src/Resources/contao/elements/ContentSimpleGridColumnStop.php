@@ -25,13 +25,11 @@ class ContentSimpleGridColumnStop extends ContentElement
      */
     protected $strTemplate = 'ce_dma_simplegrid_columnstop';
 
-
     /**
      * Compile the content element
-     *
-     * @return void
+
      */
-    public function compile()
+    public function compile(): void
     {
         if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
         {
@@ -40,8 +38,6 @@ class ContentSimpleGridColumnStop extends ContentElement
             $objTemplate = new BackendTemplate($this->strTemplate);
 
             $this->Template = $objTemplate;
-            //$this->Template->wildcard = "SimpleGrid: Column Stop";
-
         }
     }
 

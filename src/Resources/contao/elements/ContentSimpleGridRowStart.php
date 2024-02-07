@@ -26,23 +26,11 @@ class ContentSimpleGridRowStart extends ContentElement
      */
     protected $strTemplate = 'ce_dma_simplegrid_rowstart';
 
-
-
-    /**
-     * Return if the highlighter plugin is not loaded
-     *
-     * @return string
-     */
-    public function generate()
+    public function generate(): string
     {
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $this->strTemplate = 'be_wildcard';
-            $objTemplate = new BackendTemplate($this->strTemplate);
-
-            //$objTemplate->wildcard = "SimpleGrid: Row Start";
-
-            return $objTemplate->parse();
+            return (new BackendTemplate($this->strTemplate))->parse();
         }
 
         return parent::generate();
@@ -51,28 +39,20 @@ class ContentSimpleGridRowStart extends ContentElement
 
     /**
      * Compile the content element
-     *
-     * @return void
      */
-    public function compile()
+    public function compile(): void
     {
+        $arrConfiguredClasses = [];
 
-        $arrConfiguredClasses = array();
-
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false))
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false)) {
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
-        }
-        else
-        {
+        } else {
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
         }
 
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && $this->dma_simplegrid_blocksettings)
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && $this->dma_simplegrid_blocksettings) {
             $arrBlockSettings = StringUtil::deserialize($this->dma_simplegrid_blocksettings, true);
-            if (sizeof($arrBlockSettings) == 1)
-            {
+            if (count($arrBlockSettings) === 1) {
                 $arrElementSettings = $arrBlockSettings[0];
                 if (is_array($arrElementSettings)) {
                     foreach ($arrElementSettings as $columnKey => $varValue) {
@@ -82,37 +62,28 @@ class ContentSimpleGridRowStart extends ContentElement
                     }
                 }
             }
-
         }
 
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses) {
             $arrAdditionalClasses = StringUtil::deserialize($this->dma_simplegrid_additionalrowclasses, true);
-
-            if (count($arrAdditionalClasses) > 0)
-            {
-                foreach ($arrAdditionalClasses as $strClassKey)
-                {
+            if (count($arrAdditionalClasses) > 0) {
+                foreach ($arrAdditionalClasses as $strClassKey) {
                     $arrConfiguredClasses[] = $strClassKey;
                 }
             }
         }
 
-        if ($arrConfigData['config']['row-class'] ?? false)
-        {
+        if ($arrConfigData['config']['row-class'] ?? false) {
             ArrayUtil::arrayInsert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
         }
 
         $strClasses = implode(' ', $arrConfiguredClasses);
 
-        if (strpos($strClasses, "^") !== false)
-        {
-            $strClasses = str_replace(" ^", "", $strClasses);
+        if (str_contains($strClasses, '^')) {
+            $strClasses = str_replace(' ^', '', $strClasses);
         }
 
-
-        $this->type = "row ". $strClasses;
-
+        $this->type = 'row ' . $strClasses;
     }
 
 }

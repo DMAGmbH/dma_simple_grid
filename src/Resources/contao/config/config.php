@@ -637,11 +637,9 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gridlex'] =
         ]
     ];
 
-$GLOBALS['DMA_SIMPLEGRID_CONFIG']['flexboxgrid'] =
-    [
+$GLOBALS['DMA_SIMPLEGRID_CONFIG']['flexboxgrid'] = [
     'name' => 'Flexbox Grid',
-    'config' =>
-        [
+    'config' => [
         'hasWrapper' => true,
         'hasRows' => true,
         'hasColumns' => true,

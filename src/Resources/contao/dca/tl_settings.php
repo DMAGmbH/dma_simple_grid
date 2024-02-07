@@ -1,91 +1,85 @@
 <?php
 
 
+use DMA\DmaSimpleGridDcaCallbacks;
+use DMA\DmaSimpleGridHelper;
 
-$GLOBALS['TL_DCA']['tl_settings']['config']['onload_callback'][] = array('DMA\\DmaSimpleGridDcaCallbacks', 'adjustSettingsPalettesString');
+$GLOBALS['TL_DCA']['tl_settings']['config']['onload_callback'][] = [DmaSimpleGridDcaCallbacks::class, 'adjustSettingsPalettesString'];
 
 /**
  * Add to palette
+ *
+ * Done via DmaSimpleGridDcaCallbacks::adjustSettingsPalettesString()
  */
-// Done via DmaSimpleGridDcaCallbacks->adjustSettingsPalettesString
+
 
 
 /**
  * Add fields
  */
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGridType'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGridType'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGridType'],
     'inputType'	        => 'select',
-    'options_callback'  => array('DMA\\DmaSimpleGridHelper', 'getGridTypes'),
-    'eval'		        => array('tl_class'=>'w50', 'submitOnChange'=>true, 'includeBlankOption'=>true)
-);
+    'options_callback'  => [DmaSimpleGridHelper::class, 'getGridTypes'],
+    'eval'		        => ['tl_class'=>'w50', 'submitOnChange'=>true, 'includeBlankOption'=>true]
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useColumns'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useColumns'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useColumns'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50 clr')
-);
+    'eval'		        => ['tl_class'=>'w50 clr']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOffset'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOffset'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffset'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
-);
+    'eval'		        => ['tl_class'=>'w50']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOffsetRight'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOffsetRight'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffsetRight'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
-);
+    'eval'		        => ['tl_class'=>'w50']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_usePush'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_usePush'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_usePush'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
-);
+    'eval'		        => ['tl_class'=>'w50']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_usePull'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_usePull'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_usePull'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
-);
+    'eval'		        => ['tl_class'=>'w50']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useBlockGrid'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useBlockGrid'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useBlockGrid'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
-);
+    'eval'		        => ['tl_class'=>'w50']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useAdditionalWrapperClasses'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useAdditionalWrapperClasses'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalWrapperClasses'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
-);
+    'eval'		        => ['tl_class'=>'w50']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useAdditionalRowClasses'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useAdditionalRowClasses'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalRowClasses'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50 clr')
-);
+    'eval'		        => ['tl_class'=>'w50 clr']
+];
 
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useAdditionalColumnClasses'] = array
-(
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useAdditionalColumnClasses'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useAdditionalColumnClasses'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50')
-);
-$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOwnSettingsByIncludeElements'] = array
-(
+    'eval'		        => ['tl_class'=>'w50']
+];
+
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useOwnSettingsByIncludeElements'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOwnSettingsByIncludeElements'],
     'inputType'	        => 'checkbox',
-    'eval'		        => array('tl_class'=>'w50 clr')
-);
+    'eval'		        => ['tl_class'=>'w50 clr']
+];

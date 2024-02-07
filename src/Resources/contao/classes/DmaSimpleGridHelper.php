@@ -18,12 +18,11 @@ use Contao\Controller;
 class DmaSimpleGridHelper extends Controller
 {
 
-    public function getGridTypes()
+    public function getGridTypes(): array
     {
-        $arrGridTypes = array();
+        $arrGridTypes = [];
 
-        foreach ($GLOBALS['DMA_SIMPLEGRID_CONFIG'] as $keyValue => $arrGridConfig)
-        {
+        foreach ($GLOBALS['DMA_SIMPLEGRID_CONFIG'] as $keyValue => $arrGridConfig) {
             $arrGridTypes[$keyValue] = $arrGridConfig['name'];
         }
 
@@ -35,23 +34,18 @@ class DmaSimpleGridHelper extends Controller
     {
         $tableless = true;
 
-        if ($tableless && ($objWidget->dma_simplegrid_columnsettings || $objWidget->dma_simplegrid_offsetsettings || $objWidget->dma_simplegrid_pushsettings || $objWidget->dma_simplegrid_pullsettings))
-        {
-
-            $strWidgetClasses = "";
-
-            $arrTemplateData = array
-            (
+        if ($tableless && ($objWidget->dma_simplegrid_columnsettings || $objWidget->dma_simplegrid_offsetsettings || $objWidget->dma_simplegrid_pushsettings || $objWidget->dma_simplegrid_pullsettings)) {
+            $strWidgetClasses = '';
+            $arrTemplateData = [
                 'dma_simplegrid_columnsettings' => $objWidget->dma_simplegrid_columnsettings,
                 'dma_simplegrid_offsetsettings' => $objWidget->dma_simplegrid_offsetsettings,
                 'dma_simplegrid_pushsettings' => $objWidget->dma_simplegrid_pushsettings,
                 'dma_simplegrid_pullsettings' => $objWidget->dma_simplegrid_pullsettings
-            );
+            ];
 
             $strWidgetClasses .= ($strWidgetClasses != "" ? " " : "") . DmaSimpleGrid::getColumnClasses($arrTemplateData);
 
-            if ($objWidget->__get('prefix') != "")
-            {
+            if ($objWidget->__get('prefix') !== "") {
                 $strWidgetClasses = " " . $strWidgetClasses;
             }
 
@@ -62,10 +56,9 @@ class DmaSimpleGridHelper extends Controller
     }
 
 
-    public function simplegridParseTemplate($objTemplate)
+    public function simplegridParseTemplate($objTemplate): void
     {
-        if (DmaSimpleGrid::hasDmaGridInfos($objTemplate->getData()))
-        {
+        if (DmaSimpleGrid::hasDmaGridInfos($objTemplate->getData())) {
             $objTemplate->class .= " " . DmaSimpleGrid::getColumnClasses($objTemplate->getData());
         }
     }

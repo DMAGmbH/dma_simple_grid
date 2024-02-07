@@ -25,15 +25,10 @@ class ContentSimpleGridColumnStart extends ContentElement
      */
     protected $strTemplate = 'ce_dma_simplegrid_columnstart';
 
-
-    public function generate()
+    public function generate(): string
     {
-
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $this->strTemplate = 'be_wildcard';
-            //$objTemplate->wildcard = "SimpleGrid: Column Start";
-
             return (new BackendTemplate($this->strTemplate))->parse();
         }
 
@@ -43,15 +38,10 @@ class ContentSimpleGridColumnStart extends ContentElement
 
     /**
      * Compile the content element
-     *
-     * @return void
      */
-    public function compile()
+    public function compile(): void
     {
-
-
-        $this->type = "column";
-
+        $this->type = 'column';
     }
 
 }

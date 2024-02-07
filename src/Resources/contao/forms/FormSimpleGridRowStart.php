@@ -32,9 +32,8 @@ class FormSimpleGridRowStart extends Widget
     /**
      * Do not validate
      */
-    public function validate()
+    public function validate(): void
     {
-        return;
     }
 
 
@@ -45,10 +44,9 @@ class FormSimpleGridRowStart extends Widget
      *
      * @return string The template markup
      */
-    public function parse($arrAttributes=null)
+    public function parse($arrAttributes = null): string
     {
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             /** @var BackendTemplate|object $objTemplate */
             $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]) . ' ###';
@@ -56,32 +54,24 @@ class FormSimpleGridRowStart extends Widget
             return $objTemplate->parse();
         }
 
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false))
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false)) {
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
-        }
-        else
-        {
+        } else {
             $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_CONFIG']['DMA_SIMPLEGRID_FALLBACK']];
         }
 
         $strAdditionalClasses = $arrConfigData['config']['row-class'] ?? '';
 
-
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses)
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses) {
             $arrAdditionalClasses = StringUtil::deserialize($this->dma_simplegrid_additionalrowclasses, true);
-
-            if (sizeof($arrAdditionalClasses) > 0)
-            {
-                foreach ($arrAdditionalClasses as $strClassKey)
-                {
-                    $strAdditionalClasses .= " " . $strClassKey;
+            if (count($arrAdditionalClasses) > 0) {
+                foreach ($arrAdditionalClasses as $strClassKey) {
+                    $strAdditionalClasses .= ' ' . $strClassKey;
                 }
             }
         }
 
-        $this->strPrefix = "" . $strAdditionalClasses;
+        $this->strPrefix = '' . $strAdditionalClasses;
 
         return parent::parse($arrAttributes);
     }
@@ -92,9 +82,8 @@ class FormSimpleGridRowStart extends Widget
      *
      * @return string The widget markup
      */
-    public function generate()
+    public function generate(): string
     {
-
-        return "";
+        return '';
     }
 }

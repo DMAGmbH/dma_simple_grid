@@ -16,15 +16,14 @@ use DMA\DmaSimpleGrid;
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
 
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = array(DmaSimpleGridDcaCallbacks::class, 'adjustPalettesString');
-$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = array(DmaSimpleGridDcaCallbacks::class, 'onsubmitCallbackFormField');
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = [DmaSimpleGridDcaCallbacks::class, 'adjustPalettesString'];
+$GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = [DmaSimpleGridDcaCallbacks::class, 'onsubmitCallbackFormField'];
 
-ArrayUtil::arrayInsert($GLOBALS['TL_DCA']['tl_form_field']['list']['operations'], 0, array(
-    'show_simplegrid_infos' => array
-    (
-        'button_callback' => array(DmaSimpleGrid::class, 'getSimpleGridInfos')
-    )
-));
+ArrayUtil::arrayInsert($GLOBALS['TL_DCA']['tl_form_field']['list']['operations'], 0, [
+    'show_simplegrid_infos' => [
+        'button_callback' => [DmaSimpleGrid::class, 'getSimpleGridInfos']
+    ]
+]);
 
 
 
@@ -38,13 +37,11 @@ $GLOBALS['TL_DCA']['tl_form_field']['palettes']['dma_simplegrid_column_stop'] = 
 
 
 
-$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_columnsettings'] = array
-(
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_columnsettings'] = [
     'label'			=> &$GLOBALS['TL_LANG']['tl_form_field']['dma_simplegrid_columnsettings'],
     'exclude' 		=> true,
     'inputType' 	=> 'multiColumnWizard',
-    'eval' 			=> array
-    (
+    'eval' 			=> [
         'maxCount' => 1,
         'buttons' => [
             'up' => false,
@@ -54,18 +51,16 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_columnsettings'] =
             'copy' => false,
             'delete' => false,
         ],
-        'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
-    ),
+        'columnsCallback' => [DmaSimpleGrid::class, 'columnsSelectCallback']
+    ],
     'sql'                     => "text NULL"
-);
+];
 
-$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_offsetsettings'] = array
-(
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_offsetsettings'] = [
     'label'			=> &$GLOBALS['TL_LANG']['tl_form_field']['dma_simplegrid_offsetsettings'],
     'exclude' 		=> true,
     'inputType' 	=> 'multiColumnWizard',
-    'eval' 			=> array
-    (
+    'eval' 			=> [
         'maxCount' => 1,
         'buttons' => [
             'up' => false,
@@ -75,18 +70,16 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_offsetsettings'] =
             'copy' => false,
             'delete' => false,
         ],
-        'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
-    ),
+        'columnsCallback' => [DmaSimpleGrid::class, 'columnsSelectCallback']
+    ],
     'sql'                     => "text NULL"
-);
+];
 
-$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_pullsettings'] = array
-(
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_pullsettings'] = [
     'label'			=> &$GLOBALS['TL_LANG']['tl_form_field']['dma_simplegrid_pullsettings'],
     'exclude' 		=> true,
     'inputType' 	=> 'multiColumnWizard',
-    'eval' 			=> array
-    (
+    'eval' 			=> [
         'maxCount' => 1,
         'buttons' => [
             'up' => false,
@@ -96,18 +89,16 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_pullsettings'] = a
             'copy' => false,
             'delete' => false,
         ],
-        'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
-    ),
+        'columnsCallback' => [DmaSimpleGrid::class, 'columnsSelectCallback']
+    ],
     'sql'                     => "text NULL"
-);
+];
 
-$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_pushsettings'] = array
-(
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_pushsettings'] = [
     'label'			=> &$GLOBALS['TL_LANG']['tl_form_field']['dma_simplegrid_pushsettings'],
     'exclude' 		=> true,
     'inputType' 	=> 'multiColumnWizard',
-    'eval' 			=> array
-    (
+    'eval' 			=> [
         'maxCount' => 1,
         'buttons' => [
             'up' => false,
@@ -117,17 +108,16 @@ $GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_pushsettings'] = a
             'copy' => false,
             'delete' => false,
         ],
-        'columnsCallback' => array('DMA\\DmaSimpleGrid', 'columnsSelectCallback')
-    ),
+        'columnsCallback' => [DmaSimpleGrid::class, 'columnsSelectCallback']
+    ],
     'sql'                     => "text NULL"
-);
+];
 
-$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_additionalrowclasses'] = array
-(
+$GLOBALS['TL_DCA']['tl_form_field']['fields']['dma_simplegrid_additionalrowclasses'] = [
     'label'                   => &$GLOBALS['TL_LANG']['tl_form_field']['dma_simplegrid_additionalrowclasses'],
     'exclude'                 => true,
     'inputType'               => 'checkbox',
-    'options_callback'        => array('DMA\\DmaSimpleGrid', 'getAdditionalRowClasses'),
-    'eval'                    => array('multiple'=>true),
+    'options_callback'        => [DmaSimpleGrid::class, 'getAdditionalRowClasses'],
+    'eval'                    => ['multiple'=>true],
     'sql'                     => "blob NULL"
-);
+];
