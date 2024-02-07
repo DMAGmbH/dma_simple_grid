@@ -13,8 +13,6 @@ use Contao\Widget;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
- * SimpleGrid row start content element
- *
  * @author Janosch Oltmanns <oltmanns@dma.do>
  */
 class FormSimpleGridColumnStop extends Widget
@@ -31,9 +29,8 @@ class FormSimpleGridColumnStop extends Widget
     /**
      * Do not validate
      */
-    public function validate()
+    public function validate(): void
     {
-        return;
     }
 
 
@@ -44,10 +41,9 @@ class FormSimpleGridColumnStop extends Widget
      *
      * @return string The template markup
      */
-    public function parse($arrAttributes=null)
+    public function parse($arrAttributes = null): string
     {
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             /** @var BackendTemplate|object $objTemplate */
             $objTemplate = new BackendTemplate('be_wildcard');
             $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_stop'][0]) . ' ###';
@@ -64,9 +60,9 @@ class FormSimpleGridColumnStop extends Widget
      *
      * @return string The widget markup
      */
-    public function generate()
+    public function generate(): string
     {
-        return "";
+        return '';
     }
 
 }

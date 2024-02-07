@@ -24,16 +24,12 @@ class ContentSimpleGridWrapperStop extends ContentElement
      */
     protected $strTemplate = 'ce_dma_simplegrid_wrapperstop';
 
-
     /**
      * Compile the content element
-     *
-     * @return void
      */
-    public function compile()
+    public function compile(): void
     {
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create('')))
-        {
+        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
             $this->strTemplate = 'be_wildcard';
 
             $objTemplate = new BackendTemplate($this->strTemplate);

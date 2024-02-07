@@ -28,157 +28,126 @@ class DmaSimpleGridDcaCallbacks extends Controller
     {
         parent::__construct();
 
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null] ?? false))
-        {
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null] ?? false)) {
             $this->arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
-        }
-        else
-        {
+        } else {
             $this->arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_FALLBACK']];
         }
-
     }
 
 
-    public function adjustSettingsPalettesString()
+    public function adjustSettingsPalettesString(): void
     {
-
         $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ";{dma_simplegrid_legend},dmaSimpleGridType";
 
-        if (DmaSimpleGrid::getConfigData('hasColumns'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasColumns')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useColumns";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasColumnOffset'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasColumnOffset')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useOffset";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasColumnOffsetRight'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasColumnOffsetRight')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useOffsetRight";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasColumnPush'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasColumnPush')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_usePush";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasColumnPull'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasColumnPull')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_usePull";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasBlockGrid'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasBlockGrid')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useBlockGrid";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasWrapperClasses'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasWrapperClasses')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useAdditionalWrapperClasses";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasRowClasses'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasRowClasses')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useAdditionalRowClasses";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasColumnClasses'))
-        {
+        if (DmaSimpleGrid::getConfigData('hasColumnClasses')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useAdditionalColumnClasses";
         }
 
         $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useOwnSettingsByIncludeElements;";
     }
 
-    public function adjustPalettesString($dc)
+    public function adjustPalettesString($dc): void
     {
-
         $strDmaSimpleGridPaletteString = "";
 
-        if (DmaSimpleGrid::getConfigData('hasColumns') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useColumns'] ?? false))
-        {
+        if (DmaSimpleGrid::getConfigData('hasColumns') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useColumns'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_columnsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnOffset') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'] ?? false))
-        {
+
+        if (DmaSimpleGrid::getConfigData('hasColumnOffset') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffset'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_offsetsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnOffsetRight') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight'] ?? false))
-        {
+
+        if (DmaSimpleGrid::getConfigData('hasColumnOffsetRight') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useOffsetRight'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_offsetrightsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnPull') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false))
-        {
+
+        if (DmaSimpleGrid::getConfigData('hasColumnPull') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pullsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnPush') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false))
-        {
+
+        if (DmaSimpleGrid::getConfigData('hasColumnPush') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pushsettings";
         }
-        if (DmaSimpleGrid::getConfigData('hasColumnClasses') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false))
-        {
+
+        if (DmaSimpleGrid::getConfigData('hasColumnClasses') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalColumnClasses'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_additionalcolumnclasses";
         }
 
-
-        if ($dc->__get('table') == "tl_content")
-        {
-
-            if (!DmaSimpleGrid::getConfigData('hasRows'))
-            {
+        if ($dc->__get('table') === 'tl_content') {
+            if (!DmaSimpleGrid::getConfigData('hasRows')) {
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row_start']);
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row_stop']);
             }
 
-            if (!DmaSimpleGrid::getConfigData('hasWrapper'))
-            {
+            if (!DmaSimpleGrid::getConfigData('hasWrapper')) {
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_start']);
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_stop']);
             }
 
-            $arrNotSupportedOrUsefulElements = array('module', 'dma_simplegrid_row_start', 'dma_simplegrid_wrapper_start');
+            $arrNotSupportedOrUsefulElements = ['module', 'dma_simplegrid_row_start', 'dma_simplegrid_wrapper_start'];
 
-            foreach ($GLOBALS['TL_DCA']['tl_content']['palettes'] as $k => $palette)
-            {
-
-
+            foreach ($GLOBALS['TL_DCA']['tl_content']['palettes'] as $k => $palette) {
                 $strDmaSimpleGridPaletteStringOnce = $strDmaSimpleGridPaletteString;
 
-                if (!is_array($palette) && strpos($palette, "cssID")!==false && !in_array($k, $arrNotSupportedOrUsefulElements))
-                {
-
-                    $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
-                    (
+                if (!is_array($palette) && str_contains($palette, 'cssID') && !in_array($k, $arrNotSupportedOrUsefulElements)) {
+                    $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace(
                         '{invisible_legend',
                         '{dma_simplegrid_legend}' . $strDmaSimpleGridPaletteStringOnce . ';{invisible_legend',
                         $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
                     );
                 }
 
-                if ($k == "dma_simplegrid_row_start")
-                {
+                if ($k === 'dma_simplegrid_row_start') {
+                    $strRowStartFields = '';
 
-                    $strRowStartFields = "";
-
-                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && DmaSimpleGrid::getConfigData('hasBlockGrid'))
-                    {
-                        $strRowStartFields .= ",dma_simplegrid_blocksettings";
+                    if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && DmaSimpleGrid::getConfigData('hasBlockGrid')) {
+                        $strRowStartFields .= ',dma_simplegrid_blocksettings';
                     }
 
                     if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false)
                         && isset($this->arrConfigData['config']['additional-classes'])
                         && isset($this->arrConfigData['config']['additional-classes']['row'])
                     ) {
-                        $strRowStartFields .= ",dma_simplegrid_additionalrowclasses";
+                        $strRowStartFields .= ',dma_simplegrid_additionalrowclasses';
                     }
 
-                    if ($strRowStartFields != "")
+                    if ($strRowStartFields !== '')
                     {
-                        $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
-                        (
+                        $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace(
                             '{invisible_legend',
                             '{dma_simplegrid_legend}' . $strRowStartFields . ';{invisible_legend',
                             $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
@@ -187,14 +156,12 @@ class DmaSimpleGridDcaCallbacks extends Controller
 
                 }
 
-                if ($k == "dma_simplegrid_wrapper_start")
-                {
+                if ($k === 'dma_simplegrid_wrapper_start') {
                     if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false)
                         && isset($this->arrConfigData['config']['additional-classes'])
                         && isset($this->arrConfigData['config']['additional-classes']['wrapper'])
                     ) {
-                        $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace
-                        (
+                        $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace(
                             '{invisible_legend',
                             '{dma_simplegrid_legend},dma_simplegrid_additionalwrapperclasses;{invisible_legend',
                             $GLOBALS['TL_DCA']['tl_content']['palettes'][$k]
@@ -204,25 +171,17 @@ class DmaSimpleGridDcaCallbacks extends Controller
             }
         };
 
-        if ($dc->__get('table') == "tl_form_field")
-        {
-
-            foreach ($GLOBALS['TL_DCA']['tl_form_field']['palettes'] as $k => $palette)
-            {
-
+        if ($dc->__get('table') === 'tl_form_field') {
+            foreach ($GLOBALS['TL_DCA']['tl_form_field']['palettes'] as $k => $palette) {
                 $strDmaSimpleGridPaletteStringOnce = $strDmaSimpleGridPaletteString;
 
-                if (!is_array($palette) && strpos($palette, "class")!==false)
-                {
-                    if ($k == "dma_simplegrid_row_start")
-                    {
-                        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['row'])
-                        {
+                if (!is_array($palette) && str_contains($palette, 'class')) {
+                    if ($k === 'dma_simplegrid_row_start') {
+                        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $this->arrConfigData['config']['additional-classes']['row']) {
                             $strDmaSimpleGridPaletteStringOnce .= ",dma_simplegrid_additionalrowclasses";
                         }
                     }
-                    $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$k] = str_replace
-                    (
+                    $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$k] = str_replace(
                         '{template_legend',
                         '{dma_simplegrid_legend}' . $strDmaSimpleGridPaletteStringOnce . ';{template_legend',
                         $GLOBALS['TL_DCA']['tl_form_field']['palettes'][$k]
@@ -232,7 +191,7 @@ class DmaSimpleGridDcaCallbacks extends Controller
         }
     }
 
-    public function onsubmitCallbackFormField($dc)
+    public function onsubmitCallbackFormField($dc): void
     {
         $activeRecord = $dc->activeRecord;
         if (!$activeRecord || Input::post('SUBMIT_TYPE') === 'auto') {
@@ -240,7 +199,6 @@ class DmaSimpleGridDcaCallbacks extends Controller
         }
 
         if ($activeRecord->type === 'dma_simplegrid_column_start') {
-
             // Find the next columns or column element
             $nextElement = Database::getInstance()
                 ->prepare('
@@ -269,11 +227,9 @@ class DmaSimpleGridDcaCallbacks extends Controller
                     ))
                     ->execute();
             }
-
         }
 
         if ($activeRecord->type === 'dma_simplegrid_row_start') {
-
             // Find the next columns or column element
             $nextElement = Database::getInstance()
                 ->prepare('
@@ -302,11 +258,10 @@ class DmaSimpleGridDcaCallbacks extends Controller
                     ))
                     ->execute();
             }
-
         }
     }
 
-    public function onsubmitCallback($dc)
+    public function onsubmitCallback($dc): void
     {
         $activeRecord = $dc->activeRecord;
         if (!$activeRecord || Input::post('SUBMIT_TYPE') === 'auto') {
@@ -314,7 +269,6 @@ class DmaSimpleGridDcaCallbacks extends Controller
         }
 
         if ($activeRecord->type === 'dma_simplegrid_column_start') {
-
             // Find the next columns or column element
             $nextElement = Database::getInstance()
                 ->prepare('
@@ -347,11 +301,9 @@ class DmaSimpleGridDcaCallbacks extends Controller
                     ))
                     ->execute();
             }
-
         }
 
         if ($activeRecord->type === 'dma_simplegrid_row_start') {
-
             // Find the next columns or column element
             $nextElement = Database::getInstance()
                 ->prepare('
@@ -384,11 +336,9 @@ class DmaSimpleGridDcaCallbacks extends Controller
                     ))
                     ->execute();
             }
-
         }
 
         if ($activeRecord->type === 'dma_simplegrid_wrapper_start') {
-
             // Find the next columns or column element
             $nextElement = Database::getInstance()
                 ->prepare('
@@ -421,9 +371,6 @@ class DmaSimpleGridDcaCallbacks extends Controller
                     ))
                     ->execute();
             }
-
         }
-
     }
-
 }
