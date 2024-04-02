@@ -24,6 +24,6 @@ class SimpleGridClassesExtension extends AbstractExtension
         if (is_array($context) && isset($context['data'])) {
             return DmaSimpleGridHelper::getGridClassesForTwig($context['data']);
         }
-        return 'test';
+        return '';
     }
 }
