@@ -95,11 +95,11 @@ class DmaSimpleGridDcaCallbacks extends Controller
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_offsetrightsettings";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasColumnPull') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false)) {
+        if (DmaSimpleGrid::getConfigData('hasColumnPull') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pullsettings";
         }
 
-        if (DmaSimpleGrid::getConfigData('hasColumnPush') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePull'] ?? false)) {
+        if (DmaSimpleGrid::getConfigData('hasColumnPush') && ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_usePush'] ?? false)) {
             $strDmaSimpleGridPaletteString .= ",dma_simplegrid_pushsettings";
         }
 
