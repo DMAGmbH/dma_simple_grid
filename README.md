@@ -6,7 +6,7 @@ Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
 - Konfigurationsarray für Bootstrap und Foundation
 
 ## Abhängigkeiten
-https://github.com/menatwork/MultiColumnWizard
+[https://github.com/menatwork/MultiColumnWizard](https://github.com/menatwork/contao-multicolumnwizard-bundle)
 
 ## Installation
 - zunächst muss die Erweiterung *MultiColumnWizard* installiert werden.
