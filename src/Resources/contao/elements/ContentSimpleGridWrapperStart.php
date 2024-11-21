@@ -58,7 +58,7 @@ class ContentSimpleGridWrapperStart extends ContentElement
             }
         }
 
-        $this->type = 'wrapper ' . $arrConfigData['config']['wrapper-class'] . $strAdditionalClasses;
+        $this->type = 'wrapper ' . ($arrConfigData['config']['wrapper-class'] ?? '') . $strAdditionalClasses;
     }
 
 }
