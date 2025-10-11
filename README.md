@@ -8,9 +8,8 @@ Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
 ## Abhängigkeiten
 [https://github.com/menatwork/MultiColumnWizard](https://github.com/menatwork/contao-multicolumnwizard-bundle)
 
-## Installation
-- zunächst muss die Erweiterung *MultiColumnWizard* installiert werden.
-- anschließend kann die Erweitunerung *DMA SimpleGrid* installiert werden.
+## Installation und Einstellungen
+- Die Erweitunerung *DMA SimpleGrid* über den Contao Manager (Suche nach SimpleGrid) oder per Konsole `composer require dma/dma_simple_grid` installieren und DB Migration ausführen
 - Im Contao-Backend befinden sich im Bereich *Einstellungen* nun neue Einstellungsmöglichkeiten für die Simple Grid-Erweiterung
 	- Auswahl des zu verwendenden Frameworks oder Grid-System (CSS- und weitere Dateien werden nicht installiert, da hier jeder seine eigenen Ansprüche hat)
 	- Auswahl der zu verwendenden Selektoren
