@@ -6,6 +6,8 @@ Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
 - Konfigurationsarray für Bootstrap und Foundation
 
 ## Abhängigkeiten
+PHP 8.3 oder höher innerhalb der PHP-8-Reihe (`^8.3`) wird benötigt.
+
 [https://github.com/menatwork/MultiColumnWizard](https://github.com/menatwork/contao-multicolumnwizard-bundle)
 
 ## Installation

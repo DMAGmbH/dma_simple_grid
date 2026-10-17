@@ -28,7 +28,7 @@
         "source": "https://github.com/DMAGmbH/dma_simple_grid"
     },
     "require": {
-        "php": "^8.1",
+        "php": "^8.3",
         "contao/core-bundle": "^4.13 || ^5.0",
         "menatwork/contao-multicolumnwizard-bundle": "^3.6"
     },
