@@ -268,8 +268,14 @@ class DmaSimpleGrid
                 }
 
                 // Add the column sizes
-                foreach (static::$arrCache['grid']['config']['columns-sizes'] as $column) {
-                    $options[$column] = $column;
+                foreach (static::$arrCache['grid']['config']['columns-sizes'] as $group => $column) {
+                    if (is_array($column)) {
+                        foreach ($column as $size) {
+                            $options[$group][$size] = $size;
+                        }
+                    } else {
+                        $options[$column] = $column;
+                    }
                 }
 
                 $arrColumnsSetting[$configName] = [
