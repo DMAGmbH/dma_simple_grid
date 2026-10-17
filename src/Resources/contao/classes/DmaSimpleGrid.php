@@ -240,7 +240,7 @@ class DmaSimpleGrid
         return $arrColumnsSetting;
     }
 
-    public static function columnsSelectCallback(Widget $widget = null): array
+    public static function columnsSelectCallback(?Widget $widget = null): array
     {
         if (!isset(static::$arrCache['grid'])) {
             self::initialize();
