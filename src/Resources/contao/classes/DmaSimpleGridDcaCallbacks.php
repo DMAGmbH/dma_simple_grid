@@ -10,6 +10,7 @@ namespace DMA;
 
 use Contao\Controller;
 use Contao\Database;
+use Contao\DC_Table;
 use Contao\Input;
 
 /**
@@ -108,6 +109,14 @@ class DmaSimpleGridDcaCallbacks extends Controller
         }
 
         if ($dc->__get('table') === 'tl_content') {
+            if ($dc instanceof DC_Table
+                && $dc->parentTable === 'tl_content'
+                && $dc->currentPid
+                && ($dc->getCurrentRecord($dc->currentPid, 'tl_content')['type'] ?? null) === 'dma_simplegrid_column'
+            ) {
+                $strDmaSimpleGridPaletteString = '';
+            }
+
             if (!DmaSimpleGrid::getConfigData('hasRows')) {
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row']);
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_row_start']);
@@ -124,7 +133,7 @@ class DmaSimpleGridDcaCallbacks extends Controller
             foreach ($GLOBALS['TL_DCA']['tl_content']['palettes'] as $k => $palette) {
                 $strDmaSimpleGridPaletteStringOnce = $strDmaSimpleGridPaletteString;
 
-                if (!is_array($palette) && str_contains($palette, 'cssID') && !in_array($k, $arrNotSupportedOrUsefulElements)) {
+                if ($strDmaSimpleGridPaletteString !== '' && !is_array($palette) && str_contains($palette, 'cssID') && !in_array($k, $arrNotSupportedOrUsefulElements)) {
                     $GLOBALS['TL_DCA']['tl_content']['palettes'][$k] = str_replace(
                         '{invisible_legend',
                         '{dma_simplegrid_legend}' . $strDmaSimpleGridPaletteStringOnce . ';{invisible_legend',

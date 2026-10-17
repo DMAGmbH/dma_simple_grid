@@ -25,6 +25,8 @@ In der Grid-Kategorie stehen die Inhaltselemente **Row** und **Column** zur Verf
 
 Eine Row kann Inhalte direkt aufnehmen. Deren Breiten und Verschiebungen werden wie bisher am jeweiligen Inhaltselement eingestellt. Eine zusätzliche Column ist optional und fasst mehrere Inhalte in einer gemeinsamen Grid-Spalte zusammen. Auch innerhalb einer Column können weitere Rows angelegt werden.
 
+Bei direkten Kindern einer Column werden Breite, Offset, Push/Pull und zusätzliche Spaltenklassen im Backend ausgeblendet; diese Einstellungen gehören an den Column-Container. Eine darin verschachtelte Row behält ihre Row-Einstellungen, und deren direkte Kinder erhalten wieder Spalteneinstellungen. Vorhandene Werte werden durch das Ausblenden nicht gelöscht; ihre bisherige Ausgabe bleibt erhalten.
+
 Rows verwenden die Row- und gegebenenfalls Block-Grid-Klassen des aktiven Profils. Columns verwenden dessen Spalten-, Offset-, Push-/Pull- und zusätzliche Spaltenklassen. Die verfügbaren Einstellungen richten sich nach den SimpleGrid-Einstellungen; Profile ohne Rows bieten das Row-Element nicht an. Ein Titel dient der Orientierung im Backend; CSS-ID, eigene Klassen, Zugriffsschutz und Veröffentlichungszeitraum verwenden die normalen Contao-Felder.
 
 Die Twig-Templates heißen `content_element/simple_grid/row.html.twig` und `content_element/simple_grid/column.html.twig`. Sie erweitern die Core-Elementgruppe und können über eigene Twig-Varianten angepasst werden. Die Grid-Klassen stehen als `grid_classes` zur Verfügung und werden über den Attributhelfer am Container ausgegeben.
