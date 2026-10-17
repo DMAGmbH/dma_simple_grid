@@ -217,6 +217,7 @@ class DmaSimpleGrid
         $strGridInfo = self::getSimpleGridInfoText($arrRow);
 
         if ($strGridInfo !== '') {
+            $strGridInfo = StringUtil::specialchars($strGridInfo);
             $strGridInfo = '<a href="#" class="tl_gray" style="padding-right:10px; white-space:nowrap; max-width:200px; display:inline-block; overflow:hidden; text-overflow:ellipsis;" title="' . $strGridInfo .'" onclick="return false;">' . $strGridInfo . '</a>';
         }
 
