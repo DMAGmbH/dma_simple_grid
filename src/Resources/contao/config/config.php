@@ -309,7 +309,7 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['gr-grid'] =
                 'column-class' => 'col-xl-%s',
                 'offset-class' => 'col-xl-offset-%s',
                 'push-class' => 'col-xl-push-%s',
-                'pull-class' => 'col-xl-pull-%d'
+                'pull-class' => 'col-xl-pull-%s'
                 ]
             ]
         ]
