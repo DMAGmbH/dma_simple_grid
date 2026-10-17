@@ -1,7 +1,7 @@
 # DMA SimpleGrid
 Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
-- Verschachtelte Row- und Column-Inhaltselemente
-- Bisherige Row-/Column-Start-/Stop-Elemente für Inhalte und Formulare
+- Verschachtelte Wrapper-, Row- und Column-Inhaltselemente
+- Legacy-Start-/Stop-Inhaltselemente und Row-/Column-Formularfelder
 - Selektoren für Spalten-Breiten sowie Offset-, Pull- und Push-Werte
 - Konfigurationsarray für Bootstrap und Foundation
 
@@ -21,19 +21,21 @@ Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
 
 ### Verschachtelte Grid-Inhaltselemente
 
-In der Grid-Kategorie stehen die Inhaltselemente **Row** und **Column** zur Verfügung. Über „Kind-Elemente bearbeiten“ lassen sich darin weitere Inhaltselemente anlegen.
+In der Grid-Kategorie stehen die Inhaltselemente **Wrapper**, **Row** und **Column** zur Verfügung. Über „Kind-Elemente bearbeiten“ lassen sich darin weitere Inhaltselemente anlegen.
+
+Ein Wrapper fasst beliebige Inhalte, Rows und Columns in einem gemeinsamen Grid-Container zusammen. Er verwendet die Wrapper-Klasse und die aktivierten zusätzlichen Wrapper-Klassen des gewählten Profils.
 
 Eine Row kann Inhalte direkt aufnehmen. Deren Breiten und Verschiebungen werden wie bisher am jeweiligen Inhaltselement eingestellt. Eine zusätzliche Column ist optional und fasst mehrere Inhalte in einer gemeinsamen Grid-Spalte zusammen. Auch innerhalb einer Column können weitere Rows angelegt werden.
 
 Bei direkten Kindern einer Column werden Breite, Offset, Push/Pull und zusätzliche Spaltenklassen im Backend ausgeblendet; diese Einstellungen gehören an den Column-Container. Eine darin verschachtelte Row behält ihre Row-Einstellungen, und deren direkte Kinder erhalten wieder Spalteneinstellungen. Vorhandene Werte werden durch das Ausblenden nicht gelöscht; ihre bisherige Ausgabe bleibt erhalten.
 
-Rows verwenden die Row- und gegebenenfalls Block-Grid-Klassen des aktiven Profils. Columns verwenden dessen Spalten-, Offset-, Push-/Pull- und zusätzliche Spaltenklassen. Die verfügbaren Einstellungen richten sich nach den SimpleGrid-Einstellungen; Profile ohne Rows bieten das Row-Element nicht an. Ein Titel dient der Orientierung im Backend; CSS-ID, eigene Klassen, Zugriffsschutz und Veröffentlichungszeitraum verwenden die normalen Contao-Felder.
+Rows verwenden die Row- und gegebenenfalls Block-Grid-Klassen des aktiven Profils. Columns verwenden dessen Spalten-, Offset-, Push-/Pull- und zusätzliche Spaltenklassen. Die verfügbaren Einstellungen richten sich nach den SimpleGrid-Einstellungen; Profile ohne Rows bieten das Row-Element nicht an; Profile ohne Wrapper bieten das Wrapper-Element nicht an. Ein Titel dient der Orientierung im Backend; CSS-ID, eigene Klassen, Zugriffsschutz und Veröffentlichungszeitraum verwenden die normalen Contao-Felder.
 
-Die Twig-Templates heißen `content_element/simple_grid/row.html.twig` und `content_element/simple_grid/column.html.twig`. Sie erweitern die Core-Elementgruppe und können über eigene Twig-Varianten angepasst werden. Die Grid-Klassen stehen als `grid_classes` zur Verfügung und werden über den Attributhelfer am Container ausgegeben.
+Die Twig-Templates liegen unter `content_element/simple_grid/` und heißen `wrapper.html.twig`, `row.html.twig` und `column.html.twig`. Sie erweitern die Core-Elementgruppe und können über eigene Twig-Varianten angepasst werden. Die Grid-Klassen stehen als `grid_classes` zur Verfügung und werden über den Attributhelfer am Container ausgegeben.
 
-Die bisherigen Row-/Column-Start-/Stop-Inhaltselemente bleiben mit dem Suffix „ – legacy“ in derselben Grid-Kategorie verfügbar. Bestehende Inhalte werden nicht migriert. Wrapper-Start/-Stop und die Formularfelder bleiben unverändert.
+Die bisherigen Wrapper-/Row-/Column-Start-/Stop-Inhaltselemente bleiben mit dem Suffix „ – legacy“ in derselben Grid-Kategorie verfügbar. Bestehende Inhalte werden nicht migriert. Die Formularfelder bleiben unverändert.
 
-Unter **Einstellungen → DMA SimpleGrid Einstellungen** können diese vier alten Inhaltselementtypen mit **„Legacy-Elemente ausblenden“** aus der Typauswahl ausgeblendet werden. Die Option ist standardmäßig deaktiviert. Bestehende Legacy-Inhalte bleiben nutzbar; beim Bearbeiten bleibt ihr aktueller Typ in der Auswahl erhalten. Wrapper-Start/-Stop, Formularfelder und die Legacy-Elemente des Contao-Cores sind von dieser Option ausgenommen.
+Unter **Einstellungen → DMA SimpleGrid Einstellungen** können diese sechs alten Inhaltselementtypen mit **„Legacy-Elemente ausblenden“** aus der Typauswahl ausgeblendet werden. Die Option ist standardmäßig deaktiviert. Bestehende Legacy-Inhalte bleiben nutzbar; beim Bearbeiten bleibt ihr aktueller Typ in der Auswahl erhalten. Formularfelder und die Legacy-Elemente des Contao-Cores sind von dieser Option ausgenommen.
 
 ### Update von älteren Versionen
 

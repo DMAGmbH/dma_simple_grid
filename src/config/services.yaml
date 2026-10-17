@@ -10,3 +10,5 @@ services:
   Dma\SimpleGrid\Controller\ContentElement\RowController: ~
 
   Dma\SimpleGrid\Controller\ContentElement\ColumnController: ~
+
+  Dma\SimpleGrid\Controller\ContentElement\WrapperController: ~

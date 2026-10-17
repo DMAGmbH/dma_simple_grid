@@ -199,6 +199,23 @@ class DmaSimpleGrid
 
 
 
+    public static function getWrapperClasses(array $arrTemplateData): string
+    {
+        $arrConfigData = self::getData();
+        $strClasses = $arrConfigData['config']['wrapper-class'] ?? '';
+
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false)
+            && ($arrConfigData['config']['additional-classes']['wrapper'] ?? false)
+            && ($arrTemplateData['dma_simplegrid_additionalwrapperclasses'] ?? false)
+        ) {
+            foreach (StringUtil::deserialize($arrTemplateData['dma_simplegrid_additionalwrapperclasses'], true) as $strClassKey) {
+                $strClasses .= ' ' . $strClassKey;
+            }
+        }
+
+        return trim($strClasses);
+    }
+
     public static function getRowClasses(array $arrTemplateData): string
     {
         $arrConfigData = self::getData();

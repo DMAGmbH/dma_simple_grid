@@ -7,8 +7,9 @@
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid'] = 'DMA SimpleGrid';
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_row'] = ['SimpleGrid: Row', 'Eine Grid-Zeile mit verschachtelten Inhaltselementen oder Spalten.'];
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_column'] = ['SimpleGrid: Column', 'Eine Grid-Spalte mit verschachtelten Inhaltselementen.'];
-$GLOBALS['TL_LANG']['CTE']['dma_simplegrid_wrapper_start'] = ['SimpleGrid: Wrapper Start','SimpleGrid: Wrapper Start'];
-$GLOBALS['TL_LANG']['CTE']['dma_simplegrid_wrapper_stop'] = ['SimpleGrid: Wrapper Stop','SimpleGrid: Wrapper Stop'];
+$GLOBALS['TL_LANG']['CTE']['dma_simplegrid_wrapper'] = ['SimpleGrid: Wrapper', 'Ein Grid-Container mit verschachtelten Inhaltselementen.'];
+$GLOBALS['TL_LANG']['CTE']['dma_simplegrid_wrapper_start'] = ['SimpleGrid: Wrapper Start – legacy','SimpleGrid: Wrapper Start'];
+$GLOBALS['TL_LANG']['CTE']['dma_simplegrid_wrapper_stop'] = ['SimpleGrid: Wrapper Stop – legacy','SimpleGrid: Wrapper Stop'];
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_row_start'] = ['SimpleGrid: Row Start – legacy','SimpleGrid: Row Start'];
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_row_stop'] = ['SimpleGrid: Row Stop – legacy','SimpleGrid: Row Stop'];
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_column_start'] = ['SimpleGrid: Column Start – legacy','SimpleGrid: Column Start'];

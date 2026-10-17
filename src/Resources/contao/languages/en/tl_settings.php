@@ -4,7 +4,7 @@
  * Fields
  */
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGridType']                         = array('Grid Type', 'Please select a grid type.');
-$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_hideLegacyElements']          = array('Hide legacy elements', 'Hide the old Row/Column Start/Stop content elements from the type selector. The current type remains available when editing an existing legacy element.');
+$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_hideLegacyElements']          = array('Hide legacy elements', 'Hide the old Wrapper/Row/Column Start/Stop content elements from the type selector. The current type remains available when editing an existing legacy element.');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useColumns']                  = array('Show column selectors', 'Click here to enable column selectors.');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffset']                   = array('Show offset selectors', 'Click here to enable offset selectors.');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffsetRight']              = array('Show offset-right selectors', 'Click here to enable offset-right selectors.');

@@ -118,6 +118,8 @@ class DmaSimpleGridDcaCallbacks extends Controller
 
                     // Keep the current type selectable when editing an existing legacy element.
                     $hiddenTypes = array_diff([
+                        'dma_simplegrid_wrapper_start',
+                        'dma_simplegrid_wrapper_stop',
                         'dma_simplegrid_row_start',
                         'dma_simplegrid_row_stop',
                         'dma_simplegrid_column_start',
@@ -147,11 +149,12 @@ class DmaSimpleGridDcaCallbacks extends Controller
             }
 
             if (!DmaSimpleGrid::getConfigData('hasWrapper')) {
+                unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper']);
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_start']);
                 unset($GLOBALS['TL_CTE']['dma_simplegrid']['dma_simplegrid_wrapper_stop']);
             }
 
-            $arrNotSupportedOrUsefulElements = ['module', 'dma_simplegrid_row', 'dma_simplegrid_row_start', 'dma_simplegrid_wrapper_start'];
+            $arrNotSupportedOrUsefulElements = ['module', 'dma_simplegrid_row', 'dma_simplegrid_row_start', 'dma_simplegrid_wrapper', 'dma_simplegrid_wrapper_start'];
 
             foreach ($GLOBALS['TL_DCA']['tl_content']['palettes'] as $k => $palette) {
                 $strDmaSimpleGridPaletteStringOnce = $strDmaSimpleGridPaletteString;
@@ -189,7 +192,7 @@ class DmaSimpleGridDcaCallbacks extends Controller
 
                 }
 
-                if ($k === 'dma_simplegrid_wrapper_start') {
+                if (in_array($k, ['dma_simplegrid_wrapper', 'dma_simplegrid_wrapper_start'], true)) {
                     if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalWrapperClasses'] ?? false)
                         && isset($this->arrConfigData['config']['additional-classes'])
                         && isset($this->arrConfigData['config']['additional-classes']['wrapper'])

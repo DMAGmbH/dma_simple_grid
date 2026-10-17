@@ -66,7 +66,7 @@ class DmaSimpleGridHelper extends Controller
     public static function getGridClassesForTwig(array $rowData): string
     {
         // Nested grid containers add their classes in their own Twig templates.
-        if (in_array($rowData['type'] ?? null, ['dma_simplegrid_row', 'dma_simplegrid_column'], true)) {
+        if (in_array($rowData['type'] ?? null, ['dma_simplegrid_wrapper', 'dma_simplegrid_row', 'dma_simplegrid_column'], true)) {
             return '';
         }
 
