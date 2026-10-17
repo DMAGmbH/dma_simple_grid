@@ -3,6 +3,7 @@
 $GLOBALS['TL_LANG']['tl_settings']['dma_simplegrid_legend'] = "DMA SimpleGrid Einstellungen";
 
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGridType'] = array('Grid Typ','Grid Typ');
+$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_hideLegacyElements'] = array('Legacy-Elemente ausblenden', 'Die bisherigen Row-/Column-Start-/Stop-Inhaltselemente aus der Typauswahl ausblenden. Der aktuelle Typ bestehender Legacy-Elemente bleibt beim Bearbeiten verfügbar.');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useColumns'] = array('Spalten-Selectoren anzeigen','Spalten-Selectoren anzeigen');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffset'] = array('Offset-Selectoren anzeigen','Offset-Selectoren anzeigen');
 $GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useOffsetRight'] = array('Offset-Right-Selectoren anzeigen','Offset-Right-Selectoren anzeigen');

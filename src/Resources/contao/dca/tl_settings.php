@@ -24,6 +24,12 @@ $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGridType'] = [
     'eval'		        => ['tl_class'=>'w50', 'submitOnChange'=>true, 'includeBlankOption'=>true]
 ];
 
+$GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_hideLegacyElements'] = [
+    'label' => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_hideLegacyElements'],
+    'inputType' => 'checkbox',
+    'eval' => ['tl_class' => 'w50 clr']
+];
+
 $GLOBALS['TL_DCA']['tl_settings']['fields']['dmaSimpleGrid_useColumns'] = [
     'label'		        => &$GLOBALS['TL_LANG']['tl_settings']['dmaSimpleGrid_useColumns'],
     'inputType'	        => 'checkbox',

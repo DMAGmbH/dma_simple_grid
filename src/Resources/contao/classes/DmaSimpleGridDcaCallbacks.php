@@ -39,7 +39,7 @@ class DmaSimpleGridDcaCallbacks extends Controller
 
     public function adjustSettingsPalettesString(): void
     {
-        $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ";{dma_simplegrid_legend},dmaSimpleGridType";
+        $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ";{dma_simplegrid_legend},dmaSimpleGridType,dmaSimpleGrid_hideLegacyElements";
 
         if (DmaSimpleGrid::getConfigData('hasColumns')) {
             $GLOBALS['TL_DCA']['tl_settings']['palettes']['default'] .= ",dmaSimpleGrid_useColumns";
@@ -109,6 +109,29 @@ class DmaSimpleGridDcaCallbacks extends Controller
         }
 
         if ($dc->__get('table') === 'tl_content') {
+            if ($GLOBALS['TL_CONFIG']['dmaSimpleGrid_hideLegacyElements'] ?? false) {
+                $callback = $GLOBALS['TL_DCA']['tl_content']['fields']['type']['options_callback'];
+                $GLOBALS['TL_DCA']['tl_content']['fields']['type']['options_callback'] = static function (DC_Table $dc) use ($callback): array {
+                    $options = is_array($callback)
+                        ? self::importStatic($callback[0])->{$callback[1]}($dc)
+                        : $callback($dc);
+
+                    // Keep the current type selectable when editing an existing legacy element.
+                    $hiddenTypes = array_diff([
+                        'dma_simplegrid_row_start',
+                        'dma_simplegrid_row_stop',
+                        'dma_simplegrid_column_start',
+                        'dma_simplegrid_column_stop',
+                    ], [$dc->getCurrentRecord()['type'] ?? null]);
+
+                    if (isset($options['dma_simplegrid'])) {
+                        $options['dma_simplegrid'] = array_values(array_diff($options['dma_simplegrid'], $hiddenTypes));
+                    }
+
+                    return $options;
+                };
+            }
+
             if ($dc instanceof DC_Table
                 && $dc->parentTable === 'tl_content'
                 && $dc->currentPid

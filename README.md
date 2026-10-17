@@ -33,6 +33,8 @@ Die Twig-Templates heißen `content_element/simple_grid/row.html.twig` und `cont
 
 Die bisherigen Row-/Column-Start-/Stop-Inhaltselemente bleiben mit dem Suffix „ – legacy“ in derselben Grid-Kategorie verfügbar. Bestehende Inhalte werden nicht migriert. Wrapper-Start/-Stop und die Formularfelder bleiben unverändert.
 
+Unter **Einstellungen → DMA SimpleGrid Einstellungen** können diese vier alten Inhaltselementtypen mit **„Legacy-Elemente ausblenden“** aus der Typauswahl ausgeblendet werden. Die Option ist standardmäßig deaktiviert. Bestehende Legacy-Inhalte bleiben nutzbar; beim Bearbeiten bleibt ihr aktueller Typ in der Auswahl erhalten. Wrapper-Start/-Stop, Formularfelder und die Legacy-Elemente des Contao-Cores sind von dieser Option ausgenommen.
+
 ### Update von älteren Versionen
 
 Bestehende Grid-Einstellungen können ohne Datenmigration weiterverwendet werden. Die Bearbeitung erfolgt jetzt über den Row-Wizard des Contao-Cores. Die bisherige Abhängigkeit vom MultiColumnWizard entfällt; andere Erweiterungen können ihn weiterhin benötigen.
