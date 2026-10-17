@@ -6,7 +6,6 @@
  * file that was distributed with this source code.
  */
 
-use Contao\ArrayUtil;
 use DMA\DmaSimpleGridDcaCallbacks;
 use DMA\DmaSimpleGrid;
 
@@ -18,13 +17,6 @@ use DMA\DmaSimpleGrid;
 
 $GLOBALS['TL_DCA']['tl_form_field']['config']['onload_callback'][] = [DmaSimpleGridDcaCallbacks::class, 'adjustPalettesString'];
 $GLOBALS['TL_DCA']['tl_form_field']['config']['onsubmit_callback'][] = [DmaSimpleGridDcaCallbacks::class, 'onsubmitCallbackFormField'];
-
-ArrayUtil::arrayInsert($GLOBALS['TL_DCA']['tl_form_field']['list']['operations'], 0, [
-    'show_simplegrid_infos' => [
-        'button_callback' => [DmaSimpleGrid::class, 'getSimpleGridInfos']
-    ]
-]);
-
 
 
 $GLOBALS['TL_DCA']['tl_form_field']['palettes']['dma_simplegrid_row_start'] = '{type_legend},type;{expert_legend:hide},class;{template_legend:hide},customTpl';

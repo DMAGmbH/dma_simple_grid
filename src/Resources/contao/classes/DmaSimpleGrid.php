@@ -199,17 +199,22 @@ class DmaSimpleGrid
 
 
 
-    public static function getSimpleGridInfos($arrRow): string
+    public static function getSimpleGridInfoText($arrRow): string
     {
         if (!isset(static::$arrCache['grid'])) {
             self::initialize();
         }
 
-        $strGridInfo = '';
-
         if (($arrRow['dma_simplegrid_columnsettings'] ?? false) || ($arrRow['dma_simplegrid_additionalwrapperclasses'] ?? false)) {
-            $strGridInfo .= self::getColumnsShowString($arrRow);
+            return self::getColumnsShowString($arrRow);
         }
+
+        return '';
+    }
+
+    public static function getSimpleGridInfos($arrRow): string
+    {
+        $strGridInfo = self::getSimpleGridInfoText($arrRow);
 
         if ($strGridInfo !== '') {
             $strGridInfo = '<a href="#" class="tl_gray" style="padding-right:10px; white-space:nowrap; max-width:200px; display:inline-block; overflow:hidden; text-overflow:ellipsis;" title="' . $strGridInfo .'" onclick="return false;">' . $strGridInfo . '</a>';

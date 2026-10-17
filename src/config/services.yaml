@@ -4,3 +4,5 @@ services:
 
   Dma\SimpleGrid\Twig\SimpleGridClassesExtension:
     tags: [twig.extension]
+
+  Dma\SimpleGrid\EventListener\GridRecordLabelListener: ~
