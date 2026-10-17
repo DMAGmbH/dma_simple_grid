@@ -1,0 +1,7 @@
+{% set attributes = attrs()
+    .setIfExists('id', element_html_id)
+    .addClass(legacy_css_classes)
+    .setIfExists('style', properties.style|default(data.style|default))
+    .mergeWith(attributes|default)
+%}
+{% block wrapper_start %}<div{{ attributes }}>{% endblock %}

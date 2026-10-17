@@ -7,41 +7,11 @@
  */
 namespace DMA;
 
-
-use Contao\BackendTemplate;
-use Contao\ContentElement;
-use Contao\System;
-use Symfony\Component\HttpFoundation\Request;
+use Contao\ContentProxy;
 
 /**
- * SimpleGrid row start content element
- *
- * @author Janosch Oltmanns <oltmanns@dma.do>
+ * Compatibility name for the Twig fragment controller.
  */
-class ContentSimpleGridColumnStart extends ContentElement
+class ContentSimpleGridColumnStart extends ContentProxy
 {
-    /**
-     * @var string Template
-     */
-    protected $strTemplate = 'ce_dma_simplegrid_columnstart';
-
-    public function generate(): string
-    {
-        if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
-            $this->strTemplate = 'be_wildcard';
-            return (new BackendTemplate($this->strTemplate))->parse();
-        }
-
-        return parent::generate();
-    }
-
-
-    /**
-     * Compile the content element
-     */
-    public function compile(): void
-    {
-        $this->type = 'column';
-    }
-
 }

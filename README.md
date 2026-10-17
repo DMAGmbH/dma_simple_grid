@@ -33,13 +33,46 @@ Rows verwenden die Row- und gegebenenfalls Block-Grid-Klassen des aktiven Profil
 
 Die Twig-Templates liegen unter `content_element/simple_grid/` und heißen `wrapper.html.twig`, `row.html.twig` und `column.html.twig`. Sie erweitern die Core-Elementgruppe und können über eigene Twig-Varianten angepasst werden. Die Grid-Klassen stehen als `grid_classes` zur Verfügung und werden über den Attributhelfer am Container ausgegeben.
 
-Die bisherigen Wrapper-/Row-/Column-Start-/Stop-Inhaltselemente bleiben mit dem Suffix „ – legacy“ in derselben Grid-Kategorie verfügbar. Bestehende Inhalte werden nicht migriert. Die Formularfelder bleiben unverändert.
+Die bisherigen Wrapper-/Row-/Column-Start-/Stop-Inhaltselemente bleiben mit dem Suffix „ – legacy“ in derselben Grid-Kategorie verfügbar. Bestehende Inhalte werden nicht migriert. Die Formularfeldtypen bleiben erhalten; ihre Templates sind ebenfalls auf Twig umgestellt.
 
 Unter **Einstellungen → DMA SimpleGrid Einstellungen** können diese sechs alten Inhaltselementtypen mit **„Legacy-Elemente ausblenden“** aus der Typauswahl ausgeblendet werden. Die Option ist standardmäßig deaktiviert. Bestehende Legacy-Inhalte bleiben nutzbar; beim Bearbeiten bleibt ihr aktueller Typ in der Auswahl erhalten. Formularfelder und die Legacy-Elemente des Contao-Cores sind von dieser Option ausgenommen.
 
 ### Update von älteren Versionen
 
 Bestehende Grid-Einstellungen können ohne Datenmigration weiterverwendet werden. Die Bearbeitung erfolgt jetzt über den Row-Wizard des Contao-Cores. Die bisherige Abhängigkeit vom MultiColumnWizard entfällt; andere Erweiterungen können ihn weiterhin benötigen.
+
+### Neue Major-Version: Umstellung auf Twig
+
+Alle mitgelieferten Grid-Templates verwenden jetzt Twig, auch unter Contao 5.7. Die bisherigen Inhaltstypen, Start-/Stop-Paare, IDs und Grid-Klassen bleiben erhalten. Eigene PHP-Template-Anpassungen müssen vor dem Update auf Twig portiert werden. Es gibt keinen PHP-Fallback für die mitgelieferten Templates und keine automatische Konvertierung eigener Templates.
+
+| Bisheriges PHP-Template | Neues Twig-Template |
+| --- | --- |
+| `ce_dma_simplegrid_wrapperstart.html5` | `content_element/simple_grid/legacy/wrapper_start.html.twig` |
+| `ce_dma_simplegrid_wrapperstop.html5` | `content_element/simple_grid/legacy/wrapper_stop.html.twig` |
+| `ce_dma_simplegrid_rowstart.html5` | `content_element/simple_grid/legacy/row_start.html.twig` |
+| `ce_dma_simplegrid_rowstop.html5` | `content_element/simple_grid/legacy/row_stop.html.twig` |
+| `ce_dma_simplegrid_columnstart.html5` | `content_element/simple_grid/legacy/column_start.html.twig` |
+| `ce_dma_simplegrid_columnstop.html5` | `content_element/simple_grid/legacy/column_stop.html.twig` |
+| `form_dma_simplegrid_rowstart.html5` | `form_dma_simplegrid_row_start.html.twig` |
+| `form_dma_simplegrid_rowstop.html5` | `form_dma_simplegrid_row_stop.html.twig` |
+| `form_dma_simplegrid_columnstart.html5` | `form_dma_simplegrid_column_start.html.twig` |
+| `form_dma_simplegrid_columnstop.html5` | `form_dma_simplegrid_column_stop.html.twig` |
+
+Eigene Overrides liegen unterhalb des Projektverzeichnisses `templates/` mit dem jeweiligen neuen Pfad. Beispielsweise wird ein Row-Start-Override unter `templates/content_element/simple_grid/legacy/row_start.html.twig` abgelegt. Eine zusätzliche Klasse kann dort so ergänzt werden:
+
+```twig
+{% extends '@Contao/content_element/simple_grid/legacy/row_start.html.twig' %}
+
+{% set attributes = attrs(attributes|default).addClass('my-row') %}
+```
+
+Die Start-Templates bieten den Block `wrapper_start`, die Stop-Templates `wrapper_stop`. Ein Start-Template öffnet weiterhin nur den Container, das zugehörige Stop-Template schließt ihn. Die neuen Nested-Templates erzeugen dagegen vollständige Container und sind kein Ersatz für diese Start-/Stop-Templates.
+
+Inhalts-Template-Varianten können z. B. unter `content_element/simple_grid/legacy/row_start/custom.html.twig` angelegt werden. Formularvarianten folgen dem Core-Präfix, z. B. `form_dma_simplegrid_row_start_custom.html.twig`. Sie erweitern das jeweilige Standardtemplate und lassen sich im Feld „Individuelles Template“ auswählen. Bei bisher ausgewählten eigenen PHP-Varianten muss die entsprechende Twig-Variante nach der Portierung neu ausgewählt werden. Die Formular-Templates verwenden `this.prefix` und `this.class`; die Inhalts-Templates erhalten `legacy_css_classes`, `element_html_id`, `element_css_classes` und `data` vom Fragment-Controller.
+
+Die bisherigen PHP-Klassennamen `DMA\ContentSimpleGrid…` bleiben als Proxies für die Fragment-Controller vorhanden. Eigene Unterklassen, die ihre Ausgabe über `compile()` verändert haben, müssen auf Twig-Overrides bzw. angepasste Fragment-Controller umgestellt werden. Der `parseTemplate`-Hook bleibt ausschließlich als Kompatibilitätsanschluss für fremde PHP-Inhaltselemente unter Contao 5.7 erhalten; die eigenen Grid-Inhaltselemente verwenden Fragment-Controller und Twig.
+
+Nach dem Update den Contao-Cache erneuern. Die Contao-6-Freigabe ist noch ausstehend; die Composer-Anforderung bleibt vorerst bei `^5.7`.
 
 ### Wechsel des Grid-Profils
 

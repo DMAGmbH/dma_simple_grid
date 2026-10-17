@@ -12,3 +12,5 @@ services:
   Dma\SimpleGrid\Controller\ContentElement\ColumnController: ~
 
   Dma\SimpleGrid\Controller\ContentElement\WrapperController: ~
+
+  Dma\SimpleGrid\Controller\ContentElement\LegacyGridController: ~

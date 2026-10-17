@@ -7,8 +7,6 @@
  */
 namespace DMA;
 
-use Contao\BackendTemplate;
-use Contao\StringUtil;
 use Contao\System;
 use Contao\Widget;
 use Symfony\Component\HttpFoundation\Request;
@@ -26,7 +24,7 @@ class FormSimpleGridRowStart extends Widget
      *
      * @var string
      */
-    protected $strTemplate = 'form_dma_simplegrid_rowstart';
+    protected $strTemplate = 'form_dma_simplegrid_row_start';
 
 
     /**
@@ -47,31 +45,14 @@ class FormSimpleGridRowStart extends Widget
     public function parse($arrAttributes = null): string
     {
         if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
-            /** @var BackendTemplate|object $objTemplate */
-            $objTemplate = new BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]) . ' ###';
-
-            return $objTemplate->parse();
+            return System::getContainer()->get('twig')->render('@Contao/backend/simple_grid/form_wildcard.html.twig', [
+                'label' => mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_row_start'][0]),
+            ]);
         }
 
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? false) && ($GLOBALS['DMA_SIMPLEGRID_CONFIG'][($GLOBALS['TL_CONFIG']['dmaSimpleGridType'] ?? null)] ?? false)) {
-            $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['TL_CONFIG']['dmaSimpleGridType']];
-        } else {
-            $arrConfigData = $GLOBALS['DMA_SIMPLEGRID_CONFIG'][$GLOBALS['DMA_SIMPLEGRID_FALLBACK']];
-        }
-
-        $strAdditionalClasses = $arrConfigData['config']['row-class'] ?? '';
-
-        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false) && $arrConfigData['config']['additional-classes']['row'] && $this->dma_simplegrid_additionalrowclasses) {
-            $arrAdditionalClasses = StringUtil::deserialize($this->dma_simplegrid_additionalrowclasses, true);
-            if (count($arrAdditionalClasses) > 0) {
-                foreach ($arrAdditionalClasses as $strClassKey) {
-                    $strAdditionalClasses .= ' ' . $strClassKey;
-                }
-            }
-        }
-
-        $this->strPrefix = '' . $strAdditionalClasses;
+        $this->strPrefix = DmaSimpleGrid::getRowClasses([
+            'dma_simplegrid_additionalrowclasses' => $this->dma_simplegrid_additionalrowclasses,
+        ]);
 
         return parent::parse($arrAttributes);
     }

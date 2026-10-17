@@ -7,7 +7,6 @@
  */
 namespace DMA;
 
-use Contao\BackendTemplate;
 use Contao\System;
 use Contao\Widget;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,7 +22,7 @@ class FormSimpleGridColumnStart extends Widget
      *
      * @var string
      */
-    protected $strTemplate = 'form_dma_simplegrid_columnstart';
+    protected $strTemplate = 'form_dma_simplegrid_column_start';
 
 
     /**
@@ -44,10 +43,9 @@ class FormSimpleGridColumnStart extends Widget
     public function parse($arrAttributes = null): string
     {
         if (System::getContainer()->get('contao.routing.scope_matcher')->isBackendRequest(System::getContainer()->get('request_stack')->getCurrentRequest() ?? Request::create(''))) {
-            $objTemplate = new BackendTemplate('be_wildcard');
-            $objTemplate->wildcard = '### ' . mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_start'][0]) . ' ###';
-
-            return $objTemplate->parse();
+            return System::getContainer()->get('twig')->render('@Contao/backend/simple_grid/form_wildcard.html.twig', [
+                'label' => mb_strtoupper($GLOBALS['TL_LANG']['FFL']['dma_simplegrid_column_start'][0]),
+            ]);
         }
 
         return parent::parse($arrAttributes);

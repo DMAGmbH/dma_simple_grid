@@ -20,7 +20,10 @@ class ColumnController extends AbstractContentElementController
 {
     protected function getResponse(FragmentTemplate $template, ContentModel $model, Request $request): Response
     {
-        $template->set('grid_classes', DmaSimpleGrid::getColumnClasses($model->row()));
+        $data = $model->row();
+        $columnClasses = DmaSimpleGrid::hasDmaGridInfos($data) ? DmaSimpleGrid::getColumnClasses($data) : '';
+
+        $template->set('grid_classes', $columnClasses);
 
         return $template->getResponse();
     }

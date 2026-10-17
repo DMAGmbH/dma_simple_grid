@@ -56,6 +56,7 @@ class DmaSimpleGridHelper extends Controller
     }
 
 
+    // Compatibility for third-party PHP content elements in Contao 5.7.
     public function simplegridParseTemplate($objTemplate): void
     {
         if (DmaSimpleGrid::hasDmaGridInfos($objTemplate->getData())) {
@@ -66,7 +67,12 @@ class DmaSimpleGridHelper extends Controller
     public static function getGridClassesForTwig(array $rowData): string
     {
         // Nested grid containers add their classes in their own Twig templates.
-        if (in_array($rowData['type'] ?? null, ['dma_simplegrid_wrapper', 'dma_simplegrid_row', 'dma_simplegrid_column'], true)) {
+        if (in_array($rowData['type'] ?? null, [
+            'dma_simplegrid_wrapper', 'dma_simplegrid_row', 'dma_simplegrid_column',
+            'dma_simplegrid_wrapper_start', 'dma_simplegrid_wrapper_stop',
+            'dma_simplegrid_row_start', 'dma_simplegrid_row_stop',
+            'dma_simplegrid_column_start', 'dma_simplegrid_column_stop',
+        ], true)) {
             return '';
         }
 
