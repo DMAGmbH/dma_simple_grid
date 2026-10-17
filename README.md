@@ -6,19 +6,27 @@ Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
 - Konfigurationsarray für Bootstrap und Foundation
 
 ## Abhängigkeiten
-PHP 8.3 oder höher innerhalb der PHP-8-Reihe (`^8.3`) wird benötigt.
 
-[https://github.com/menatwork/MultiColumnWizard](https://github.com/menatwork/contao-multicolumnwizard-bundle)
+- PHP `^8.3`
+- Contao `^5.7`
 
 ## Installation
-- zunächst muss die Erweiterung *MultiColumnWizard* installiert werden.
-- anschließend kann die Erweitunerung *DMA SimpleGrid* installiert werden.
+- Die Erweiterung *DMA SimpleGrid* über Composer installieren.
 - Im Contao-Backend befinden sich im Bereich *Einstellungen* nun neue Einstellungsmöglichkeiten für die Simple Grid-Erweiterung
 	- Auswahl des zu verwendenden Frameworks oder Grid-System (CSS- und weitere Dateien werden nicht installiert, da hier jeder seine eigenen Ansprüche hat)
 	- Auswahl der zu verwendenden Selektoren
 - Anschließend sollten bei den einzelnen Inhaltselementen Select-Felder zur jeweiligen Auswahl der Grid-Einstellungen zur Verfügung stehen.
 
 ## Weitere Hinweise
+
+### Update von älteren Versionen
+
+Bestehende Grid-Einstellungen können ohne Datenmigration weiterverwendet werden. Die Bearbeitung erfolgt jetzt über den Row-Wizard des Contao-Cores. Die bisherige Abhängigkeit vom MultiColumnWizard entfällt; andere Erweiterungen können ihn weiterhin benötigen.
+
+### Wechsel des Grid-Profils
+
+Beim Speichern eines Grid-Einstellungsfeldes werden nur die Breakpoints des aktiven Grid-Profils übernommen. Werte für dort nicht mehr vorhandene Breakpoints werden entfernt und stehen bei einem späteren Wechsel zurück nicht mehr zur Verfügung. Der Profilwechsel allein verändert keine gespeicherten Elementdaten.
+
 ### Was diese Erweiterung nicht kann
 - CSS etc. werden durch diese Erweiterung nicht mitgebracht. Jeder kann es auf seine eigene Art und Weise in Contao integrieren
 - Kombinierte Grid-Einstellungen werden nicht auf vollständige Zeilen etc. validiert
@@ -84,4 +92,3 @@ $GLOBALS['DMA_SIMPLEGRID_CONFIG']['foundation'] = array
     )
 );
 ```
-

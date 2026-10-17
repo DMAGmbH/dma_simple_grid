@@ -232,7 +232,7 @@ class DmaSimpleGrid
 
         $arrColumnsSetting = [];
 
-        if (static::$arrCache['grid']['config']['block-config']) {
+        if (static::$arrCache['grid']['config']['block-config'] ?? false) {
             foreach (static::$arrCache['grid']['config']['block-config'] as $configName => $arrColumnConfig) {
                 $arrColumnsSetting[$configName] = [
                     'label' => $arrColumnConfig['name'],
@@ -248,6 +248,11 @@ class DmaSimpleGrid
 
     public static function columnsSelectCallback(?Widget $widget = null): array
     {
+        return self::getColumnFields($widget !== null ? $widget->dataContainer->field : '');
+    }
+
+    public static function getColumnFields(string $field): array
+    {
         if (!isset(static::$arrCache['grid'])) {
             self::initialize();
         }
@@ -259,17 +264,17 @@ class DmaSimpleGrid
                 $options = [];
 
                 // Add the hide option for column settings
-                if ($widget !== null && $widget->dataContainer->field === 'dma_simplegrid_columnsettings' && isset($arrColumnConfig['hide-class'])) {
+                if ($field === 'dma_simplegrid_columnsettings' && isset($arrColumnConfig['hide-class'])) {
                     $options['hide'] = &$GLOBALS['TL_LANG']['MSC']['dma_simplegrid_hidden'];
                 }
 
                 // Add the reset/zero option for offset/offset-right/push/pull settings
-                if ($widget !== null && (
-                    ($widget->dataContainer->field === 'dma_simplegrid_offsetsettings' && isset(static::$arrCache['grid']['config']['hasColumnOffsetReset']) && static::$arrCache['grid']['config']['hasColumnOffsetReset'])
-                    || ($widget->dataContainer->field === 'dma_simplegrid_offsetrightsettings' && isset(static::$arrCache['grid']['config']['hasColumnOffsetRightReset']) && static::$arrCache['grid']['config']['hasColumnOffsetRightReset'])
-                    || ($widget->dataContainer->field === 'dma_simplegrid_pushsettings' && isset(static::$arrCache['grid']['config']['hasColumnPushReset']) && static::$arrCache['grid']['config']['hasColumnPushReset'])
-                    || ($widget->dataContainer->field === 'dma_simplegrid_pullsettings' && isset(static::$arrCache['grid']['config']['hasColumnPullReset']) && static::$arrCache['grid']['config']['hasColumnPullReset'])
-                )) {
+                if (
+                    ($field === 'dma_simplegrid_offsetsettings' && isset(static::$arrCache['grid']['config']['hasColumnOffsetReset']) && static::$arrCache['grid']['config']['hasColumnOffsetReset'])
+                    || ($field === 'dma_simplegrid_offsetrightsettings' && isset(static::$arrCache['grid']['config']['hasColumnOffsetRightReset']) && static::$arrCache['grid']['config']['hasColumnOffsetRightReset'])
+                    || ($field === 'dma_simplegrid_pushsettings' && isset(static::$arrCache['grid']['config']['hasColumnPushReset']) && static::$arrCache['grid']['config']['hasColumnPushReset'])
+                    || ($field === 'dma_simplegrid_pullsettings' && isset(static::$arrCache['grid']['config']['hasColumnPullReset']) && static::$arrCache['grid']['config']['hasColumnPullReset'])
+                ) {
                     $options['reset'] = '0 (reset)';
                 }
 
@@ -288,7 +293,7 @@ class DmaSimpleGrid
                     'label' => $arrColumnConfig['name'],
                     'inputType' => 'select',
                     'options' => $options,
-                    'eval' => ['includeBlankOption' => true, 'style' => 'width:115px']
+                    'eval' => ['includeBlankOption' => true, 'style' => 'min-width:140px']
                 ];
             }
         }
