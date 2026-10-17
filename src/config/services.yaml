@@ -6,3 +6,7 @@ services:
     tags: [twig.extension]
 
   Dma\SimpleGrid\EventListener\GridRecordLabelListener: ~
+
+  Dma\SimpleGrid\Controller\ContentElement\RowController: ~
+
+  Dma\SimpleGrid\Controller\ContentElement\ColumnController: ~

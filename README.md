@@ -1,7 +1,7 @@
 # DMA SimpleGrid
 Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
-- Row-Elemente (für Inhalts-Elemente und Formulare)
-- Spalten-Elemente (für Inhalts-Elemente und Formulare)
+- Verschachtelte Row- und Column-Inhaltselemente
+- Bisherige Row-/Column-Start-/Stop-Elemente für Inhalte und Formulare
 - Selektoren für Spalten-Breiten sowie Offset-, Pull- und Push-Werte
 - Konfigurationsarray für Bootstrap und Foundation
 
@@ -19,6 +19,18 @@ Contao Erweiterung, die einfache Strukturen für Grid-Systeme bietet:
 
 ## Weitere Hinweise
 
+### Verschachtelte Grid-Inhaltselemente
+
+In der Grid-Kategorie stehen die Inhaltselemente **Row** und **Column** zur Verfügung. Über „Kind-Elemente bearbeiten“ lassen sich darin weitere Inhaltselemente anlegen.
+
+Eine Row kann Inhalte direkt aufnehmen. Deren Breiten und Verschiebungen werden wie bisher am jeweiligen Inhaltselement eingestellt. Eine zusätzliche Column ist optional und fasst mehrere Inhalte in einer gemeinsamen Grid-Spalte zusammen. Auch innerhalb einer Column können weitere Rows angelegt werden.
+
+Rows verwenden die Row- und gegebenenfalls Block-Grid-Klassen des aktiven Profils. Columns verwenden dessen Spalten-, Offset-, Push-/Pull- und zusätzliche Spaltenklassen. Die verfügbaren Einstellungen richten sich nach den SimpleGrid-Einstellungen; Profile ohne Rows bieten das Row-Element nicht an. Ein Titel dient der Orientierung im Backend; CSS-ID, eigene Klassen, Zugriffsschutz und Veröffentlichungszeitraum verwenden die normalen Contao-Felder.
+
+Die Twig-Templates heißen `content_element/simple_grid/row.html.twig` und `content_element/simple_grid/column.html.twig`. Sie erweitern die Core-Elementgruppe und können über eigene Twig-Varianten angepasst werden. Die Grid-Klassen stehen als `grid_classes` zur Verfügung und werden über den Attributhelfer am Container ausgegeben.
+
+Die bisherigen Row-/Column-Start-/Stop-Inhaltselemente bleiben mit dem Suffix „ – legacy“ in derselben Grid-Kategorie verfügbar. Bestehende Inhalte werden nicht migriert. Wrapper-Start/-Stop und die Formularfelder bleiben unverändert.
+
 ### Update von älteren Versionen
 
 Bestehende Grid-Einstellungen können ohne Datenmigration weiterverwendet werden. Die Bearbeitung erfolgt jetzt über den Row-Wizard des Contao-Cores. Die bisherige Abhängigkeit vom MultiColumnWizard entfällt; andere Erweiterungen können ihn weiterhin benötigen.
@@ -30,7 +42,7 @@ Beim Speichern eines Grid-Einstellungsfeldes werden nur die Breakpoints des akti
 ### Was diese Erweiterung nicht kann
 - CSS etc. werden durch diese Erweiterung nicht mitgebracht. Jeder kann es auf seine eigene Art und Weise in Contao integrieren
 - Kombinierte Grid-Einstellungen werden nicht auf vollständige Zeilen etc. validiert
-- Alle Grids können aufgrund ihrer Struktur nicht abgebildet werden. Insbesondere verschachtelte Div-Strukturen (wie sie beispielsweise bei YAML verwendet werden) lassen sich nicht realisieren.
+- Nicht alle Grid-Systeme lassen sich allein durch das vorhandene Profilmodell vollständig abbilden. Eigene Klassen und Twig-Varianten können zusätzliche Anpassungen erfordern.
 
 ### Erweiterung der Grid-Einstellungen
 Standardmäßig wird diese Erweiterung mit dem Support für das Contao Grid, das Grid von Bootstrap 3, Bootstrap 4, Foundation 6 und unsemantic sowie dem GoldenRatio Grid von uns ausgeliefert. Über eigene `config.php`-Dateien können weitere Grid-Systeme unterstützt werden (hier als Beispiel die Konfiguration für das Foundation-Grid):

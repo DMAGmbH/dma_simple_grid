@@ -182,7 +182,7 @@ class DmaSimpleGrid
             }
         }
 
-        if (count($arrConfiguredClasses) > 0 || (isset($arrTemplateData['type']) && $arrTemplateData['type'] === 'dma_simplegrid_column_start')) {
+        if (count($arrConfiguredClasses) > 0 || in_array($arrTemplateData['type'] ?? null, ['dma_simplegrid_column_start', 'dma_simplegrid_column'], true)) {
             if (isset(static::$arrCache['grid']['config']['column-class']) && static::$arrCache['grid']['config']['column-class']) {
                 ArrayUtil::arrayInsert($arrConfiguredClasses, 0, static::$arrCache['grid']['config']['column-class']);
             }
@@ -198,6 +198,41 @@ class DmaSimpleGrid
     }
 
 
+
+    public static function getRowClasses(array $arrTemplateData): string
+    {
+        $arrConfigData = self::getData();
+        $arrConfiguredClasses = [];
+
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useBlockGrid'] ?? false) && ($arrTemplateData['dma_simplegrid_blocksettings'] ?? false)) {
+            $arrBlockSettings = StringUtil::deserialize($arrTemplateData['dma_simplegrid_blocksettings'], true);
+            if (count($arrBlockSettings) === 1) {
+                $arrElementSettings = $arrBlockSettings[0];
+                if (is_array($arrElementSettings)) {
+                    foreach ($arrElementSettings as $columnKey => $varValue) {
+                        if ($varValue) {
+                            $arrConfiguredClasses[] = sprintf($arrConfigData['config']['block-config'][$columnKey]['block-class'], $varValue);
+                        }
+                    }
+                }
+            }
+        }
+
+        if (($GLOBALS['TL_CONFIG']['dmaSimpleGrid_useAdditionalRowClasses'] ?? false)
+            && ($arrConfigData['config']['additional-classes']['row'] ?? false)
+            && ($arrTemplateData['dma_simplegrid_additionalrowclasses'] ?? false)
+        ) {
+            foreach (StringUtil::deserialize($arrTemplateData['dma_simplegrid_additionalrowclasses'], true) as $strClassKey) {
+                $arrConfiguredClasses[] = $strClassKey;
+            }
+        }
+
+        if ($arrConfigData['config']['row-class'] ?? false) {
+            ArrayUtil::arrayInsert($arrConfiguredClasses, 0, $arrConfigData['config']['row-class']);
+        }
+
+        return str_replace(' ^', '', implode(' ', $arrConfiguredClasses));
+    }
 
     public static function getSimpleGridInfoText($arrRow): string
     {

@@ -4,6 +4,8 @@
  * Content elements
  */
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid']               = 'Grid System (DMA SimpleGrid)';
+$GLOBALS['TL_LANG']['CTE']['dma_simplegrid_row']           = array('Grid Row', 'A grid row containing nested content elements or columns.');
+$GLOBALS['TL_LANG']['CTE']['dma_simplegrid_column']        = array('Grid Column', 'A grid column containing nested content elements.');
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_wrapper_start'] = array('Grid Wrapper Start');
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_wrapper_stop']  = array('Grid Wrapper Stop');
 $GLOBALS['TL_LANG']['CTE']['dma_simplegrid_row_start']     = array('Grid Row Start – legacy');
